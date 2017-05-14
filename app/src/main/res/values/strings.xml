@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CajaAplicacionesTics</string>
+
+    <string name="navigation_drawer_open">Abrir menú</string>
+    <string name="navigation_drawer_close">Cerrar menú</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="nombre_app">Caja de Aplicaciones Tics</string>
+    <string name="menu">Menú</string>
+</resources>
