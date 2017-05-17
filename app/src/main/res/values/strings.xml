@@ -7,4 +7,14 @@
     <string name="action_settings">Settings</string>
     <string name="nombre_app">Caja de Aplicaciones Tics</string>
     <string name="menu">Menú</string>
+
+    <!-- Menú de navegación lateral -->
+    <string name="menu_volver">Volver a seleccionar niveles</string>
+    <string name="menu_video">Video</string>
+    <string name="menu_app_office">Aplicaciones office</string>
+    <string name="menu_web">Sitios web de interés</string>
+    <string name="menu_soft">Software/Simuladores</string>
+    <string name="menu_pdf">Archivos PDF para descargar</string>
+    <string name="menu_perfil">Mi perfil</string>
+    <string name="menu_version_app">Versión de la app: </string>
 </resources>

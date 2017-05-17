@@ -81,20 +81,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera)
+        if (id == R.id.nav_back)
         {
             Fragment2 fragment2 = new Fragment2();
             getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment2)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_video) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_office) {
 
-        } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
 

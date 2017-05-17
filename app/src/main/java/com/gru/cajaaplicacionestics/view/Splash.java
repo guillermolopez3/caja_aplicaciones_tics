@@ -24,7 +24,7 @@ public class Splash extends AppCompatActivity
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent().setClass(Splash.this,MainActivity.class);
+                Intent mainIntent = new Intent().setClass(Splash.this,SeleccionActivity.class);
                 startActivity(mainIntent);
                 finish();//Destruimos esta activity para prevenit que el usuario retorne aqui presionando el boton Atras.
             }
