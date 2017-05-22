@@ -43,21 +43,19 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:srcCompat="@drawable/logo_ministerio"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="0.5"
-            android:padding="10dp"
-            />
+
+            app:srcCompat="@drawable/logo_ministerio" />
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="100dp"
-            android:layout_height="130dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="0.5"
-            android:padding="10dp"
-            app:srcCompat="@drawable/subsecretaria"
-             />
+
+            app:srcCompat="@drawable/subsecretaria" />
 
     </LinearLayout>
 
