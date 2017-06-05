@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CajaAplicacionesTics</string>
+    <string name="app_name">Caja Tics</string>
 
     <string name="navigation_drawer_open">Abrir menú</string>
     <string name="navigation_drawer_close">Cerrar menú</string>
@@ -17,4 +17,5 @@
     <string name="menu_pdf">Archivos PDF para descargar</string>
     <string name="menu_perfil">Mi perfil</string>
     <string name="menu_version_app">Versión de la app: V 0.01 </string>
+    <string name="buscar_menu">Buscar...</string>
 </resources>

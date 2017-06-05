@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.MainActivity" />
-        <activity android:name=".view.SeleccionActivity"></activity>
+        <activity android:name=".view.SeleccionActivity" />
+        <activity android:name=".view.DetallaRecursoActivity"></activity>
     </application>
 
 </manifest>
