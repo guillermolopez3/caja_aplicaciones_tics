@@ -19,7 +19,7 @@
             android:id="@+id/imagenCardRecursos"
             android:layout_width="match_parent"
             android:layout_height="@dimen/altura_imagen_item"
-            card_view:srcCompat="@drawable/side_nav_bar" />
+            card_view:srcCompat="@drawable/img_web" />
 
         <!-- Cuerpo -->
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

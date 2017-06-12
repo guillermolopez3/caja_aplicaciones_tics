@@ -7,12 +7,12 @@ import android.support.v7.widget.Toolbar;
 
 import com.gru.cajaaplicacionestics.R;
 
-public class DetallaRecursoActivity extends AppCompatActivity {
+public class AcercadeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalla_recurso);
+        setContentView(R.layout.activity_acercade);
         showToolbar("",true);
     }
 
@@ -23,6 +23,6 @@ public class DetallaRecursoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(tittle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(upButton);
-
+        //CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingDetalle);
     }
 }

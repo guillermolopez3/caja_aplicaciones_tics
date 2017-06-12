@@ -21,7 +21,9 @@ import java.util.ArrayList;
 
 public class FragmentPrincipal extends Fragment
 {
+    String consulta;
     public FragmentPrincipal(){}
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

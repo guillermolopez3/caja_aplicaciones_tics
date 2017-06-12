@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">Abrir menú</string>
     <string name="navigation_drawer_close">Cerrar menú</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="acercade">Acerca de la app</string>
     <string name="nombre_app">Caja de Aplicaciones Tics</string>
     <string name="menu">Menú</string>
 
@@ -18,4 +18,7 @@
     <string name="menu_perfil">Mi perfil</string>
     <string name="menu_version_app">Versión de la app: V 0.01 </string>
     <string name="buscar_menu">Buscar...</string>
+
+
+    <string name="colaboradores">Idea original: Cristian Farias \nDesarrolo: Guillermo López \nDiseño: Maria Laura Gonzalez \ Ministro....</string>
 </resources>
