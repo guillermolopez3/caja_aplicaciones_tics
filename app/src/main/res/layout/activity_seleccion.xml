@@ -21,87 +21,89 @@
 
     </android.support.design.widget.AppBarLayout>
 
-          <LinearLayout
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              app:layout_behavior="@string/appbar_scrolling_view_behavior"
-              android:padding="@dimen/padding_gral"
-              android:weightSum="1">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_gral"
+            android:layout_marginTop="15dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Seleccione el/los niveles para obtener el listado de los recursos"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:layout_weight="0.05"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_weight=".85"
-                android:weightSum="1"
-                android:padding="20dp"
-               >
+                android:padding="20dp">
 
                 <CheckBox
+                    android:id="@+id/seleccionChkInicial"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="INICIAL"
-                    android:layout_weight=".3"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
                 <CheckBox
+                    android:id="@+id/seleccionChkPrimaria"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
                     android:text="PRIMARIO"
-                    android:layout_weight=".3"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
                 <CheckBox
+                    android:id="@+id/seleccionChkPD"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
-                    android:text="Primaria digital"
-                    android:layout_weight=".03"
-                   />
+                    android:layout_marginTop="5dp"
+                    android:text="Primaria digital" />
 
                 <CheckBox
+                    android:id="@+id/seleccionChkSecundario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
                     android:text="SECUNDARIO"
-                    android:layout_weight=".3"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
                 <CheckBox
+                    android:id="@+id/seleccionChkCI"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
-                    android:text="Conectar Igualdad"
-                    android:layout_weight=".03"
-                    />
+                    android:layout_marginTop="5dp"
+                    android:text="Conectar Igualdad" />
 
 
             </LinearLayout>
 
-              <Button
-                  android:id="@+id/btnEntrarActivitySeleccion"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:text="ENTRAR"
-                  android:textSize="16sp"
-                  android:background="@color/colorPrimary"
-                  android:padding="20dp"
-                  android:textColor="@android:color/white"
-                  android:onClick="ActivitySeleccionEntrar"
-                  android:layout_gravity="bottom"/>
-
-
-
 
         </LinearLayout>
 
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnEntrarActivitySeleccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:background="@color/colorPrimary"
+        android:onClick="ActivitySeleccionEntrar"
+        android:padding="20dp"
+        android:text="ENTRAR"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 
 </android.support.design.widget.CoordinatorLayout>

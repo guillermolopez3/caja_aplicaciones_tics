@@ -6,6 +6,6 @@
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="padding_gral">16dp</dimen>
-    <dimen name="altura_imagen_item">192dp</dimen>
-    <dimen name="appbar_height">256dp</dimen>
+    <dimen name="altura_imagen_item">130dp</dimen>
+    <dimen name="appbar_height">200dp</dimen>
 </resources>

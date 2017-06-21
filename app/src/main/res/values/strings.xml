@@ -16,6 +16,8 @@
     <string name="menu_soft">Software/Simuladores</string>
     <string name="menu_pdf">Archivos PDF para descargar</string>
     <string name="menu_perfil">Mi perfil</string>
+    <string name="pd">Primaria Digital</string>
+    <string name="ci">Conectar Igualdad</string>
     <string name="menu_version_app">Versión de la app: V 0.01 </string>
     <string name="buscar_menu">Buscar...</string>
 
