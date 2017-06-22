@@ -3,6 +3,7 @@
 
     <string name="navigation_drawer_open">Abrir menú</string>
     <string name="navigation_drawer_close">Cerrar menú</string>
+    <string name="search_hint">Buscar</string>
 
     <string name="acercade">Acerca de la app</string>
     <string name="nombre_app">Caja de Aplicaciones Tics</string>

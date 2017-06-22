@@ -29,7 +29,7 @@
             android:title="@string/menu_pdf" />
         <item
             android:id="@+id/nav_pd"
-            android:icon="@drawable/ic_pd"
+            android:icon="@drawable/ic_pdg"
             android:title="@string/pd"
             />
         <item
