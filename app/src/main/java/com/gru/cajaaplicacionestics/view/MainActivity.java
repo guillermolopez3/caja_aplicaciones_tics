@@ -3,7 +3,9 @@ package com.gru.cajaaplicacionestics.view;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,11 +19,14 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.view.fragment.FragmentPrincipal;
 
+import static com.gru.cajaaplicacionestics.R.id.noLeftAction;
 import static com.gru.cajaaplicacionestics.R.id.toolbar;
 
 
@@ -32,7 +37,10 @@ public class MainActivity extends AppCompatActivity
     private String categoria; //variable para saber en que fragment estoy
     private String consulta="";
     FragmentPrincipal fragmentPrincipal;
-    SearchView searchView;
+    FloatingActionButton fab;
+
+    SearchView searchView=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +50,16 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         categoria= "todos";
+
+        fab= (FloatingActionButton) findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,EnviarRecursosActivity.class);
+                startActivity(i);
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -82,15 +100,37 @@ public class MainActivity extends AppCompatActivity
         {
            Intent i = new Intent(this,SeleccionActivity.class);
             startActivity(i);
-        } else if (id == R.id.nav_video)
+        }
+        else if (id == R.id.nav_video)
         {
             categoria="video";
             cambiarFragment();
         }
-        else if (id == R.id.nav_office)
+        else if (id == R.id.nav_audio)
         {
-            categoria="office";
+            categoria="audio";
             cambiarFragment();
+        }
+        else if (id == R.id.nav_pd)
+        {
+            categoria="pd";
+            cambiarFragment();
+        }
+        else if(id==R.id.nav_web){
+            categoria="web";
+            cambiarFragment();
+        }
+        else if(id==R.id.nav_pdf){
+            categoria="pdf";
+            cambiarFragment();
+        }
+        else if(id==R.id.nav_ci){
+            categoria="ci";
+            cambiarFragment();
+        }
+        else if(id==R.id.nav_consultar)
+        {
+            enviarMail();
         }
 
        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -110,8 +150,9 @@ public class MainActivity extends AppCompatActivity
     {
         Bundle data = new Bundle();
         data.putString("categoria", categoria);
-        data.putString("consulta", categoria);
+        data.putString("consulta", consulta);
         fragmentPrincipal.setArguments(data);
+        consulta="";
     }
 
     @Override
@@ -120,12 +161,15 @@ public class MainActivity extends AppCompatActivity
         inflater.inflate(R.menu.main, menu);
 
         MenuItem menuItem=menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView)menuItem.getActionView();
+        searchView = (SearchView)menuItem.getActionView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.e("texto", query); //cuando doy buscar cargo el fragment pasando esl texto
+                categoria="todos";
+                consulta=query;
+                cambiarFragment();
                 return true;
             }
 
@@ -135,16 +179,25 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+
          return true;
     }
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId()== R.id.action_settings) {
+       /* if (item.getItemId()== R.id.action_settings) {
             Intent i = new Intent(MainActivity.this,AcercadeActivity.class);
             startActivity(i);
-        }
+        }*/
+       if(item.getItemId()==R.id.que_es_cajatic){
+           Intent i = new Intent(MainActivity.this,QueEsCajaTICActivity.class);
+           startActivity(i);
+       }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -153,4 +206,24 @@ public class MainActivity extends AppCompatActivity
     protected void onStop() {
         super.onStop();
     }
+
+    private void enviarMail()
+    {
+        // Reemplazamos el email por algun otro real
+        String[] to = { "cajarecursostic@gmail.com" };
+        String mensaje="Aporte para mejorar la app";
+
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Sugerencia caja Tic");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
+        emailIntent.setType("message/rfc822");
+        startActivity(Intent.createChooser(emailIntent, "Email "));
+    }
+
+
+
+
 }
+

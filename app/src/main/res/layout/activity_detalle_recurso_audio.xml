@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gru.cajaaplicacionestics.view.DetalleRecursoAudio">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/detalleRecursoAudioImg"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/fondo_card" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/detalleRecursoAudioBtnPlay"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_action_playback_play"
+                android:background="@color/colorPrimary"/>
+            <ImageButton
+                android:id="@+id/detalleRecursoAudioBtnStop"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_action_playback_stop"
+                android:background="@color/colorPrimary"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:background="@android:color/darker_gray"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/txtTituloDescripcionRecurso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Titulo del recurso"
+                    android:textSize="25dp"/>
+
+                <TextView
+                    android:id="@+id/txtTagsDescripcionRecurso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="#tags"
+                    android:textSize="14dp"/>
+
+                <TextView
+                    android:id="@+id/txtFechaDescripcionRecurso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ultima actualización 25/6/2017"
+                    android:textSize="12dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <TextView
+                    android:id="@+id/detalleRecursoAudioTxtEscuela"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Escuela"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/detalleRecursoAudioTxtDocente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Docente"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtDescripcionRecurso"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:text="Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen."/>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

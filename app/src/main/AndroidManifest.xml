@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icono_fondo_bco"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/icono_fondo_bco"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.Splash">
@@ -18,8 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.MainActivity"/>
-
+        <activity android:name=".view.MainActivity" />
         <activity android:name=".view.SeleccionActivity" />
         <activity android:name=".view.DetallaRecursoActivity">
             <meta-data
@@ -27,6 +26,18 @@
                 android:value=".view.MainActivity" />
         </activity>
         <activity android:name=".view.AcercadeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity" />
+        </activity>
+        <activity android:name=".view.YoutubeActivity" />
+        <activity android:name=".view.EnviarRecursosActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity" />
+        </activity>
+        <activity android:name=".view.DetalleRecursoAudio" />
+        <activity android:name=".view.QueEsCajaTICActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.MainActivity" />

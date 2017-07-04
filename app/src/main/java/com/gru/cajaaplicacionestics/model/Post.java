@@ -1,17 +1,28 @@
 package com.gru.cajaaplicacionestics.model;
 
+import java.io.Serializable;
+
 /**
  * Created by guill on 14/06/2017.
  */
 
-public class Post
+public class Post implements Serializable
 {
+    private static final long serialVersionUID = 1L;
     private String id;
     private String urlImagen;
     private int imagenLocal;
+    private int audio_local;
+    private String url_recurso;
     private String nombreRecurso;
     private String descripcionCorta;
+    private String descripcion;
     private String hastag;
+    private String tipo_recurso; //lo uso para saber si es un video, audio, etc
+    private String escuela= "ESCUELA: ";
+    private String docente= "DOCENTE: ";
+    private String video_id;
+
 
     public Post(){}
 
@@ -68,5 +79,61 @@ public class Post
 
     public void setHastag(String hastag) {
         this.hastag = hastag;
+    }
+
+    public String getTipo_recurso() {
+        return tipo_recurso;
+    }
+
+    public void setTipo_recurso(String tipo_recurso) {
+        this.tipo_recurso = tipo_recurso;
+    }
+
+    public String getEscuela() {
+        return escuela;
+    }
+
+    public void setEscuela(String escuela) {
+        this.escuela = escuela;
+    }
+
+    public String getDocente() {
+        return docente;
+    }
+
+    public void setDocente(String docente) {
+        this.docente = docente;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getUrl_recurso() {
+        return url_recurso;
+    }
+
+    public void setUrl_recurso(String url_recurso) {
+        this.url_recurso = url_recurso;
+    }
+
+    public int getAudio_local() {
+        return audio_local;
+    }
+
+    public void setAudio_local(int audio_local) {
+        this.audio_local = audio_local;
+    }
+
+    public String getVideo_id() {
+        return video_id;
+    }
+
+    public void setVideo_id(String video_id) {
+        this.video_id = video_id;
     }
 }

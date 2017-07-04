@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/altura_imagen_item"
             android:scaleType="centerCrop"
-            card_view:srcCompat="@drawable/fondo_web" />
+            card_view:srcCompat="@drawable/fondo_card" />
 
         <!-- Cuerpo -->
         <LinearLayout
@@ -42,6 +42,7 @@
                 android:id="@+id/descripcionCardRecursos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLines="3"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
 
             <Button

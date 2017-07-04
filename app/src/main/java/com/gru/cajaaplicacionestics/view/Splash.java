@@ -15,7 +15,7 @@ import java.util.TimerTask;
 
 public class Splash extends AppCompatActivity
 {
-    private long splashDelay = 1000;
+    private long splashDelay = 3000;
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,63 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
-    tools:context="com.gru.cajaaplicacionestics.view.Splash">
+   >
 
-    <TextView
-        android:id="@+id/textView2"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:text="Caja de Herramientas Tics"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="8dp"
-        android:layout_gravity="center"
-        app:srcCompat="@drawable/logo" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        app:srcCompat="@drawable/logo_gobierno"   />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
+        
+        <ImageView
+            android:id="@+id/logo_pcia"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logo_prov_blanco"
+            android:layout_marginLeft="10dp"/>
 
         <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_weight="0.5"
-
-            app:srcCompat="@drawable/logo_ministerio" />
+            android:id="@+id/logo_app"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:layout_below="@+id/logo_pcia"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo_blanco"/>
 
         <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_weight="0.5"
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/baner"
+            android:layout_below="@+id/logo_app"
+            android:layout_centerHorizontal="true"/>
 
-            app:srcCompat="@drawable/subsecretaria" />
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/logos_ministerios"
+            android:layout_below="@+id/banner"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
 
-    </LinearLayout>
+
+    </RelativeLayout>
+
+    
 
 
-</LinearLayout>
+
+
+
+</android.support.design.widget.CoordinatorLayout>

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.gru.cajaaplicacionestics.R;
@@ -16,7 +17,8 @@ import com.gru.cajaaplicacionestics.R;
 public class SeleccionActivity extends AppCompatActivity {
 
     Button entrar;
-    CheckBox inicial,primaria,pd,secundaria,ci;
+    CheckBox inicial,primaria,secundaria;
+    ImageView img_primaria,img_secundaria, img_inicial;
     boolean pasar; //variable para comprobar que haya un chk seleccionado
     boolean chkInicial,chkPrimaria,chkPD,chkSecundaria,chkCI; //variables para saber que selecciono para traer los datos
     @Override
@@ -28,10 +30,31 @@ public class SeleccionActivity extends AppCompatActivity {
         entrar= (Button)findViewById(R.id.btnEntrarActivitySeleccion);
         inicial= (CheckBox) findViewById(R.id.seleccionChkInicial);
         primaria= (CheckBox) findViewById(R.id.seleccionChkPrimaria);
-        pd= (CheckBox) findViewById(R.id.seleccionChkPD);
         secundaria= (CheckBox) findViewById(R.id.seleccionChkSecundario);
-        ci= (CheckBox) findViewById(R.id.seleccionChkCI);
 
+        img_inicial= (ImageView) findViewById(R.id.imgEdInicial);
+        img_inicial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               seleccionarChk(inicial);
+            }
+        });
+
+        img_primaria=(ImageView) findViewById(R.id.imgEdPrimaria);
+        img_primaria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seleccionarChk(primaria);
+            }
+        });
+
+        img_secundaria= (ImageView) findViewById(R.id.imgEdSecundaria);
+        img_secundaria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seleccionarChk(secundaria);
+            }
+        });
 
     }
 
@@ -45,15 +68,21 @@ public class SeleccionActivity extends AppCompatActivity {
         if(primaria.isChecked()){
             pasar=true;
             chkPD=true;}
-        if(pd.isChecked()){
-            pasar=true;
-            chkPD=true;}
         if(secundaria.isChecked()){
             pasar=true;
             chkSecundaria=true;}
-        if(ci.isChecked()){
-            pasar=true;
-            chkCI=true;}
+
+    }
+
+    private void seleccionarChk(CheckBox chk)
+    {
+        if(chk.isChecked()==true)
+        {
+            chk.setChecked(false);
+        }
+        else {
+            chk.setChecked(true);
+        }
     }
 
     public void ActivitySeleccionEntrar(View view)

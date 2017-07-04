@@ -24,6 +24,8 @@ import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.model.ModelRecursos;
 import com.gru.cajaaplicacionestics.model.Post;
 import com.gru.cajaaplicacionestics.view.DetallaRecursoActivity;
+import com.gru.cajaaplicacionestics.view.DetalleRecursoAudio;
+import com.gru.cajaaplicacionestics.view.YoutubeActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -55,25 +57,55 @@ public class AdapterRecursos extends RecyclerView.Adapter<AdapterRecursos.Recurs
     }
 
     @Override
-    public void onBindViewHolder(RecursosHolder holder, int position) {
-        Post modelRecursos= array.get(position);
+    public void onBindViewHolder(final RecursosHolder holder, int position) {
+        final Post modelRecursos= array.get(position);
         holder.nombreRecurso.setText(modelRecursos.getNombreRecurso());
         Log.d("nombre",modelRecursos.getNombreRecurso());
         holder.descripcionCorta.setText(modelRecursos.getDescripcionCorta());
         holder.hastag.setText(modelRecursos.getHastag());
 
-        Picasso.with(activity).load(R.drawable.fondo_web);
+        if(modelRecursos.getImagenLocal()!=0)
+        {
+            Picasso.with(activity).load(modelRecursos.getImagenLocal()).into(holder.imagen);
+        }
+        else {
+            Picasso.with(activity).load(R.drawable.fondo_card);
+        }
+
+        if(modelRecursos.getTipo_recurso()=="video")
+        {
+            Picasso.with(activity).load(modelRecursos.getUrlImagen()).into(holder.imagen);
+        }
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(activity, DetallaRecursoActivity.class);
-                activity.startActivity(i);
+               abrirDetalleCorrespondiente(modelRecursos.getTipo_recurso(),modelRecursos);
             }
         });
 
     }
 
+    private void abrirDetalleCorrespondiente(String tipo_rec,Post post) //dependiendo si es audio, video o web muestra distintos activity detalles
+    {
+        if(tipo_rec=="video")
+        {
+            Intent i = new Intent(activity, YoutubeActivity.class);
+            i.putExtra("data",post);
+            activity.startActivity(i);
+        }
+        else if(tipo_rec=="audio")
+        {
+            Intent i = new Intent(activity, DetalleRecursoAudio.class);
+            i.putExtra("data",post);
+            activity.startActivity(i);
+        }
+        else {
+            Intent i = new Intent(activity, DetallaRecursoActivity.class);
+            i.putExtra("data",post);
+            activity.startActivity(i);
+        }
+    }
 
 
     @Override

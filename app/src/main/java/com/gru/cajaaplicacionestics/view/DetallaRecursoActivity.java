@@ -1,19 +1,76 @@
 package com.gru.cajaaplicacionestics.view;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.model.Post;
+import com.squareup.picasso.Picasso;
 
-public class DetallaRecursoActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class DetallaRecursoActivity extends AppCompatActivity
+{
+    Button acceder_recurso;
+    ImageView imagen;
+    TextView titulo,tag,descripcion;
+    Post post= new Post();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalla_recurso);
         showToolbar("",true);
+
+        acceder_recurso=(Button) findViewById(R.id.detalleBtnAccederRecurso);
+        imagen=(ImageView)findViewById(R.id.imagenHeaderDetalle);
+        titulo=(TextView)findViewById(R.id.txtTituloDescripcionRecurso);
+        tag=(TextView) findViewById(R.id.txtTagsDescripcionRecurso);
+        descripcion=(TextView)findViewById(R.id.txtDescripcionRecurso);
+
+        post = (Post)getIntent().getExtras().get("data");
+
+
+        if(post!=null)
+        {
+            titulo.setText(post.getNombreRecurso());
+            tag.setText(post.getHastag());
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                descripcion.setText(Html.fromHtml(post.getDescripcion(),Html.FROM_HTML_MODE_LEGACY));
+            } else {
+                descripcion.setText(Html.fromHtml(post.getDescripcion()));
+            }
+
+          //  descripcion.setText(Html.fromHtml(post.getDescripcionCorta()));
+            Picasso.with(this).load(post.getImagenLocal()).into(imagen);
+        }
+
+        acceder_recurso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(post.getUrl_recurso()!="")
+                {
+                    Uri uri = Uri.parse(post.getUrl_recurso());
+                    Intent i = new Intent(Intent.ACTION_VIEW,uri);
+                    startActivity(i);
+                }
+
+            }
+        });
+
     }
 
     public void showToolbar(String tittle, boolean upButton)
@@ -24,5 +81,29 @@ public class DetallaRecursoActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(tittle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(upButton);
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+       /* MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_compartir,menu);*/
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+       /* Uri uri=Uri.parse("android.resource://com.gru.cajaaplicacionestics/drawable/"+ R.drawable.logo);
+        if (item.getItemId()== R.id.menu_compartir) {
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+            shareIntent.setType("image/*");
+            startActivity(Intent.createChooser(shareIntent, "enviar"));
+        }*/
+
+
+        return super.onOptionsItemSelected(item);
     }
 }

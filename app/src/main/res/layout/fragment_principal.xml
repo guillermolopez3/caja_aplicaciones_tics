@@ -4,6 +4,30 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <LinearLayout
+        android:id="@+id/sin_internet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imgSinInternet"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:src="@drawable/ic_cloud_off"/>
+
+        <TextView
+            android:id="@+id/txtSinInternet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:text="@string/sin_internet"/>
+
+    </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerPrincipal"
         android:layout_width="match_parent"

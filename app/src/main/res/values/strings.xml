@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Caja Tics</string>
+    <string name="app_name">CAJA TIC</string>
 
     <string name="navigation_drawer_open">Abrir menú</string>
     <string name="navigation_drawer_close">Cerrar menú</string>
     <string name="search_hint">Buscar</string>
 
     <string name="acercade">Acerca de la app</string>
-    <string name="nombre_app">Caja de Aplicaciones Tics</string>
+    <string name="nombre_app">Caja de Recursos TIC</string>
     <string name="menu">Menú</string>
 
     <!-- Menú de navegación lateral -->
@@ -19,9 +19,31 @@
     <string name="menu_perfil">Mi perfil</string>
     <string name="pd">Primaria Digital</string>
     <string name="ci">Conectar Igualdad</string>
+    <string name="menu_audio">Audiolibro</string>
+    <string name="nav_consulta">Envianos tu consulta</string>
     <string name="menu_version_app">Versión de la app: V 0.01 </string>
     <string name="buscar_menu">Buscar...</string>
+    <string name="sin_internet">Sin Internet. Compruebe la conexion y vuelva a seleccionar una categoría desde el menú lateral izquierdo</string>
+
+    <string name="KEY_API_YOUTUBE">AIzaSyALo8GHleJTNyaBmjoCZZS-gVhiRUyMnUc</string>
+
+    <!--Activity enviar recurso -->
+
+    <string name="usuario">Tu nombre</string>
+    <string name="titulo_recurso">Título del recurso</string>
+    <string name="url_recurso">Link del recurso (página web, youtube..)</string>
+    <string name="categoria_recurso">Cetegoría del recurso y nivel educativo</string>
+    <string name="descripcion_recurso">Descripción del recurso</string>
 
 
     <string name="colaboradores">Idea original: Cristian Farias \nDesarrolo: Guillermo López \nDiseño: Maria Laura Gonzalez \ Ministro....</string>
+
+
+    <string name="que_es_la_app">Facilita a la comunidad educativa el acceso a un repositorio colaborativo de experiencias y recursos digitales, seleccionados  y organizados por niveles y áreas de conocimiento.
+
+El mismo recupera las diversas experiencias docentes, las pone a disposición de toda la comunidad y posibilita su contextualización y adecuación pedagógica.
+
+Es una herramienta colaborativa para toda  la comunidad educativa, en constante actualización y crecimiento…</string>
+
+
 </resources>
