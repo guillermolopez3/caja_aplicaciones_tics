@@ -505,7 +505,7 @@ public class FragmentPrincipal extends Fragment
         ArrayList<Post> list = new ArrayList<>();
         Post post = new Post();
 
-        post.setNombreRecurso("Competencias de educación digital, el ciberespacio - Ma. Florencia Ripani");
+        post.setNombreRecurso("Competencias de educación digital, el ciberespacio -Ma. Florencia Ripani");
         post.setVideo_id("V6aUGhecrYo");
         post.setUrlImagen("https://i.ytimg.com/vi/V6aUGhecrYo/hqdefault.jpg");
         post.setDescripcion("Te invitamos a ver un video en donde María Florencia Ripani, directora de Educación Digital y Contenidos Multiplataforma de Educar S.E., ilustra el concepto del ciberespacio.");
@@ -548,7 +548,7 @@ public class FragmentPrincipal extends Fragment
         post.setNombreRecurso("Repensar las prácticas de enseñanza en el siglo XXI");
         post.setVideo_id("aPN1-nzeiQg");
         post.setUrlImagen("https://i.ytimg.com/vi/aPN1-nzeiQg/maxresdefault.jpg");
-        post.setDescripcion("\"Planificación, gestión y evaluación\"\n" +
+        post.setDescripcion("Planificación, gestión y evaluación \"\n" +
                 "Presentación y contenido: Dr. Horacio A. Ferreyra (Subsecretario de Promoción de Igualdad y Calidad Educativa). Ministerio de Educación de la Provincia de Córdoba.");
         post.setDescripcionCorta("\"Planificación, gestión y evaluación\"\n" +
                 "Presentación y contenido: Dr. Horacio A. Ferreyra (Subsecretario de Promoción de Igualdad y Calidad Educativa). Ministerio de Educación de la Provincia de Córdoba.");
