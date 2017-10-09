@@ -22,7 +22,7 @@ public class Post implements Serializable
     private String escuela= "ESCUELA: ";
     private String docente= "DOCENTE: ";
     private String video_id;
-
+    private String fecha;
 
     public Post(){}
 
@@ -31,6 +31,21 @@ public class Post implements Serializable
         nombreRecurso=nombre;
         descripcionCorta=desc;
         urlImagen=img;
+    }
+
+
+
+    public Post(String video)
+    {
+        video_id=video;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public String getId() {

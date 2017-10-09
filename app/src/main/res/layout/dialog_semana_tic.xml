@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="¡Bienvenido a la semana Tic! Ingresá y enterate todo lo que pasa en la Semana Tic. Transmisión en vivo de las conferencias, grilla y mucho más"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/logo_semana_tic1"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="vertical"
+        android:padding="8dp">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1"
+            android:orientation="horizontal">
+            
+            <Button
+                android:id="@+id/dialogNo"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:background="@color/colorPrimary"
+                android:text="NO"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.5"
+                android:textColor="@android:color/white"/>
+
+            <Button
+                android:id="@+id/dialogSi"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:background="@color/colorPrimary"
+                android:text="SI"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="10dp"
+                android:textColor="@android:color/white"/>
+            
+        </LinearLayout>
+        
+    </LinearLayout>
+
+
+</LinearLayout>

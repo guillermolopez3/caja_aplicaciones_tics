@@ -13,7 +13,7 @@ public class AcercadeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acercade);
-        showToolbar("",true);
+        showToolbar("",false);
     }
 
     public void showToolbar(String tittle, boolean upButton)

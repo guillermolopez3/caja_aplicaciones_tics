@@ -8,6 +8,14 @@
             android:id="@+id/nav_back"
             android:icon="@drawable/ic_first_page_black_24dp"
             android:title="@string/menu_volver" />
+
+
+        <item
+            android:id="@+id/nav_novedades"
+            android:icon="@drawable/novedades"
+            android:title="@string/novedades"
+            />
+
         <item
             android:id="@+id/nav_pd"
             android:icon="@drawable/ic_pdg"

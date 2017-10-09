@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context="com.gru.cajaaplicacionestics.view.DetalleRecursoAudio">
 
+    <ProgressBar
+        android:id="@+id/progressAudio"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:visibility="gone"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -88,21 +96,6 @@
                     android:layout_marginBottom="10dp"
                     android:background="@android:color/darker_gray"/>
 
-                <TextView
-                    android:id="@+id/detalleRecursoAudioTxtEscuela"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Escuela"
-                    android:textSize="16sp" />
-
-
-                <TextView
-                    android:id="@+id/detalleRecursoAudioTxtDocente"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="Docente"
-                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/txtDescripcionRecurso"

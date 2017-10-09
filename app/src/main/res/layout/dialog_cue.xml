@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/linearDialogCUE"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:src="@drawable/baner"
+        android:background="@color/colorPrimary"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Ingrese el CUE"
+        android:layout_marginTop="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutDialogCue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_marginTop="@dimen/edittext_margin_compartir">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/recursoEnviarTxtUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="9"
+            android:hint="Nro CUE (ej. 111111100)"/>
+    </android.support.design.widget.TextInputLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:weightSum="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialogNo"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@color/colorPrimary"
+            android:text="Salir"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.5"
+            android:textColor="@android:color/white"/>
+
+        <Button
+            android:id="@+id/dialogSi"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@color/colorPrimary"
+            android:text="Enviar"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="10dp"
+            android:textColor="@android:color/white"/>
+
+    </LinearLayout>
+
+</LinearLayout>

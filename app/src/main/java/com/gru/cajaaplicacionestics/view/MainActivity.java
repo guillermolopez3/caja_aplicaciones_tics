@@ -1,45 +1,43 @@
 package com.gru.cajaaplicacionestics.view;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
-import com.arlib.floatingsearchview.FloatingSearchView;
+
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.view.fragment.FragmentPrincipal;
 
-import static com.gru.cajaaplicacionestics.R.id.noLeftAction;
-import static com.gru.cajaaplicacionestics.R.id.toolbar;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    FloatingSearchView mSearchView;
     private String categoria; //variable para saber en que fragment estoy
     private String consulta="";
     FragmentPrincipal fragmentPrincipal;
-    FloatingActionButton fab;
 
+    private int inicial=-1;
+    private int primaria=-1;
+    private int secundaria=-1;
+
+    FloatingActionsMenu fab;
+    com.getbase.floatingactionbutton.FloatingActionButton service,capac,recurso;
     SearchView searchView=null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +47,40 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        categoria= "todos";
+        categoria= "Todos";
 
-        fab= (FloatingActionButton) findViewById(R.id.fab);
+        inicial     =(int) getIntent().getExtras().get("inicial");
+        primaria    =(int) getIntent().getExtras().get("primaria");
+        secundaria  =(int) getIntent().getExtras().get("secundaria");
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        fab = (FloatingActionsMenu)  findViewById(R.id.menu_fab);
+        recurso = (com.getbase.floatingactionbutton.FloatingActionButton)findViewById(R.id.accionNuevoRecurso);
+        service = (com.getbase.floatingactionbutton.FloatingActionButton)findViewById(R.id.accionServicioTecnico);
+        capac   =  (com.getbase.floatingactionbutton.FloatingActionButton)findViewById(R.id.accionCapacitacion);
+
+        recurso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fab.collapse();
                 Intent i = new Intent(MainActivity.this,EnviarRecursosActivity.class);
+                startActivity(i);
+            }
+        });
+
+        service.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fab.collapse();
+                Intent i = new Intent(MainActivity.this,ServicioTecnicoActivity.class);
+                startActivity(i);
+            }
+        });
+
+        capac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fab.collapse();
+                Intent i = new Intent(MainActivity.this,CapacitacionActivity.class);
                 startActivity(i);
             }
         });
@@ -101,32 +125,41 @@ public class MainActivity extends AppCompatActivity
            Intent i = new Intent(this,SeleccionActivity.class);
             startActivity(i);
         }
+        /*else if (id == R.id.nav_semana_tic)
+        {
+            Intent i = new Intent(this,SemanaTicActivity.class);
+            startActivity(i);
+        }*/
         else if (id == R.id.nav_video)
         {
-            categoria="video";
+            categoria="Video";
             cambiarFragment();
         }
         else if (id == R.id.nav_audio)
         {
-            categoria="audio";
+            categoria="Audio";
             cambiarFragment();
         }
         else if (id == R.id.nav_pd)
         {
-            categoria="pd";
+            categoria="PD";
             cambiarFragment();
         }
         else if(id==R.id.nav_web){
-            categoria="web";
+            categoria="Web";
             cambiarFragment();
         }
         else if(id==R.id.nav_pdf){
-            categoria="pdf";
+            categoria="Pdf";
             cambiarFragment();
         }
         else if(id==R.id.nav_ci){
-            categoria="ci";
+            categoria="CI";
             cambiarFragment();
+        }
+        else if(id==R.id.nav_novedades){
+            Intent i = new Intent(MainActivity.this,NovedadesActivity.class);
+            startActivity(i);
         }
         else if(id==R.id.nav_consultar)
         {
@@ -151,6 +184,9 @@ public class MainActivity extends AppCompatActivity
         Bundle data = new Bundle();
         data.putString("categoria", categoria);
         data.putString("consulta", consulta);
+        data.putInt("inicial",inicial);
+        data.putInt("primaria",primaria);
+        data.putInt("secundaria",secundaria);
         fragmentPrincipal.setArguments(data);
         consulta="";
     }
@@ -183,23 +219,14 @@ public class MainActivity extends AppCompatActivity
          return true;
     }
 
-
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-       /* if (item.getItemId()== R.id.action_settings) {
-            Intent i = new Intent(MainActivity.this,AcercadeActivity.class);
-            startActivity(i);
-        }*/
        if(item.getItemId()==R.id.que_es_cajatic){
            Intent i = new Intent(MainActivity.this,QueEsCajaTICActivity.class);
            startActivity(i);
        }
-
-
-        return super.onOptionsItemSelected(item);
+       return super.onOptionsItemSelected(item);
     }
 
     @Override

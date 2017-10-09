@@ -12,7 +12,7 @@ public class QueEsCajaTICActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_que_es_caja_tic);
-        showToolbar("Que es Caja TIC",true);
+        showToolbar("Que es Caja TIC",false);
     }
 
     public void showToolbar(String tittle, boolean upButton)

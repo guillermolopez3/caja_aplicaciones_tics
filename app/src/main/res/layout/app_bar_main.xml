@@ -45,13 +45,48 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/menu_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_action_add" />
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        app:fab_addButtonColorNormal="?attr/colorAccent"
+        app:fab_addButtonSize="normal"
+        app:fab_labelStyle="@style/Etiquetas"
+        app:fab_labelsPosition="left">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/accionNuevoRecurso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="?attr/colorPrimary"
+            app:fab_icon="@drawable/ic_playlist_add"
+            app:fab_size="mini"
+            app:fab_title="Nuevo Recurso" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/accionServicioTecnico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="?attr/colorPrimary"
+            app:fab_icon="@drawable/ic_build"
+            app:fab_size="mini"
+            app:fab_title="Servicio Técnico" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/accionCapacitacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="?attr/colorPrimary"
+            app:fab_icon="@drawable/ic_event"
+            app:fab_size="mini"
+            app:fab_title="Capacitación" />
+
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 
 

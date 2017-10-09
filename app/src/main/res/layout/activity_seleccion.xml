@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/coordinatorSeleccion"
     tools:context="com.gru.cajaaplicacionestics.view.SeleccionActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -33,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Seleccione el ó los niveles para obtener el listado con los recursos"
+                android:text="Seleccione el ó los niveles"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <LinearLayout

@@ -94,7 +94,7 @@ public class AdapterRecursos extends RecyclerView.Adapter<AdapterRecursos.Recurs
             i.putExtra("data",post);
             activity.startActivity(i);
         }
-        else if(tipo_rec=="audio")
+        else if(tipo_rec.equals("audio"))
         {
             Intent i = new Intent(activity, DetalleRecursoAudio.class);
             i.putExtra("data",post);
