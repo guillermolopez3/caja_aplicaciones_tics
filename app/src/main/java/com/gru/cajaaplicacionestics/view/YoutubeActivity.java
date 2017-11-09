@@ -44,7 +44,7 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
     YouTubePlayer mYouTubePlayer;
 
     private NewPost post;
-    TextView titulo,tag,descripcion;
+    TextView titulo,tag,descripcion,txtFecha;
     private String url_video;
     private Button btnRecargar;
 
@@ -63,6 +63,7 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
         tag=(TextView) findViewById(R.id.txtTagsDescripcionRecurso);
         descripcion=(TextView)findViewById(R.id.txtDescripcionRecurso);
         btnRecargar=(Button)findViewById(R.id.youtubeRecargar);
+        txtFecha = (TextView)findViewById(R.id.txtFechaDescripcionRecurso);
 
         URL_BASE=getResources().getString(R.string.URL_BASE);
         URL_VIDEO= getResources().getString(R.string.URL_VIDEO);
@@ -93,6 +94,7 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
         tag.setText(post.getTag());
         descripcion.setText(post.getDetalle());
         url_video=post.getUlr_mas();
+        txtFecha.setText("Ultima actualización: " + post.getFecha());
 
         youTubePlayerView.initialize(getResources().getString(R.string.KEY_API_YOUTUBE), this);
     }

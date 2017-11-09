@@ -89,7 +89,9 @@
                 android:value=".view.MainActivity" />
         </activity>
         <activity android:name=".view.DetalleNovedadesActivity" />
-        <activity android:name=".view.NovedadesActivity"></activity>
+        <activity android:name=".view.NovedadesActivity" />
+        <activity android:name=".view.NuevaSeleccioonActivity" />
+        <activity android:name=".view.PDActivity"></activity>
     </application>
 
 </manifest>

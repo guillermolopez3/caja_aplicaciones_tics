@@ -158,7 +158,8 @@ public class MainActivity extends AppCompatActivity
             cambiarFragment();
         }
         else if(id==R.id.nav_novedades){
-            Intent i = new Intent(MainActivity.this,NovedadesActivity.class);
+           // Intent i = new Intent(MainActivity.this,NovedadesActivity.class);
+            Intent i = new Intent(MainActivity.this,NuevaSeleccioonActivity.class);
             startActivity(i);
         }
         else if(id==R.id.nav_consultar)

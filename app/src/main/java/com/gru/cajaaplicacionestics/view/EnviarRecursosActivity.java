@@ -67,7 +67,8 @@ public class EnviarRecursosActivity extends AppCompatActivity {
 
     private void insertarCapacitacion() //trae los datos de la BD, los parsea con volley y lo carga a la lista
     {
-        String URL = "http://www.muniap.com/CajaTic/InsertarNuevoRecurso.php";
+        //String URL = "http://www.muniap.com/CajaTic/InsertarNuevoRecurso.php";
+        String URL= "http://www.igualdadycalidadcba.gov.ar/CajaTIC/consultas_app/InsertarNuevoRecurso.php";
 
         final ProgressDialog dialog=new ProgressDialog(this);
         dialog.setMessage("Enviando pedido...");
@@ -98,6 +99,8 @@ public class EnviarRecursosActivity extends AppCompatActivity {
 
                             dialog.dismiss();
                         } catch (JSONException e) {
+                            Snackbar.make(scrollView,"Error al enviar el pedido,intente nuevamente",Snackbar.LENGTH_LONG).show();
+                            Log.e("Insetrado","error");
                             Log.e("error cue", e.toString());
                             e.printStackTrace();
                         }
@@ -105,7 +108,9 @@ public class EnviarRecursosActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Snackbar.make(scrollView,"Error al enviar el pedido,intente nuevamente",Snackbar.LENGTH_LONG).show();
+                Log.e("Insetrado","error");
+                Log.e("error insertar", error.toString());
             }
         }){
             @Override

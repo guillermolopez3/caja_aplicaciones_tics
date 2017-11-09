@@ -7,18 +7,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="¡Bienvenido a la semana Tic! Ingresá y enterate todo lo que pasa en la Semana Tic. Transmisión en vivo de las conferencias, grilla y mucho más"/>
+       >
 
         <ImageView
+            android:id="@+id/imagenPopUp"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/logo_semana_tic1"
-            android:layout_marginTop="20dp"/>
+            android:src="@drawable/fondo_card"
+            />
+
+        <TextView
+            android:id="@+id/txtPopUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:text=""/>
+
+
 
     </LinearLayout>
 

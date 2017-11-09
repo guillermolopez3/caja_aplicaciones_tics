@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
 import com.gru.cajaaplicacionestics.R;
@@ -48,6 +49,7 @@ public class DetalleNovedadesActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             pdfView.setVisibility(View.INVISIBLE);
+            Toast.makeText(DetalleNovedadesActivity.this,"Descargando Novedades",Toast.LENGTH_LONG).show();
             progressBar.setVisibility(View.VISIBLE);
         }
 
@@ -70,9 +72,10 @@ public class DetalleNovedadesActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(InputStream inputStream) {
+           pdfView.fromStream(inputStream).load();
             progressBar.setVisibility(View.GONE);
             pdfView.setVisibility(View.VISIBLE);
-            pdfView.fromStream(inputStream).load();
+
         }
     }
 }

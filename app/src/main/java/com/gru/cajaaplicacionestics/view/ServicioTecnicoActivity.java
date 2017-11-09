@@ -287,7 +287,7 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
 
     private void insertarCapacitacion() //trae los datos de la BD, los parsea con volley y lo carga a la lista
     {
-        String URL = "http://www.muniap.com/CajaTic/InsertarReclamo.php";
+        String URL = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/consultas_app/InsertarReclamo.php";
 
         final ProgressDialog dialog=new ProgressDialog(this);
         dialog.setMessage("Enviando pedido...");

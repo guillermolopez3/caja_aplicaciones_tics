@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -26,7 +27,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.model.ModelPopUp;
+import com.gru.cajaaplicacionestics.model.NewPost;
 import com.gru.cajaaplicacionestics.model.Post;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,13 +53,15 @@ public class SeleccionActivity extends AppCompatActivity {
 
     String url="";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleccion);
         showToolbar(getResources().getString(R.string.nombre_app),false);
 
-        //abrirDialog(this);
+        obtenerDatosPopUp();
+
 
         entrar= (Button)findViewById(R.id.btnEntrarActivitySeleccion);
         inicial= (CheckBox) findViewById(R.id.seleccionChkInicial);
@@ -155,12 +161,18 @@ public class SeleccionActivity extends AppCompatActivity {
         finish();
     }
 
-    private void abrirDialog(Context c)
+    private void abrirDialog(Context c, String url_img, String descripcion, String tipo_r, final int id_p)
     {
         final AlertDialog.Builder builder = new AlertDialog.Builder(c);
         LayoutInflater inflater = getLayoutInflater();
 
         final View view = inflater.inflate(R.layout.dialog_semana_tic,null);
+
+        TextView descr = (TextView) view.findViewById(R.id.txtPopUp);
+        ImageView imag = (ImageView)view.findViewById(R.id.imagenPopUp);
+
+        descr.setText(descripcion);
+        Picasso.with(this).load(url_img).into(imag);
 
         builder.setView(view);
 
@@ -180,20 +192,19 @@ public class SeleccionActivity extends AppCompatActivity {
         si.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SeleccionActivity.this, EspecialSemanaTicActivity.class);
-                startActivity(i);
+                obtenerDatosPost(id_p);
             }
         });
 
     }
 
-    private void obtenerUrlVideoVivo() {
+    private void obtenerDatosPopUp() {
         final ProgressDialog dialog=new ProgressDialog(SeleccionActivity.this);
         dialog.setMessage("Cargando datos...");
         dialog.show();
         Log.e("entrando", "obtener");
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                "https://faltaequipoxyz.000webhostapp.com/obtener_url_video.php",
+                "http://www.igualdadycalidadcba.gov.ar/CajaTIC/consultas_app/GetPopUp.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -203,20 +214,24 @@ public class SeleccionActivity extends AppCompatActivity {
                             JSONArray array = jsonObject.getJSONArray("post");
 
                             JSONObject o = array.getJSONObject(0);
-                            Post post = new Post();
-                            post.setNombreRecurso("Semana Tic");
-                            post.setHastag("semana tic");
-                            post.setDescripcion("Todo sobre la semana tic");
 
-                            url = o.getString("url_video");
-                            post.setVideo_id(url);
-                            Intent i = new Intent(SeleccionActivity.this,YoutubeActivity.class);
-                            i.putExtra("data",post);
-                            startActivity(i);
-                            Log.e("url video ob", url);
+                            ModelPopUp popUp=new ModelPopUp();
+                            popUp.setUrl_imagen(o.getString("url_imagen"));
+                            popUp.setDescripcion(o.getString("descripcion"));
+                            popUp.setTipo_recurso(o.getString("tipo_recurso"));
+                            popUp.setId_post(o.getInt("id_post"));
 
+                            if((popUp.getDescripcion()!=null)&& (popUp.getDescripcion()!=""))
+                            {
+                                Log.e("descr",popUp.getDescripcion());
+                                abrirDialog(SeleccionActivity.this,popUp.getUrl_imagen(),popUp.getDescripcion(), popUp.getTipo_recurso(),
+                                        popUp.getId_post());
+                            }
+
+                            Log.e("datos",popUp.getDescripcion());
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Log.e("error",e.getMessage());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -230,6 +245,53 @@ public class SeleccionActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
+
+    private void obtenerDatosPost(int id) {
+        final ProgressDialog dialog=new ProgressDialog(SeleccionActivity.this);
+        dialog.setMessage("Cargando datos...");
+        dialog.show();
+        Log.e("entrando", "obtener");
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                "http://www.igualdadycalidadcba.gov.ar/CajaTIC/consultas_app/GetDatosVivo.php?id=" + id,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        dialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray array = jsonObject.getJSONArray("post");
+
+                            JSONObject o = array.getJSONObject(0);
+
+                            NewPost post = new NewPost();
+                            post.setNombre(o.getString("titulo"));
+                            post.setTag(o.getString("tags"));
+                            post.setDetalle(o.getString("detalle"));
+                            post.setUlr_mas(o.getString("url_mas"));
+                            post.setFecha(o.getString("fecha"));
+
+                            Intent i = new Intent(SeleccionActivity.this,YoutubeActivity.class);
+                            i.putExtra("data",post);
+                            startActivity(i);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("error",e.getMessage());
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+    }
+
+
 
 
     @Override
