@@ -26,7 +26,7 @@ public class NuevaSeleccioonActivity extends AppCompatActivity {
         pd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(NuevaSeleccioonActivity.this,QueEsCajaTICActivity.class);
+                Intent i = new Intent(NuevaSeleccioonActivity.this,PDActivity.class);
                 startActivity(i);
 
             }

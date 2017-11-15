@@ -91,7 +91,12 @@
         <activity android:name=".view.DetalleNovedadesActivity" />
         <activity android:name=".view.NovedadesActivity" />
         <activity android:name=".view.NuevaSeleccioonActivity" />
-        <activity android:name=".view.PDActivity"></activity>
+        <activity android:name=".view.PDActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.NuevaSeleccioonActivity" />
+        </activity>
+        <activity android:name=".view.PdfActivity"></activity>
     </application>
 
 </manifest>

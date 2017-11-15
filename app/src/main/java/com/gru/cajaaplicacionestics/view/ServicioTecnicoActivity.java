@@ -92,6 +92,7 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
 
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
+        alertDialog.setCancelable(false);
 
         no.setOnClickListener(new View.OnClickListener() {
             @Override

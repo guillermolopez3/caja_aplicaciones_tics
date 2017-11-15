@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:appcompat="http://schemas.android.com/tools">
+
+
+    <item
+        android:title=""
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_action_search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always|collapseActionView" />
+    <item
+        android:id="@+id/action_filtrar"
+        android:icon="@drawable/ic_action_filter"
+        android:title=""
+        app:showAsAction="ifRoom" />
+
+    <!-- <item
+         android:id="@+id/action_settings"
+         android:title="@string/acercade"
+         app:showAsAction="never" /> -->
+</menu>

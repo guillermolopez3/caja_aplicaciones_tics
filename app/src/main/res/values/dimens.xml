@@ -9,4 +9,8 @@
     <dimen name="altura_imagen_item">130dp</dimen>
     <dimen name="appbar_height">200dp</dimen>
     <dimen name="edittext_margin_compartir">10dp</dimen>
+    <dimen name="corner_radius">10dp</dimen>
+    <dimen name="paddin_card">5dp</dimen>
+    <dimen name="elevation_card">5dp</dimen>
+
 </resources>

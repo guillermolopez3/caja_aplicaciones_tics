@@ -91,7 +91,7 @@ public class CapacitacionActivity extends AppCompatActivity implements AdapterVi
 
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
-
+        alertDialog.setCancelable(false);
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +114,8 @@ public class CapacitacionActivity extends AppCompatActivity implements AdapterVi
 
             }
         });
+
+
 
     }
 

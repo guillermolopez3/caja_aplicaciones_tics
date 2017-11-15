@@ -32,6 +32,17 @@ public class NewPost implements Serializable
         categoria=cat;
     }
 
+    public NewPost(int id, String nombre, String descripcion_corta, String fecha, String url_img, String tag, String detalle, String ulr_mas) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion_corta = descripcion_corta;
+        this.fecha = fecha;
+        this.url_img = url_img;
+        this.tag = tag;
+        this.detalle = detalle;
+        this.ulr_mas = ulr_mas;
+
+    }
     public int getId() {
         return id;
     }
