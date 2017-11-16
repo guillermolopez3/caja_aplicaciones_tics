@@ -122,7 +122,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_back)
         {
-           Intent i = new Intent(this,SeleccionActivity.class);
+            Intent i = new Intent(MainActivity.this,NuevaSeleccioonActivity.class);
+           //Intent i = new Intent(this,SeleccionActivity.class);
             startActivity(i);
         }
         /*else if (id == R.id.nav_semana_tic)
@@ -158,8 +159,8 @@ public class MainActivity extends AppCompatActivity
             cambiarFragment();
         }
         else if(id==R.id.nav_novedades){
-           // Intent i = new Intent(MainActivity.this,NovedadesActivity.class);
-            Intent i = new Intent(MainActivity.this,NuevaSeleccioonActivity.class);
+            Intent i = new Intent(MainActivity.this,NovedadesActivity.class);
+
             startActivity(i);
         }
         else if(id==R.id.nav_consultar)

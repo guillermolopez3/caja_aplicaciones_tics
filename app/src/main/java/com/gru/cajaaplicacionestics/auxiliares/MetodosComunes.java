@@ -35,7 +35,7 @@ public class MetodosComunes
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(upButton);
     }
 
-
+    //abre el fab con las opciones de pedido de capacitacion/st o enviar recursos
     public static void abrirActivityFab(AppCompatActivity act)
     {
         final AppCompatActivity activity= act;
@@ -72,6 +72,19 @@ public class MetodosComunes
                 activity.startActivity(i);
             }
         });
+    }
+
+    //metodo para compartir texto ya sea whatsapp, mail
+    public static void compartirRecursos(String mens,AppCompatActivity activity)
+    {
+        String mensaje="Recurso enviado desde CajaTic \n";
+        mensaje+= mens;
+
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Compartir pdf");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
+        emailIntent.setType("text/plain");
+        activity.startActivity(Intent.createChooser(emailIntent, "Enviar Recurso "));
     }
 
 }

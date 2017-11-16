@@ -3,7 +3,6 @@ package com.gru.cajaaplicacionestics.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.ImageView;
 
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.model.ModelNovedades;
-import com.gru.cajaaplicacionestics.view.DetalleNovedadesActivity;
+import com.gru.cajaaplicacionestics.view.PdfActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -54,7 +53,7 @@ public class AdapterNovedades extends RecyclerView.Adapter<AdapterNovedades.Nove
         holder.novedades.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(activity, DetalleNovedadesActivity.class);
+                Intent i = new Intent(activity, PdfActivity.class);
                 i.putExtra("link",url_pdf);
                 activity.startActivity(i);
             }

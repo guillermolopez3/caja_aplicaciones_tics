@@ -1,7 +1,6 @@
 package com.gru.cajaaplicacionestics.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -16,8 +15,8 @@ import android.widget.TextView;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.model.NewPost;
 import com.gru.cajaaplicacionestics.view.DetallaRecursoActivity;
-import com.gru.cajaaplicacionestics.view.DetalleNovedadesActivity;
 import com.gru.cajaaplicacionestics.view.DetalleRecursoAudio;
+import com.gru.cajaaplicacionestics.view.PdfActivity;
 import com.gru.cajaaplicacionestics.view.YoutubeActivity;
 import com.squareup.picasso.Picasso;
 
@@ -86,7 +85,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.RecursosHolder
         }
         else if(tipo_rec.equals("Pdf"))
         {
-            Intent i = new Intent(activity, DetalleNovedadesActivity.class);
+            Intent i = new Intent(activity, PdfActivity.class);
             Log.e("link pdf",post.getUlr_mas());
             i.putExtra("link",post.getUlr_mas());
             activity.startActivity(i);
