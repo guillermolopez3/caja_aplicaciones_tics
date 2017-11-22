@@ -16,6 +16,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.adapter.AdapterNovedades;
+import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.model.ModelNovedades;
 import com.gru.cajaaplicacionestics.model.NewPost;
 
@@ -41,7 +42,8 @@ public class NovedadesActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_novedades);
 
-        showToolbar("Novedades",false);
+        MetodosComunes.showToolbar("Novedades",true,this);
+
 
         recyclerView=(RecyclerView) findViewById(R.id.recyclerNovedades);
 
@@ -102,13 +104,4 @@ public class NovedadesActivity extends AppCompatActivity
 
     }
 
-    public void showToolbar(String tittle, boolean upButton)
-    {
-        //uso appcompatacty... xq la actividad que maneja esto tiene soporte y es de este tipo
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(tittle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(upButton);
-        //CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingDetalle);
-    }
 }

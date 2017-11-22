@@ -74,6 +74,9 @@ Es una herramienta colaborativa para toda  la comunidad educativa, en constante 
     <string name="JSON_BUSQUDA_SECCION">NuevaBusquedaPost.php?</string>
     <string name="JSON_FILTRO_POST">GetPostFiltrado.php?</string>
 
+    <string name="JSON_NE_DA">NEDocAcompa.php?</string>
+    <string name="JSON_POST_X_NIVEL">GetPostXNivel.php?</string>
+
     <string name="CANTIDAD_POST">15</string>
     <string name="URL_VIDEO">/consultaVideoVivo.php</string>
 

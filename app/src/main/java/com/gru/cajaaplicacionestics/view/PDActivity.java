@@ -30,7 +30,10 @@ public class PDActivity extends AppCompatActivity
 {
     SearchView searchView=null;
     PullToLoadView pullToLoadView; //se encarga de ir llenando el recycler
-    static final int PRIMARIA_DIGITAL=1; //el id de la BD de PD es 1
+    //static final int PRIMARIA_DIGITAL=1; //el id de la BD de PD es 1
+    int SECCION_SELECCIONADA=1; //aca guardo la seccion (PD,CI,NE,Rec) segun el id de la tabla
+
+    String titulo,seccion; //segun la seccion seleccionada va el titulo
 
     String str_web="";
     String str_video="";
@@ -41,11 +44,15 @@ public class PDActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pd);
-        MetodosComunes.showToolbar("Primaria Digital",true,this);
+
+        seccion = getIntent().getExtras().getString("seleccion");
+        seccionSeleccionada();
+
+        MetodosComunes.showToolbar(titulo,true,this);
 
         //lleno el recycler
         pullToLoadView=(PullToLoadView)findViewById(R.id.recyclerPd);
-        new Paginacion(this,pullToLoadView,PRIMARIA_DIGITAL).iniciarPaginacion();
+        new Paginacion(this,pullToLoadView,SECCION_SELECCIONADA).iniciarPaginacion();
 
         MetodosComunes.abrirActivityFab(this);
 
@@ -62,7 +69,7 @@ public class PDActivity extends AppCompatActivity
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                new Paginacion(PDActivity.this,pullToLoadView,PRIMARIA_DIGITAL).iniciarPaginacionBusqueda(query);
+                new Paginacion(PDActivity.this,pullToLoadView,SECCION_SELECCIONADA).iniciarPaginacionBusqueda(query);
                 return true;
             }
 
@@ -80,7 +87,7 @@ public class PDActivity extends AppCompatActivity
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                new Paginacion(PDActivity.this,pullToLoadView,PRIMARIA_DIGITAL).iniciarPaginacion();
+                new Paginacion(PDActivity.this,pullToLoadView,SECCION_SELECCIONADA).iniciarPaginacion();
                 return true;
             }
         });
@@ -153,11 +160,27 @@ public class PDActivity extends AppCompatActivity
                     }
                 }
 
-                new Paginacion(PDActivity.this,pullToLoadView,PRIMARIA_DIGITAL).
+                new Paginacion(PDActivity.this,pullToLoadView,SECCION_SELECCIONADA).
                         iniciarPaginacionFiltrada(str_web,str_video,str_audio,str_pdf);
                 alertDialog.dismiss();
             }
         });
+
+    }
+
+    //segun la seleccion del usuario, son los valores de las variables
+    private void seccionSeleccionada()
+    {
+        if(seccion.equals("pd"))
+        {
+            SECCION_SELECCIONADA=1;//pd en la BD
+            titulo= "Primaria Digital";
+        }
+        else if(seccion.equals("ci")){
+            SECCION_SELECCIONADA=2;//pd en la BD
+            titulo= "Conectar Igualdad";
+        }
+
 
     }
 

@@ -188,6 +188,49 @@ public class Paginacion
         pullToLoadView.initLoad();
     }
 
+    public void iniciarPaginacionRecursosxNivel(final String nivel)
+    {
+        pullToLoadView.isLoadMoreEnabled(true);
+
+        URL_BASE=activity.getResources().getString(R.string.URL_BASE);
+        URL_JSON=activity.getResources().getString(R.string.JSON_POST_X_NIVEL);
+        CANTIDAD_POST= Integer.parseInt(activity.getResources().getString(R.string.CANTIDAD_POST));
+
+        pullToLoadView.setPullCallback(new PullCallback() {
+            @Override
+            public void onLoadMore() {
+                Log.e("on load","entra");
+                LIMIT=LIMIT+CANTIDAD_POST;
+                cargarListaRecursosXNivel(nivel);
+
+            }
+
+            //evento ni bien ingresa y cuando haces swipe para arriba
+            @Override
+            public void onRefresh() {
+                Log.e("on refresh","entra");
+                adapter.clear(); //limpio el adapter
+                hasLoadedAll=false;
+                LIMIT=0; //reinicio el contador
+                cargarListaRecursosXNivel(nivel);
+
+            }
+
+            @Override
+            public boolean isLoading() {
+                Log.e("on loading","entra");
+                return isLoading;
+            }
+
+            @Override
+            public boolean hasLoadedAllItems() {
+                Log.e("on hasLoaded","entra");
+                return hasLoadedAll;
+            }
+        });
+        pullToLoadView.initLoad();
+    }
+
     private void cargarLista()
     {
         VolleySingleton.getInstancia(activity).
@@ -319,4 +362,50 @@ public class Paginacion
                     }
                 }));
     }
+
+
+    private void cargarListaRecursosXNivel(String nivel)
+    {
+        VolleySingleton.getInstancia(activity).
+                addToRequestQueue(new StringRequest(Request.Method.GET,
+                        URL_BASE + URL_JSON + "limite="+ LIMIT + "&nivel=" + nivel,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    JSONArray array= jsonObject.getJSONArray("post");
+
+                                    for(int i=0; i< array.length();i++)
+                                    {
+                                        JSONObject o = array.getJSONObject(i);
+                                        NewPost post = new NewPost(
+                                                o.getInt("id"),
+                                                o.getString("titulo"),
+                                                o.getString("descripcion_corta"),
+                                                o.getString("fecha"),
+                                                o.getString("url_img_ppal"),
+                                                o.getString("tags"),
+                                                o.getString("detalle"),
+                                                o.getString("url_mas"),
+                                                o.getString("activity")
+                                        );
+                                        adapter.add(post);
+                                    }
+                                    pullToLoadView.setComplete();
+                                    isLoading=false;
+                                } catch (JSONException e) {
+                                    Log.e("error",e.getMessage());
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }));
+    }
+
+
 }

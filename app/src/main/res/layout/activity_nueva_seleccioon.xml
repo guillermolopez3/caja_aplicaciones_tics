@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#333333"
     tools:context="com.gru.cajaaplicacionestics.view.NuevaSeleccioonActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -29,7 +30,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.3"
             android:orientation="horizontal">
 
             <ImageButton
@@ -49,12 +50,13 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/ci_button"/>
 
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.3"
             android:orientation="horizontal">
 
             <ImageButton
@@ -73,6 +75,31 @@
                 android:padding="2dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/recursos_button"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/seleccionNovedades"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:padding="2dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/novedades_button"/>
+            <ImageButton
+                android:id="@+id/seleccionCanal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:padding="2dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/canal_button"/>
 
         </LinearLayout>
 

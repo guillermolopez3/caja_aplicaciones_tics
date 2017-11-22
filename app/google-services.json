@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "237917838173",
+    "project_id": "cajatics"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:237917838173:android:ef97fad5fa0b82dd",
+        "android_client_info": {
+          "package_name": "com.gru.cajaaplicacionestics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "237917838173-2lorperiejonsbh6h7lnarbs55ogf7ph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkekolWiDaUOd00QZDxF5J65u_q_OsT6Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-105770823-2"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
