@@ -17,8 +17,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.gru.cajaaplicacionestics.R;
 
+import com.gru.cajaaplicacionestics.auxiliares.AnalitycsAplication;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.backend.Paginacion;
 
@@ -28,6 +31,8 @@ import com.srx.widget.PullToLoadView;
 
 public class PDActivity extends AppCompatActivity
 {
+    private Tracker mTracker;
+
     SearchView searchView=null;
     PullToLoadView pullToLoadView; //se encarga de ir llenando el recycler
     //static final int PRIMARIA_DIGITAL=1; //el id de la BD de PD es 1
@@ -44,6 +49,9 @@ public class PDActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pd);
+
+        AnalitycsAplication aplication = (AnalitycsAplication) getApplication();
+        mTracker = aplication.getDefaultTracker();
 
         seccion = getIntent().getExtras().getString("seleccion");
         seccionSeleccionada();
@@ -192,4 +200,10 @@ public class PDActivity extends AppCompatActivity
         str_pdf=getResources().getString(R.string.FILTRO_Pdf);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mTracker.setScreenName(titulo);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
 }

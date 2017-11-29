@@ -28,7 +28,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.auxiliares.AnalitycsAplication;
 import com.gru.cajaaplicacionestics.model.ColegioModel;
 import com.gru.cajaaplicacionestics.model.Post;
 
@@ -42,7 +45,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ServicioTecnicoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
+    private Tracker mTracker;
     CoordinatorLayout coordinatorLayout;
     ColegioModel colegioModel;
 
@@ -64,6 +67,9 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_servicio_tecnico);
+
+        AnalitycsAplication aplication = (AnalitycsAplication) getApplication();
+        mTracker = aplication.getDefaultTracker();
 
         coordinatorLayout=(CoordinatorLayout)findViewById(R.id.coordinatorST);
         coordinatorLayout.setVisibility(View.INVISIBLE);
@@ -345,5 +351,12 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mTracker.setScreenName("ST");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

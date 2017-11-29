@@ -18,7 +18,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.auxiliares.AnalitycsAplication;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EnviarRecursosActivity extends AppCompatActivity {
-
+    private Tracker mTracker;
     ScrollView scrollView;
     TextInputEditText nombre,titulo,link,categoria,descripcion;
     Button enviar;
@@ -35,6 +38,8 @@ public class EnviarRecursosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar_recursos);
+        AnalitycsAplication aplication = (AnalitycsAplication) getApplication();
+        mTracker = aplication.getDefaultTracker();
         showToolbar("Compartir Recurso",false);
 
         scrollView  =(ScrollView) findViewById(R.id.scrollEnviar);
@@ -137,5 +142,12 @@ public class EnviarRecursosActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(tittle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(upButton);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mTracker.setScreenName("Nuevo Recurso");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

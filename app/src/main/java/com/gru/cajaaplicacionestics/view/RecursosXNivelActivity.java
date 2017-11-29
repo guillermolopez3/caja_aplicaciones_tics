@@ -10,11 +10,15 @@ import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.view.MenuItem;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.auxiliares.AnalitycsAplication;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.view.fragment.FragmentRecursosNIvel;
 
 public class RecursosXNivelActivity extends AppCompatActivity {
+    private Tracker mTracker;
     SearchView searchView=null;
     Fragment recursos;
 
@@ -27,6 +31,9 @@ public class RecursosXNivelActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recursos_nivel);
+
+        AnalitycsAplication aplication = (AnalitycsAplication) getApplication();
+        mTracker = aplication.getDefaultTracker();
 
         MetodosComunes.showToolbar("Recursos", true, this);
 
@@ -74,6 +81,10 @@ public class RecursosXNivelActivity extends AppCompatActivity {
         recursos.setArguments(data);
     }
 
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mTracker.setScreenName("Recursos por Nivel");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
 }
