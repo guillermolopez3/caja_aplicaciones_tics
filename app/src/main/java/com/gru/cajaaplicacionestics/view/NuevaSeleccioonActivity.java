@@ -48,7 +48,8 @@ public class NuevaSeleccioonActivity extends AppCompatActivity {
         ne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(NuevaSeleccioonActivity.this,NEActivity.class);
+               // Intent i = new Intent(NuevaSeleccioonActivity.this,NEActivity.class);
+                Intent i = new Intent(NuevaSeleccioonActivity.this,NuestraEscuelaMenuActivity.class);
                 startActivity(i);
             }
         });

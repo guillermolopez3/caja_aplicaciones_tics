@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gru.cajaaplicacionestics.view.NuestraEscuelaMenuActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/fondo_logo_ne"
+           android:src="@drawable/logo_ne"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp"
+                android:padding="25dp">
+
+                <Button
+                    android:id="@+id/btnDocAcompa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/botones_ne"
+                    android:textColor="@android:color/white"
+                    android:text="Documento de acompañamiento"/>
+
+                <Button
+                    android:id="@+id/btnOrientAdm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/botones_ne"
+                    android:textColor="@android:color/white"
+                    android:text="Orientaciones administrativas"/>
+                <Button
+                    android:id="@+id/btnRecPcial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/botones_ne"
+                    android:textColor="@android:color/white"
+                    android:text="Recursos Provinciales"/>
+                <Button
+                    android:id="@+id/btnResolucion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/botones_ne"
+                    android:textColor="@android:color/white"
+                    android:text="Resoluciones aprobatorias"/>
+                <Button
+                    android:id="@+id/btnDocAutoeval"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@color/botones_ne"
+                    android:text="Doc. para la autoevaluación instituc."/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

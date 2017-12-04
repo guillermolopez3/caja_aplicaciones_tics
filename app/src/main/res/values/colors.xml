@@ -10,4 +10,7 @@
 
     <color name="black_overlay">#66000000</color>
 
+    <color name="fondo_logo_ne">#F1F1F1</color>
+    <color name="botones_ne">#eb402d</color>
+
 </resources>
