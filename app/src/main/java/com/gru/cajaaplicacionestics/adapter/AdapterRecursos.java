@@ -1,7 +1,6 @@
 package com.gru.cajaaplicacionestics.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -14,25 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.gru.cajaaplicacionestics.R;
-import com.gru.cajaaplicacionestics.model.ModelRecursos;
 import com.gru.cajaaplicacionestics.model.Post;
-import com.gru.cajaaplicacionestics.view.DetallaRecursoActivity;
+import com.gru.cajaaplicacionestics.view.DetalleRecursoGeneralActivity;
 import com.gru.cajaaplicacionestics.view.DetalleRecursoAudio;
 import com.gru.cajaaplicacionestics.view.YoutubeActivity;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -101,7 +88,7 @@ public class AdapterRecursos extends RecyclerView.Adapter<AdapterRecursos.Recurs
             activity.startActivity(i);
         }
         else {
-            Intent i = new Intent(activity, DetallaRecursoActivity.class);
+            Intent i = new Intent(activity, DetalleRecursoGeneralActivity.class);
             i.putExtra("data",post);
             activity.startActivity(i);
         }

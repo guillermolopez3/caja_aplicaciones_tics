@@ -124,8 +124,9 @@ public class PdfActivity extends AppCompatActivity{
             pdfView.fromStream(inputStream).onError(new OnErrorListener() {
                 @Override
                 public void onError(Throwable t) {
-                    Toast.makeText(PdfActivity.this,"Error al descargar el pdf",Toast.LENGTH_LONG).show();
+                    Toast.makeText(PdfActivity.this,"Error al descargar el pdf, verifique su conexión",Toast.LENGTH_LONG).show();
                     progressBar.setVisibility(View.GONE);
+                    finish();
                 }
             }).onLoad(new OnLoadCompleteListener() {
                 @Override

@@ -23,6 +23,8 @@ import com.google.zxing.common.BitMatrix;
 import com.gru.cajaaplicacionestics.R;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+//Codigo QR
+
 public class SemanaTicActivity extends AppCompatActivity
 {
     TextInputEditText txtDni;

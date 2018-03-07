@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gru.cajaaplicacionestics.view.DetallaRecursoActivity">
+    tools:context="com.gru.cajaaplicacionestics.view.DetalleRecursoGeneralActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"

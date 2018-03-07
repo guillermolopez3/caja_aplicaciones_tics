@@ -14,6 +14,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.auxiliares.AnalitycsAplication;
+import com.gru.cajaaplicacionestics.auxiliares.BottomNavigationViewHelper;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.view.fragment.FragmentRecursosNIvel;
 
@@ -35,14 +36,15 @@ public class RecursosXNivelActivity extends AppCompatActivity {
         AnalitycsAplication aplication = (AnalitycsAplication) getApplication();
         mTracker = aplication.getDefaultTracker();
 
-        MetodosComunes.showToolbar("Recursos", true, this);
+        MetodosComunes.showToolbar("Espacio Didáctico", true, this);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationViewHelper.removeShiftMode(navigation);//le quito el efecto de aumento al cliquear los iconos
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         recursos = new FragmentRecursosNIvel();
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, recursos)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-        enviarNivel("INICIAL");
+        enviarNivel(2);
 
     }
 
@@ -55,29 +57,36 @@ public class RecursosXNivelActivity extends AppCompatActivity {
                             recursos = new FragmentRecursosNIvel();
                             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, recursos)
                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-                            enviarNivel("INICIAL");
+                            enviarNivel(2);
                             return true;
                         case R.id.navigation_primaria:
                             recursos = new FragmentRecursosNIvel();
                             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, recursos)
                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-                            enviarNivel("PRIMARIO");
+                            enviarNivel(3);
                             return true;
                         case R.id.navigation_secundaria:
                             recursos = new FragmentRecursosNIvel();
                             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, recursos)
                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-                            enviarNivel("SECUNDARIO");
+                            enviarNivel(4);
+                            return true;
+                        case R.id.navigation_superior:
+                            recursos = new FragmentRecursosNIvel();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, recursos)
+                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                            enviarNivel(5);
                             return true;
                     }
                     return false;
                 }
             };
 
-    private void enviarNivel(String nivel)
+    private void enviarNivel(int nivel)
     {
+        //2 inicial, 3 primario, 4 secundario
         Bundle data = new Bundle();
-        data.putString("nivel", nivel);
+        data.putInt("nivel", nivel);
         recursos.setArguments(data);
     }
 

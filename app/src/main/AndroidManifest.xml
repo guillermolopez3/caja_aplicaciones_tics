@@ -30,7 +30,7 @@
         </activity>
         <activity android:name=".view.MainActivity" />
         <activity android:name=".view.SeleccionActivity" />
-        <activity android:name=".view.DetallaRecursoActivity">
+        <activity android:name=".view.DetalleRecursoGeneralActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.MainActivity" />
@@ -53,16 +53,6 @@
                 android:value=".view.MainActivity" />
         </activity>
         <activity android:name=".view.SemanaTicActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.EspecialSemanaTicActivity" />
-        </activity>
-        <activity android:name=".view.EspecialSemanaTicActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.SeleccionActivity" />
-        </activity>
-        <activity android:name=".view.GrillaSemanaTicActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.EspecialSemanaTicActivity" />
@@ -116,7 +106,18 @@
             android:name=".view.RecursosProvincialesActivity"
             android:label="@string/title_activity_recursos_provinciales"
             android:theme="@style/AppTheme" />
-        <activity android:name=".view.NuestraEscuelaMenuActivity"></activity>
+        <activity android:name=".view.NuestraEscuelaMenuActivity" />
+        <activity android:name=".view.MenuActivity" />
+        <activity android:name=".view.PostActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".view.NovedadActivity"
+            android:label="@string/title_activity_novedad"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".auxiliares.WebViewActivity"></activity>
     </application>
 
 </manifest>

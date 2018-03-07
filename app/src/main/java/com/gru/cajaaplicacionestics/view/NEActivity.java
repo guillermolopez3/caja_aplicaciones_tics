@@ -18,15 +18,17 @@ public class NEActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ne);
+        setContentView(R.layout.activity_nuestra_escuela_menu);
 
-        AnalitycsAplication aplication = (AnalitycsAplication) getApplication();
+        /*AnalitycsAplication aplication = (AnalitycsAplication) getApplication();
         mTracker = aplication.getDefaultTracker();
 
         MetodosComunes.showToolbar("Doc. de Acompañamiento",true,this);
 
         pullToLoadView=(PullToLoadView)findViewById(R.id.recyclerNe);
-        new PaginacionNE(this,pullToLoadView).iniciarPaginacion();
+
+        String json = getResources().getString(R.string.JSON_NE_DA);
+        new PaginacionNE(this,pullToLoadView,false,json).iniciarPaginacion();*/
 
 
     }
@@ -34,7 +36,7 @@ public class NEActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mTracker.setScreenName("NE");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+       /* mTracker.setScreenName("NE");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());*/
     }
 }

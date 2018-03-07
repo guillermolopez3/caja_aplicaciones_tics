@@ -18,18 +18,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
+import com.gru.cajaaplicacionestics.model.ModelPost;
 import com.gru.cajaaplicacionestics.model.NewPost;
 import com.gru.cajaaplicacionestics.model.Post;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class DetallaRecursoActivity extends AppCompatActivity
+public class DetalleRecursoGeneralActivity extends AppCompatActivity
 {
     Button acceder_recurso;
     ImageView imagen;
     TextView titulo,tag,descripcion;
-    NewPost post= new NewPost();
+    ModelPost post= new ModelPost();
     CollapsingToolbarLayout collapsingToolbarLayout;
 
     @Override
@@ -47,48 +49,38 @@ public class DetallaRecursoActivity extends AppCompatActivity
 
         collapsingToolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
 
-        post = (NewPost)getIntent().getExtras().get("data");
+        post = (ModelPost)getIntent().getExtras().get("data");
 
-        showToolbar(post.getNombre(),false);
+        MetodosComunes.showToolbar(post.getTitle(),false,this);
 
 
         if(post!=null)
         {
-            titulo.setText(post.getNombre());
-            tag.setText(post.getTag());
+            titulo.setText(post.getTitle());
+            tag.setText(post.getTags());
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                descripcion.setText(Html.fromHtml(post.getDetalle(),Html.FROM_HTML_MODE_LEGACY));
+                descripcion.setText(Html.fromHtml(post.getDescription(),Html.FROM_HTML_MODE_LEGACY));
             } else {
-                descripcion.setText(Html.fromHtml(post.getDetalle()));
+                descripcion.setText(Html.fromHtml(post.getDescription()));
             }
 
           //  descripcion.setText(Html.fromHtml(post.getDescripcionCorta()));
-            Picasso.with(this).load(post.getUrl_img()).into(imagen);
+            Picasso.with(this).load(MetodosComunes.verificarUrl(post.getImage())).into(imagen);
         }
 
         acceder_recurso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(post.getUlr_mas()!="")
+                if(post.getLink()!="")
                 {
-                    Uri uri = Uri.parse(post.getUlr_mas());
+                    Uri uri = Uri.parse(MetodosComunes.verificarUrl(post.getLink()));
                     Intent i = new Intent(Intent.ACTION_VIEW,uri);
                     startActivity(i);
                 }
 
             }
         });
-
-    }
-
-    public void showToolbar(String tittle, boolean upButton)
-    {
-        //uso appcompatacty... xq la actividad que maneja esto tiene soporte y es de este tipo
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(tittle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(upButton);
 
     }
 

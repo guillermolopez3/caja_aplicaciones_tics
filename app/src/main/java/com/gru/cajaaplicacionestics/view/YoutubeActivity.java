@@ -29,6 +29,8 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
+import com.gru.cajaaplicacionestics.model.ModelPost;
 import com.gru.cajaaplicacionestics.model.NewPost;
 import com.gru.cajaaplicacionestics.model.Post;
 
@@ -43,7 +45,7 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
     private YouTubePlayer.OnInitializedListener onInitializedListener;
     YouTubePlayer mYouTubePlayer;
 
-    private NewPost post;
+    private ModelPost post;
     TextView titulo,tag,descripcion,txtFecha;
     private String url_video;
     private Button btnRecargar;
@@ -68,8 +70,8 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
         URL_BASE=getResources().getString(R.string.URL_BASE);
         URL_VIDEO= getResources().getString(R.string.URL_VIDEO);
 
-        post=new NewPost();
-        post = (NewPost)getIntent().getExtras().get("data");
+        post=new ModelPost();
+        post = (ModelPost) getIntent().getExtras().get("data");
 
        cargarActivity();
 
@@ -80,7 +82,8 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
         btnRecargar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                obtenerUrlVideoVivo();
+                //obtenerUrlVideoVivo();
+                mYouTubePlayer.loadVideo(url_video);
 
                 Log.e("url",url_video);
             }
@@ -90,11 +93,11 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
 
     private void cargarActivity()
     {
-        titulo.setText(post.getNombre());
-        tag.setText(post.getTag());
-        descripcion.setText(post.getDetalle());
-        url_video=post.getUlr_mas();
-        txtFecha.setText("Ultima actualización: " + post.getFecha());
+        titulo.setText(post.getTitle());
+        tag.setText(post.getTags());
+        descripcion.setText(post.getDescription());
+        url_video= MetodosComunes.verificarUrl(post.getLink());
+        txtFecha.setText("Ultima actualización: " + post.getCreated_at());
 
         youTubePlayerView.initialize(getResources().getString(R.string.KEY_API_YOUTUBE), this);
     }

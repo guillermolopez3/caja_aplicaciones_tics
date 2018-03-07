@@ -1,6 +1,7 @@
 package com.gru.cajaaplicacionestics.backend;
 
 import android.app.Activity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -40,13 +41,38 @@ public class PaginacionNE
 
     int LIMIT=0,CANTIDAD_POST=15;
 
-    public PaginacionNE(Activity activity, PullToLoadView pullToLoadView) {
+    public PaginacionNE(Activity activity, PullToLoadView pullToLoadView,boolean grilla,String json) {
         this.activity = activity;
         this.pullToLoadView = pullToLoadView;
 
         recyclerView = pullToLoadView.getRecyclerView();
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false));
+        if(grilla)
+        {
+            recyclerView.setLayoutManager(new GridLayoutManager(activity,3));
+        }
+        else {
+            recyclerView.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false));
+        }
+        URL_JSON=json;
         adapter= new AdapterNE(activity,new ArrayList<ModelNE>());
+        recyclerView.setAdapter(adapter);
+
+    }
+
+    public PaginacionNE(Activity activity, PullToLoadView pullToLoadView,boolean grilla,String json,boolean escalo) {
+        this.activity = activity;
+        this.pullToLoadView = pullToLoadView;
+
+        recyclerView = pullToLoadView.getRecyclerView();
+        if(grilla)
+        {
+            recyclerView.setLayoutManager(new GridLayoutManager(activity,3));
+        }
+        else {
+            recyclerView.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false));
+        }
+        URL_JSON=json;
+        adapter= new AdapterNE(activity,new ArrayList<ModelNE>(),escalo);
         recyclerView.setAdapter(adapter);
 
     }
@@ -56,7 +82,7 @@ public class PaginacionNE
         pullToLoadView.isLoadMoreEnabled(true);
 
         URL_BASE=activity.getResources().getString(R.string.URL_BASE);
-        URL_JSON=activity.getResources().getString(R.string.JSON_NE_DA);
+        //URL_JSON=activity.getResources().getString(R.string.JSON_NE_DA);
         CANTIDAD_POST= Integer.parseInt(activity.getResources().getString(R.string.CANTIDAD_POST));
 
         pullToLoadView.setPullCallback(new PullCallback() {
@@ -94,11 +120,96 @@ public class PaginacionNE
         pullToLoadView.initLoad();
     }
 
+    public void iniciarPaginacionRP(final String fec)
+    {
+        pullToLoadView.isLoadMoreEnabled(true);
+
+        URL_BASE=activity.getResources().getString(R.string.URL_BASE);
+        //URL_JSON=activity.getResources().getString(R.string.JSON_NE_DA);
+        CANTIDAD_POST= Integer.parseInt(activity.getResources().getString(R.string.CANTIDAD_POST));
+
+        pullToLoadView.setPullCallback(new PullCallback() {
+            @Override
+            public void onLoadMore() {
+                Log.e("on load","entra");
+                LIMIT=LIMIT+CANTIDAD_POST;
+                cargarListaRecursosPcial(fec);
+
+            }
+
+            //evento ni bien ingresa y cuando haces swipe para arriba
+            @Override
+            public void onRefresh() {
+                Log.e("on refresh","entra");
+                adapter.clear(); //limpio el adapter
+                hasLoadedAll=false;
+                LIMIT=0; //reinicio el contador
+                cargarListaRecursosPcial(fec);
+
+            }
+
+            @Override
+            public boolean isLoading() {
+                Log.e("on loading","entra");
+                return isLoading;
+            }
+
+            @Override
+            public boolean hasLoadedAllItems() {
+                Log.e("on hasLoaded","entra");
+                return hasLoadedAll;
+            }
+        });
+        pullToLoadView.initLoad();
+    }
+
     private void cargarLista()
+    {
+        StringRequest request;
+        VolleySingleton.getInstancia(activity).
+                addToRequestQueue(request=new StringRequest(Request.Method.GET,
+                        URL_BASE + URL_JSON + "limite="+ LIMIT,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    JSONArray array= jsonObject.getJSONArray("post");
+
+                                    for(int i=0; i< array.length();i++)
+                                    {
+                                        JSONObject o = array.getJSONObject(i);
+                                        ModelNE post = new ModelNE(
+                                                o.getInt("id"),
+                                                o.getString("url_imagen"),
+                                                o.getString("descripcion"),
+                                                o.getString("url_pdf"),
+                                                o.getString("seccion"),
+                                                o.getString("nivel"),
+                                                o.getString("otra_descripcion")
+                                        );
+                                        adapter.add(post);
+                                    }
+                                    pullToLoadView.setComplete();
+                                    isLoading=false;
+                                } catch (JSONException e) {
+                                    Log.e("error",e.getMessage());
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }));
+    }
+
+    private void cargarListaRecursosPcial(String año)
     {
         VolleySingleton.getInstancia(activity).
                 addToRequestQueue(new StringRequest(Request.Method.GET,
-                        URL_BASE + URL_JSON + "limite="+ LIMIT,
+                        URL_BASE + URL_JSON + "limite="+ LIMIT + "&fecha="+año,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {

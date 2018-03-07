@@ -15,6 +15,7 @@ public class ModelNE implements Serializable
     private String seccion;
     private String nivel;
     private String otra_descripcion;
+    private String ano;
 
     public ModelNE(int id, String url_img, String descripcion, String url_pdf, String seccion, String nivel, String otra_descripcion) {
         this.id = id;
@@ -24,6 +25,25 @@ public class ModelNE implements Serializable
         this.seccion = seccion;
         this.nivel = nivel;
         this.otra_descripcion = otra_descripcion;
+    }
+
+    public ModelNE(int id, String url_img, String descripcion, String url_pdf, String seccion, String nivel, String otra_descripcion, String ano) {
+        this.id = id;
+        this.url_img = url_img;
+        this.descripcion = descripcion;
+        this.url_pdf = url_pdf;
+        this.seccion = seccion;
+        this.nivel = nivel;
+        this.otra_descripcion = otra_descripcion;
+        this.ano = ano;
+    }
+
+    public String getAno() {
+        return ano;
+    }
+
+    public void setAno(String ano) {
+        this.ano = ano;
     }
 
     public int getId() {

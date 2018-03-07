@@ -27,10 +27,17 @@ public class AdapterNE extends RecyclerView.Adapter<AdapterNE.NEHolder>
 {
     Activity activity;
     private List<ModelNE> array;
+    private boolean escalo=false; //si hay que mostrar las card vs x fila es scale type es center inside
 
     public AdapterNE(Activity activity, List<ModelNE> array) {
         this.activity = activity;
         this.array = array;
+    }
+
+    public AdapterNE(Activity activity, List<ModelNE> array, boolean escalo) {
+        this.activity = activity;
+        this.array = array;
+        this.escalo=escalo;
     }
 
     @Override
@@ -54,6 +61,10 @@ public class AdapterNE extends RecyclerView.Adapter<AdapterNE.NEHolder>
         }
         else {
             Picasso.with(activity).load(R.drawable.fondo_card).into(holder.imagen);
+        }
+        if(escalo)
+        {
+            holder.imagen.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         }
 
 

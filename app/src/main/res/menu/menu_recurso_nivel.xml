@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_inicial"
-        android:title="INICIAL"
-        android:icon="@drawable/letra_i"/>
+        android:title="Inicial"
+        app:showAsAction="always|withText"
+        android:icon="@drawable/ic_inicial"
+       />
 
     <item
         android:id="@+id/navigation_primaria"
-        android:title="PRIMARIA"
-        android:icon="@drawable/letra_p"/>
+        android:title="Primaria"
+        app:showAsAction="always|withText"
+        android:icon="@drawable/ic_primaria"
+        />
 
     <item
         android:id="@+id/navigation_secundaria"
-        android:title="SECUNDARIA"
-        android:icon="@drawable/letra_s"/>
+        android:title="Secundaria"
+        app:showAsAction="always|withText"
+        android:icon="@drawable/ic_secundario"
+        />
+
+    <item
+        android:id="@+id/navigation_superior"
+        android:title="Superior"
+        app:showAsAction="always|withText"
+        android:icon="@drawable/ic_superior"
+        />
 
 </menu>

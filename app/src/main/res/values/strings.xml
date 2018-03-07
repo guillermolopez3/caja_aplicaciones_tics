@@ -68,13 +68,21 @@ Es una herramienta colaborativa para toda  la comunidad educativa, en constante 
 
 
     <!-- url de conexion a la bd -->
-    <string name="URL_BASE">http://www.igualdadycalidadcba.gov.ar/CajaTIC/consultas_app/</string>
+    <string name="URL_BASE">http://www.igualdadycalidadcba.gov.ar/CajaTIC/api/</string>
+
+
+    <string name="URL_BASE1">http://www.muniap.com/api/</string>
+    <string name="URL_POST_SEARCH">posts/getPostsSearch?</string>
+    <string name="URL_GET_ALL_POST">posts/getPostsSeccion</string>
+    <string name="URL_GET_ALL_POST_LEVEL">posts/getPostsLevel</string>
+    <string name="URL_GET_ALL_NOVEDADES">posts/getNovedades</string>
 
     <string name="JSON_SECCION">GetPostSeccion.php?</string>
     <string name="JSON_BUSQUDA_SECCION">NuevaBusquedaPost.php?</string>
     <string name="JSON_FILTRO_POST">GetPostFiltrado.php?</string>
 
     <string name="JSON_NE_DA">NEDocAcompa.php?</string>
+    <string name="JSON_NE_RP">NERecurProvin.php?</string>
     <string name="JSON_POST_X_NIVEL">GetPostXNivel.php?</string>
 
     <string name="CANTIDAD_POST">15</string>
@@ -95,5 +103,7 @@ Es una herramienta colaborativa para toda  la comunidad educativa, en constante 
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    <string name="URL_PRUEBA">http://www.muniap.com/api/posts/getPostsSeccion</string>
+    <string name="title_activity_novedad">NovedadActivity</string>
 </resources>
 

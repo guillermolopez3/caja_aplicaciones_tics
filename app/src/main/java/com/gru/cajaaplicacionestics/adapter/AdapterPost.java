@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.model.NewPost;
-import com.gru.cajaaplicacionestics.view.DetallaRecursoActivity;
+import com.gru.cajaaplicacionestics.view.DetalleRecursoGeneralActivity;
 import com.gru.cajaaplicacionestics.view.DetalleRecursoAudio;
 import com.gru.cajaaplicacionestics.view.PdfActivity;
 import com.gru.cajaaplicacionestics.view.YoutubeActivity;
@@ -91,7 +91,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.RecursosHolder
             activity.startActivity(i);
         }
         else {
-            Intent i = new Intent(activity, DetallaRecursoActivity.class);
+            Intent i = new Intent(activity, DetalleRecursoGeneralActivity.class);
             i.putExtra("data",post);
             activity.startActivity(i);
         }

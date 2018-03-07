@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.backend.Paginacion;
+import com.gru.cajaaplicacionestics.backend.PaginacionPost;
 import com.srx.widget.PullToLoadView;
 
 /**
@@ -18,7 +19,7 @@ import com.srx.widget.PullToLoadView;
 
 public class FragmentRecursosNIvel extends Fragment
 {
-    private String NIVEL="";
+    private int NIVEL=1;
     PullToLoadView pullToLoadView; //se encarga de ir llenando el recycler
 
     private static FragmentRecursosNIvel instancia;
@@ -40,13 +41,13 @@ public class FragmentRecursosNIvel extends Fragment
 
         if(getArguments()!=null)
         {
-            NIVEL= getArguments().getString("nivel");
+            NIVEL= getArguments().getInt("nivel");
         }
 
         View view = inflater.inflate(R.layout.fragment_recursos_nivel,container,false);
 
        pullToLoadView=(PullToLoadView)view.findViewById(R.id.recyclerRecursos);
-       new Paginacion(getActivity(),pullToLoadView,4).iniciarPaginacionRecursosxNivel(NIVEL);
+       new Paginacion(getActivity(),pullToLoadView).iniciarPaginacionRecursosxNivel(NIVEL);
 
 
         return view;

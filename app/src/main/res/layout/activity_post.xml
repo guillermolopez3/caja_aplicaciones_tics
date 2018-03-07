@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/postCoordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gru.cajaaplicacionestics.view.PDActivity">
+
+    <include layout="@layout/app_bar"/>
+
+    <com.srx.widget.PullToLoadView
+        android:id="@+id/recyclerPd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/menu_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        app:fab_addButtonColorNormal="?attr/colorAccent"
+        app:fab_addButtonSize="normal"
+        app:fab_labelStyle="@style/Etiquetas"
+        app:fab_labelsPosition="left">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/accionNuevoRecurso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="?attr/colorPrimary"
+            app:fab_icon="@drawable/ic_playlist_add"
+            app:fab_size="mini"
+            app:fab_title="Nuevo Recurso" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/accionServicioTecnico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="?attr/colorPrimary"
+            app:fab_icon="@drawable/ic_build"
+            app:fab_size="mini"
+            app:fab_title="Servicio Técnico" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/accionCapacitacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="?attr/colorPrimary"
+            app:fab_icon="@drawable/ic_event"
+            app:fab_size="mini"
+            app:fab_title="Capacitación" />
+
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+    <include layout="@layout/error_layout"/>
+</android.support.design.widget.CoordinatorLayout>

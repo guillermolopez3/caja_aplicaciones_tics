@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
+import com.gru.cajaaplicacionestics.model.ModelPost;
 import com.gru.cajaaplicacionestics.model.NewPost;
 import com.gru.cajaaplicacionestics.model.Post;
 import com.squareup.picasso.Picasso;
@@ -25,7 +27,7 @@ public class DetalleRecursoAudio extends AppCompatActivity implements MediaPlaye
     private boolean reproduciendo=false;
     private TextView titulo,tag,detalle;
     private String url_audio="";
-    NewPost post=new NewPost();
+    ModelPost post=new ModelPost();
 
     ProgressBar progressBar;
 
@@ -37,7 +39,7 @@ public class DetalleRecursoAudio extends AppCompatActivity implements MediaPlaye
         setContentView(R.layout.activity_detalle_recurso_audio);
         mediaPlayer=new MediaPlayer();
 
-        post = (NewPost) getIntent().getExtras().get("data");
+        post = (ModelPost) getIntent().getExtras().get("data");
 
         imagen=(ImageView)findViewById(R.id.detalleRecursoAudioImg);
         titulo=(TextView)findViewById(R.id.txtTituloDescripcionRecurso);
@@ -47,11 +49,11 @@ public class DetalleRecursoAudio extends AppCompatActivity implements MediaPlaye
         stop = (ImageButton)findViewById(R.id.detalleRecursoAudioBtnStop);
         progressBar=(ProgressBar)findViewById(R.id.progressAudio);
 
-        titulo.setText(post.getNombre());
-        tag.setText(post.getTag());
-        detalle.setText(post.getDetalle());
-        url_audio= post.getUlr_mas();
-        Picasso.with(this).load(post.getUrl_img()).into(imagen);
+        titulo.setText(post.getTitle());
+        tag.setText(post.getTags());
+        detalle.setText(post.getDescription());
+        url_audio= MetodosComunes.verificarUrl(post.getLink());
+        Picasso.with(this).load(MetodosComunes.verificarUrl(post.getImage())).into(imagen);
 
         play.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -8,10 +8,13 @@ import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.adapter.AdapterNPost;
 import com.gru.cajaaplicacionestics.adapter.AdapterPost;
+import com.gru.cajaaplicacionestics.model.ModelPost;
 import com.gru.cajaaplicacionestics.model.NewPost;
 import com.srx.widget.PullCallback;
 import com.srx.widget.PullToLoadView;
@@ -32,15 +35,17 @@ public class Paginacion
     RecyclerView recyclerView;
     private PullToLoadView pullToLoadView;
     private AdapterPost adapter;
+    private AdapterNPost m_adapter;
     private boolean isLoading=false;
     private boolean hasLoadedAll=false;
 
     private int seccion;
 
-    String URL_BASE="",URL_JSON="",JSON_BUSCAR="", palabra_buscar="",JSON_FILTRAR="";
+    String URL_BASE="",URL_JSON="",JSON_BUSCAR="", palabra_buscar="",JSON_FILTRAR="",URL_GET_ALL="";
 
 
     int LIMIT=0,CANTIDAD_POST=15;
+    int PAGINA_ACTUAL=1;
 
     public Paginacion(Activity activity, PullToLoadView pullToLoadView,int seccion) {
         this.activity = activity;
@@ -50,6 +55,16 @@ public class Paginacion
         recyclerView.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false));
         adapter= new AdapterPost(activity,new ArrayList<NewPost>());
         recyclerView.setAdapter(adapter);
+
+    }
+
+    public Paginacion(Activity activity, PullToLoadView pullToLoadView) {
+        this.activity = activity;
+        this.pullToLoadView = pullToLoadView;
+        recyclerView = pullToLoadView.getRecyclerView();
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false));
+        m_adapter= new AdapterNPost(activity);
+        recyclerView.setAdapter(m_adapter);
 
     }
 
@@ -188,12 +203,12 @@ public class Paginacion
         pullToLoadView.initLoad();
     }
 
-    public void iniciarPaginacionRecursosxNivel(final String nivel)
+    public void iniciarPaginacionRecursosxNivel(final int nivel)
     {
         pullToLoadView.isLoadMoreEnabled(true);
 
         URL_BASE=activity.getResources().getString(R.string.URL_BASE);
-        URL_JSON=activity.getResources().getString(R.string.JSON_POST_X_NIVEL);
+        URL_GET_ALL=activity.getResources().getString(R.string.URL_GET_ALL_POST_LEVEL);
         CANTIDAD_POST= Integer.parseInt(activity.getResources().getString(R.string.CANTIDAD_POST));
 
         pullToLoadView.setPullCallback(new PullCallback() {
@@ -201,6 +216,7 @@ public class Paginacion
             public void onLoadMore() {
                 Log.e("on load","entra");
                 LIMIT=LIMIT+CANTIDAD_POST;
+                PAGINA_ACTUAL++;
                 cargarListaRecursosXNivel(nivel);
 
             }
@@ -209,9 +225,10 @@ public class Paginacion
             @Override
             public void onRefresh() {
                 Log.e("on refresh","entra");
-                adapter.clear(); //limpio el adapter
+                m_adapter.clear(); //limpio el adapter
                 hasLoadedAll=false;
                 LIMIT=0; //reinicio el contador
+                PAGINA_ACTUAL=1;
                 cargarListaRecursosXNivel(nivel);
 
             }
@@ -233,8 +250,10 @@ public class Paginacion
 
     private void cargarLista()
     {
+        Log.e("rta","entro a cargar la lista");
+        StringRequest request;
         VolleySingleton.getInstancia(activity).
-                addToRequestQueue(new StringRequest(Request.Method.GET,
+                addToRequestQueue(request = new StringRequest(Request.Method.GET,
                         URL_BASE + URL_JSON + "limite="+ LIMIT + "&seccion=" + seccion,
                         new Response.Listener<String>() {
                             @Override
@@ -242,7 +261,7 @@ public class Paginacion
                                 try {
                                     JSONObject jsonObject = new JSONObject(response);
                                     JSONArray array= jsonObject.getJSONArray("post");
-
+                                    Log.e("rta",response);
                                     for(int i=0; i< array.length();i++)
                                     {
                                         JSONObject o = array.getJSONObject(i);
@@ -269,15 +288,33 @@ public class Paginacion
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Log.e("error",error.toString());
                     }
                 }));
+                //estblezco nuevos tiempos x si el servidor tarda mucho en contestar
+                request.setRetryPolicy(new RetryPolicy() {
+                    @Override
+                    public int getCurrentTimeout() {
+                        return 50000;
+                    }
+
+                    @Override
+                    public int getCurrentRetryCount() {
+                        return 50000;
+                    }
+
+                    @Override
+                    public void retry(VolleyError error) throws VolleyError {
+
+                    }
+                });
     }
 
     private void cargarListaXBusqueda()
     {
+        StringRequest request;
         VolleySingleton.getInstancia(activity).
-                addToRequestQueue(new StringRequest(Request.Method.GET,
+                addToRequestQueue(request= new StringRequest(Request.Method.GET,
                         URL_BASE + JSON_BUSCAR + "limite="+ LIMIT + "&seccion="+seccion+" &busqueda=" + palabra_buscar,
                         new Response.Listener<String>() {
                             @Override
@@ -315,14 +352,31 @@ public class Paginacion
 
                     }
                 }));
+                request.setRetryPolicy(new RetryPolicy() {
+                    @Override
+                    public int getCurrentTimeout() {
+                        return 50000;
+                    }
+
+                    @Override
+                    public int getCurrentRetryCount() {
+                        return 50000;
+                    }
+
+                    @Override
+                    public void retry(VolleyError error) throws VolleyError {
+
+                    }
+                });
     }
 
     private void cargarListaFiltrada(String web,String video,String audio,String pdf)
     {
+        StringRequest request;
         Log.e("url",URL_BASE + JSON_FILTRAR + "limite="+ LIMIT + "&seccion="+seccion+
                 "&web="+web+"&video="+video+"&audio="+audio+"&pdf="+pdf+"");
         VolleySingleton.getInstancia(activity).
-                addToRequestQueue(new StringRequest(Request.Method.GET,
+                addToRequestQueue(request = new StringRequest(Request.Method.GET,
                         URL_BASE + JSON_FILTRAR + "limite="+ LIMIT + "&seccion="+seccion+
                                 "&web="+web+"&video="+video+"&audio="+audio+"&pdf="+pdf+"",
                         new Response.Listener<String>() {
@@ -361,36 +415,54 @@ public class Paginacion
 
                     }
                 }));
+                request.setRetryPolicy(new RetryPolicy() {
+                    @Override
+                    public int getCurrentTimeout() {
+                        return 50000;
+                    }
+
+                    @Override
+                    public int getCurrentRetryCount() {
+                        return 50000;
+                    }
+
+                    @Override
+                    public void retry(VolleyError error) throws VolleyError {
+
+                    }
+                });
     }
 
 
-    private void cargarListaRecursosXNivel(String nivel)
+    private void cargarListaRecursosXNivel(int nivel)
     {
+        Log.e("url",URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&level=" + nivel );
+        StringRequest request;
         VolleySingleton.getInstancia(activity).
                 addToRequestQueue(new StringRequest(Request.Method.GET,
-                        URL_BASE + URL_JSON + "limite="+ LIMIT + "&nivel=" + nivel,
+                        URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&level=" + nivel,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 try {
                                     JSONObject jsonObject = new JSONObject(response);
-                                    JSONArray array= jsonObject.getJSONArray("post");
+                                    JSONArray array= jsonObject.getJSONArray("data");
 
                                     for(int i=0; i< array.length();i++)
                                     {
                                         JSONObject o = array.getJSONObject(i);
-                                        NewPost post = new NewPost(
+                                        ModelPost post = new ModelPost(
                                                 o.getInt("id"),
-                                                o.getString("titulo"),
-                                                o.getString("descripcion_corta"),
-                                                o.getString("fecha"),
-                                                o.getString("url_img_ppal"),
+                                                o.getString("created_at"),
+                                                o.getString("title"),
+                                                o.getString("copete"),
+                                                o.getString("image"),
                                                 o.getString("tags"),
-                                                o.getString("detalle"),
-                                                o.getString("url_mas"),
-                                                o.getString("activity")
+                                                o.getInt("id_tipo_activity"),
+                                                o.getString("description"),
+                                                o.getString("link")
                                         );
-                                        adapter.add(post);
+                                        m_adapter.add(post);
                                     }
                                     pullToLoadView.setComplete();
                                     isLoading=false;
@@ -402,9 +474,25 @@ public class Paginacion
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Log.e("error",error.getMessage());
                     }
                 }));
+        /*request.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });*/
     }
 
 
