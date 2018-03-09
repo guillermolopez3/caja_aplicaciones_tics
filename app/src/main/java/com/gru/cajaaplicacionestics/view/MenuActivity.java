@@ -9,10 +9,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.adapter.AdapterMenu;
@@ -39,7 +41,12 @@ public class MenuActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapterMenu);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2, LinearLayoutManager.VERTICAL,false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        MetodosComunes.showToolbar(getResources().getString(R.string.nombre_app),false,this);
+        //MetodosComunes.showToolbar(getResources().getString(R.string.nombre_app),false,this);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setLogo(R.drawable.ministerio);
+        getSupportActionBar().setTitle("");
 
 
     }
@@ -66,11 +73,11 @@ public class MenuActivity extends AppCompatActivity {
     private void llenarArray() //agrego las imagenes del menu
     {
         array = new ArrayList<>();
+        array.add(new ModelMenu(R.drawable.novedades));
+        array.add(new ModelMenu(R.drawable.espacio_didactico));
         array.add(new ModelMenu(R.drawable.primaria_digital));
         array.add(new ModelMenu(R.drawable.conectar_igualdad));
         array.add(new ModelMenu(R.drawable.nuestra_escuela));
-        array.add(new ModelMenu(R.drawable.espacio_didactico));
-        array.add(new ModelMenu(R.drawable.novedades));
         array.add(new ModelMenu(R.drawable.audiovisuales));
     }
 }

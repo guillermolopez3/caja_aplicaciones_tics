@@ -41,12 +41,13 @@ public class NovedadActivity extends AppCompatActivity implements PaginationErro
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tabs);
+
+
+
         tabLayout.setupWithViewPager(mViewPager);
 
 
     }
-
-
 
 
     @Override
@@ -55,7 +56,6 @@ public class NovedadActivity extends AppCompatActivity implements PaginationErro
         mSectionsPagerAdapter = new NovedadActivity.SectionPagenAdapter(getSupportFragmentManager());
 
     }
-
 
     public class SectionPagenAdapter extends FragmentPagerAdapter {
         public SectionPagenAdapter(FragmentManager fm)
@@ -80,7 +80,8 @@ public class NovedadActivity extends AppCompatActivity implements PaginationErro
 
         }
 
-        private Bundle sendYear(String año)
+
+        private Bundle sendYear(String año) //envio el año del tab a buscar
         {
             Bundle bundle = new Bundle();
             bundle.putString("año",año);

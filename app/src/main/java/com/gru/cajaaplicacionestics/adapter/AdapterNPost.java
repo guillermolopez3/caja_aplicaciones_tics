@@ -52,7 +52,13 @@ public class AdapterNPost extends RecyclerView.Adapter<AdapterNPost.RecursosHold
         final ModelPost modelRecursos= array.get(position);
         holder.nombreRecurso.setText(modelRecursos.getTitle());
 
-        holder.descripcionCorta.setText(modelRecursos.getCopete());
+        if((modelRecursos.getCopete()!=null) && (modelRecursos.getCopete()!="") && (!modelRecursos.getCopete().equals("null"))) {
+            holder.descripcionCorta.setText(modelRecursos.getCopete());
+        }
+        else {
+            holder.descripcionCorta.setVisibility(View.GONE);
+        }
+
 
 
         String img = modelRecursos.getImage();
@@ -65,7 +71,7 @@ public class AdapterNPost extends RecyclerView.Adapter<AdapterNPost.RecursosHold
             Picasso.with(activity).load(R.drawable.fondo_card).into(holder.imagen);
         }
 
-        if((modelRecursos.getTags()!=null) && (img!="") && (!modelRecursos.getTags().equals("null")))
+        if((modelRecursos.getTags()!=null) && (modelRecursos.getTags()!="") && (!modelRecursos.getTags().equals("null")))
         {
             holder.hastag.setText(modelRecursos.getTags());
         }else {

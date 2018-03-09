@@ -25,7 +25,7 @@ public class DetalleRecursoAudio extends AppCompatActivity implements MediaPlaye
     ImageView imagen;
     MediaPlayer mediaPlayer;
     private boolean reproduciendo=false;
-    private TextView titulo,tag,detalle;
+    private TextView titulo,tag,detalle, fecha;
     private String url_audio="";
     ModelPost post=new ModelPost();
 
@@ -44,16 +44,17 @@ public class DetalleRecursoAudio extends AppCompatActivity implements MediaPlaye
         imagen=(ImageView)findViewById(R.id.detalleRecursoAudioImg);
         titulo=(TextView)findViewById(R.id.txtTituloDescripcionRecurso);
         tag=(TextView)findViewById(R.id.txtTagsDescripcionRecurso);
+        fecha= (TextView)findViewById(R.id.txtFechaDescripcionRecurso);
         detalle=(TextView)findViewById(R.id.txtDescripcionRecurso);
         play = (ImageButton)findViewById(R.id.detalleRecursoAudioBtnPlay);
         stop = (ImageButton)findViewById(R.id.detalleRecursoAudioBtnStop);
         progressBar=(ProgressBar)findViewById(R.id.progressAudio);
 
-        titulo.setText(post.getTitle());
-        tag.setText(post.getTags());
-        detalle.setText(post.getDescription());
+
         url_audio= MetodosComunes.verificarUrl(post.getLink());
         Picasso.with(this).load(MetodosComunes.verificarUrl(post.getImage())).into(imagen);
+
+        cargarDatosActivity();
 
         play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +96,28 @@ public class DetalleRecursoAudio extends AppCompatActivity implements MediaPlaye
             }
         });
     }
+
+    private void cargarDatosActivity()//lleno el activity con los datos
+    {
+        titulo.setText(post.getTitle());
+        fecha.setText("Ultima actualización: " + post.getCreated_at());
+
+        if((post.getTags() !=null) && (post.getTags()!="") && (!post.getTags().equals("null")))
+        {
+            tag.setText(post.getTags());
+        } else {
+            tag.setVisibility(View.GONE);
+        }
+        if((post.getDescription() !=null) && (post.getDescription()!="") && (!post.getDescription().equals("null")))
+        {
+            detalle.setText(post.getDescription());
+        } else {
+            detalle.setVisibility(View.INVISIBLE);
+        }
+    }
+
+
+
 
     private void cargarAudio() //descarga el audio y comienza a reproducirlo
     {

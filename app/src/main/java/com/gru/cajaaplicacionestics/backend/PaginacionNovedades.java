@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.gru.cajaaplicacionestics.R;
@@ -98,8 +99,9 @@ public class PaginacionNovedades
 
     public void cargarLista()
     {
+        Request request;
         VolleySingleton.getInstancia(activity).
-                addToRequestQueue(new StringRequest(Request.Method.GET,URL_BASE + URL_GET_ALL + "page=" + PAGINA_ACTUAL + "& ano=" + año
+                addToRequestQueue(request = new StringRequest(Request.Method.GET,URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&ano=" + año
                          ,
                         new Response.Listener<String>() {
                             @Override
@@ -142,6 +144,22 @@ public class PaginacionNovedades
                        // manejoError(true);
                     }
                 }));
+        request.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
     }
 
 

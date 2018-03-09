@@ -30,6 +30,8 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
 {
     private String      seccion="";
 
+    private boolean     isNuestraEscuela=false;
+
     SearchView          searchView=null;
     PullToLoadView      pullToLoadView; //se encarga de ir llenando el recycler
     LinearLayout        errorLayout;
@@ -49,6 +51,9 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
         seccion             = getIntent().getExtras().getString("seleccion");
         String titulo       = getIntent().getExtras().getString("titulo");
 
+        isNuestraEscuela    = getIntent().getBooleanExtra("titulo",false);
+        Log.e("ne", "valor" + isNuestraEscuela);
+
         pullToLoadView      =(PullToLoadView)findViewById(R.id.recyclerPd);
         coordinatorLayout   =(CoordinatorLayout)findViewById(R.id.postCoordinator);
 
@@ -59,6 +64,10 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
 
         if(seccion.equals("search")){
             iniciarPaginacionSearch();
+        }
+        else if (isNuestraEscuela)
+        {
+
         }
         else {
             iniciarPaginacion();
@@ -84,6 +93,7 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
         new PaginacionPost(PostActivity.this,pullToLoadView,idSeccionSeleccionada());
 
     }
+
 
     private int idSeccionSeleccionada()
     {

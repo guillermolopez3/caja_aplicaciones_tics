@@ -15,6 +15,7 @@ import com.gru.cajaaplicacionestics.auxiliares.WebViewActivity;
 import com.gru.cajaaplicacionestics.view.NovedadActivity;
 import com.gru.cajaaplicacionestics.model.ModelMenu;
 import com.gru.cajaaplicacionestics.view.NEActivity;
+import com.gru.cajaaplicacionestics.view.NuestraEscuelaMenuActivity;
 import com.gru.cajaaplicacionestics.view.PostActivity;
 import com.gru.cajaaplicacionestics.view.RecursosXNivelActivity;
 import com.squareup.picasso.Picasso;
@@ -58,29 +59,29 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.MenuHolder>
     {
         Intent i;
         switch (position){
-            case 0:
+            case 2:
                 i = new Intent(activity,PostActivity.class);
                 i.putExtra("seleccion","pd");
                 i.putExtra("titulo","Primaria Digital");
                 activity.startActivity(i);
                 break;
-            case 1:
+            case 3:
                 i = new Intent(activity,PostActivity.class);
                 i.putExtra("seleccion","ci");
                 i.putExtra("titulo","Conectar Igualdad");
                 activity.startActivity(i);
                 break;
-            case 2:
-                i = new Intent(activity,NEActivity.class);
+            case 4:
+                i = new Intent(activity,NuestraEscuelaMenuActivity.class);
                // i.putExtra("seleccion","ci");
                 //i.putExtra("titulo","Conectar Igualdad");
                 activity.startActivity(i);
                 break;
-            case 3:
+            case 1:
                 i= new Intent(activity, RecursosXNivelActivity.class);
                 activity.startActivity(i);
                 break;
-            case 4:
+            case 0:
                 i = new Intent(activity,NovedadActivity.class);
                 activity.startActivity(i);
                 break;

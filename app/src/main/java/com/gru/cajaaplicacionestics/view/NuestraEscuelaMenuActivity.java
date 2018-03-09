@@ -26,7 +26,9 @@ public class NuestraEscuelaMenuActivity extends AppCompatActivity {
         doc_a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(NuestraEscuelaMenuActivity.this,NEActivity.class);
+               Intent i = new Intent(NuestraEscuelaMenuActivity.this,NEActivity.class);
+                i.putExtra("ne",2);
+                i.putExtra("titulo","Documento de acompañamiento");
                 startActivity(i);
             }
         });

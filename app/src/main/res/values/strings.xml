@@ -72,10 +72,11 @@ Es una herramienta colaborativa para toda  la comunidad educativa, en constante 
 
 
     <string name="URL_BASE1">http://www.muniap.com/api/</string>
-    <string name="URL_POST_SEARCH">posts/getPostsSearch?</string>
+    <string name="URL_POST_SEARCH">posts/getPostsSearch</string>
     <string name="URL_GET_ALL_POST">posts/getPostsSeccion</string>
     <string name="URL_GET_ALL_POST_LEVEL">posts/getPostsLevel</string>
     <string name="URL_GET_ALL_NOVEDADES">posts/getNovedades</string>
+    <string name="URL_GET_ALL_NE">posts/getNuestraEscuela</string>
 
     <string name="JSON_SECCION">GetPostSeccion.php?</string>
     <string name="JSON_BUSQUDA_SECCION">NuevaBusquedaPost.php?</string>

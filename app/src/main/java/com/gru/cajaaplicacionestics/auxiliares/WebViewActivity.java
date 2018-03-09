@@ -27,8 +27,8 @@ public class WebViewActivity extends AppCompatActivity {
 
         if(getIntent().getExtras()!=null)
         {
-            url+= getIntent().getExtras().getString("link");
-            Log.e("URL",url);
+            verificarSiLinkEsDeGoogleDocs(getIntent().getExtras().getString("link"));
+
         }
 
         webView=(WebView)findViewById(R.id.webView);
@@ -64,5 +64,16 @@ public class WebViewActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void verificarSiLinkEsDeGoogleDocs(String link) //si el link viene desde google docs no agrego la ruta
+    {
+        if(link.startsWith("https://docs"))
+        {
+            url=link;
+        }
+        else {
+            url+= link;
+        }
     }
 }

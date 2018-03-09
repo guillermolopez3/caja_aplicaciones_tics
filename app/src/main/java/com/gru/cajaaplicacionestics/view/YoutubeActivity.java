@@ -94,8 +94,18 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
     private void cargarActivity()
     {
         titulo.setText(post.getTitle());
-        tag.setText(post.getTags());
-        descripcion.setText(post.getDescription());
+        if((post.getTags() !=null) && (post.getTags()!="") && (!post.getTags().equals("null")))
+        {
+            tag.setText(post.getTags());
+        } else {
+            tag.setVisibility(View.GONE);
+        }
+        if((post.getDescription() !=null) && (post.getDescription()!="") && (!post.getDescription().equals("null")))
+        {
+            descripcion.setText(post.getDescription());
+        } else {
+            descripcion.setVisibility(View.INVISIBLE);
+        }
         url_video= MetodosComunes.verificarUrl(post.getLink());
         txtFecha.setText("Ultima actualización: " + post.getCreated_at());
 

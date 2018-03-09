@@ -106,12 +106,12 @@ public class PaginacionPost
     }
 
 
-    public void iniciarPaginacionRecursosxNivel(final int nivel)
+    public void iniciarPaginacionNe(final int seccion)
     {
         pullToLoadView.isLoadMoreEnabled(true);
 
         URL_BASE=activity.getResources().getString(R.string.URL_BASE);
-        URL_GET_ALL=activity.getResources().getString(R.string.URL_GET_ALL_POST_LEVEL);
+        URL_GET_ALL=activity.getResources().getString(R.string.URL_GET_ALL_NE);
         //CANTIDAD_POST= Integer.parseInt(activity.getResources().getString(R.string.CANTIDAD_POST));
 
         pullToLoadView.setPullCallback(new PullCallback() {
@@ -120,7 +120,7 @@ public class PaginacionPost
                 Log.e("on load","entra");
                 //LIMIT=LIMIT+CANTIDAD_POST;
                 PAGINA_ACTUAL++;
-                cargarListaRecursosXNivel(nivel);
+                cargarListaNe(seccion);
 
             }
 
@@ -131,7 +131,7 @@ public class PaginacionPost
                 adapter.clear(); //limpio el adapter
                 hasLoadedAll=false;
                 PAGINA_ACTUAL=1; //reinicio el contador
-                cargarListaRecursosXNivel(nivel);
+                cargarListaNe(seccion);
 
             }
 
@@ -156,7 +156,7 @@ public class PaginacionPost
         pullToLoadView.isLoadMoreEnabled(true);
         //adapter.clear(); //limpio el adapter
 
-        URL_BASE    =activity.getResources().getString(R.string.URL_BASE1);
+        URL_BASE    =activity.getResources().getString(R.string.URL_BASE);
 
         URL_SEARCH  =activity.getResources().getString(R.string.URL_POST_SEARCH);
         //Log.e("url search",URL_BASE+ URL_SEARCH);
@@ -242,10 +242,10 @@ public class PaginacionPost
 
     public void cargarListaSearch(final String consulta)
     {
-        Log.e("url search",URL_BASE + URL_SEARCH + "page=" + PAGINA_ACTUAL + "&consulta=" +consulta);
+        Log.e("url search",URL_BASE + URL_SEARCH + "?page=" + PAGINA_ACTUAL + "&consulta=" +consulta);
         VolleySingleton.getInstancia(activity).
                 addToRequestQueue(new StringRequest(Request.Method.GET,
-                        URL_BASE + URL_SEARCH + "page=" + PAGINA_ACTUAL + "&consulta=" +consulta ,
+                        URL_BASE + URL_SEARCH + "?page=" + PAGINA_ACTUAL + "&consulta=" +consulta ,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -287,18 +287,18 @@ public class PaginacionPost
                 }));
     }
 
-    private void cargarListaRecursosXNivel(int nivel)
+    private void cargarListaNe(int seccionNe)
     {
         StringRequest request;
         VolleySingleton.getInstancia(activity).
                 addToRequestQueue(request = new StringRequest(Request.Method.GET,
-                        URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&nivel=" + nivel,
+                        URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&seccionNe=" + seccionNe,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 try {
                                     JSONObject jsonObject = new JSONObject(response);
-                                    JSONArray array= jsonObject.getJSONArray("post");
+                                    JSONArray array= jsonObject.getJSONArray("data");
 
                                     for(int i=0; i< array.length();i++)
                                     {

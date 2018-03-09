@@ -7,7 +7,7 @@ android {
         applicationId "com.gru.cajaaplicacionestics"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 13
+        versionCode 14
         versionName "1.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
