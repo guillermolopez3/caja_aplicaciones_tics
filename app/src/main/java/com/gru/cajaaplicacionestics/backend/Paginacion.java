@@ -295,12 +295,12 @@ public class Paginacion
                 request.setRetryPolicy(new RetryPolicy() {
                     @Override
                     public int getCurrentTimeout() {
-                        return 50000;
+                        return 8000;
                     }
 
                     @Override
                     public int getCurrentRetryCount() {
-                        return 50000;
+                        return 8000;
                     }
 
                     @Override
@@ -355,12 +355,12 @@ public class Paginacion
                 request.setRetryPolicy(new RetryPolicy() {
                     @Override
                     public int getCurrentTimeout() {
-                        return 50000;
+                        return 8000;
                     }
 
                     @Override
                     public int getCurrentRetryCount() {
-                        return 50000;
+                        return 8000;
                     }
 
                     @Override
@@ -431,6 +431,22 @@ public class Paginacion
 
                     }
                 });
+        request.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 8000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 8000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
     }
 
 
@@ -439,7 +455,7 @@ public class Paginacion
         Log.e("url",URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&level=" + nivel );
         StringRequest request;
         VolleySingleton.getInstancia(activity).
-                addToRequestQueue(new StringRequest(Request.Method.GET,
+                addToRequestQueue(request = new StringRequest(Request.Method.GET,
                         URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&level=" + nivel,
                         new Response.Listener<String>() {
                             @Override
@@ -467,32 +483,32 @@ public class Paginacion
                                     pullToLoadView.setComplete();
                                     isLoading=false;
                                 } catch (JSONException e) {
-                                    Log.e("error",e.getMessage());
+                                    //Log.e("error",e.getMessage());
                                     e.printStackTrace();
                                 }
                             }
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("error",error.getMessage());
+                        //Log.e("error",error.getMessage());
                     }
                 }));
-        /*request.setRetryPolicy(new RetryPolicy() {
+        request.setRetryPolicy(new RetryPolicy() {
             @Override
             public int getCurrentTimeout() {
-                return 50000;
+                return 8000;
             }
 
             @Override
             public int getCurrentRetryCount() {
-                return 50000;
+                return 8000;
             }
 
             @Override
             public void retry(VolleyError error) throws VolleyError {
 
             }
-        });*/
+        });
     }
 
 

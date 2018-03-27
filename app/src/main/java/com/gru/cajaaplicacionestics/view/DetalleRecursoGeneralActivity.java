@@ -26,6 +26,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+//TODO:  verificar si la URL que viene empieza con http// ya que si no viene asi la app crashea
+
 public class DetalleRecursoGeneralActivity extends AppCompatActivity
 {
     Button acceder_recurso;

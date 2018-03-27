@@ -3,4 +3,15 @@
     <string name="ga_trackingId">UA-105770823-2</string>
     <bool name="ga_reportUncaughtExceptions">true</bool>
 
+    <!-- Seguimiento automático de las pantallas -->
+    <bool name="ga_autoActivityTracking">true</bool>
+
+    <!-- The screen names that will appear in reports -->
+    <screenName name="com.gru.cajaaplicacionestics.view.MenuActivity">
+        Menu
+    </screenName>
+    <screenName name="com.example.EcommerceActivity">
+        AnalyticsSampleApp EcommerceSampleScreen
+    </screenName>
+
 </resources>

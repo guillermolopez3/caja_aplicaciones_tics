@@ -62,6 +62,8 @@ public class CapacitacionActivity extends AppCompatActivity implements AdapterVi
 
     String cue;
 
+    String URL_BASE, URL_COLE;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +76,9 @@ public class CapacitacionActivity extends AppCompatActivity implements AdapterVi
         coordinatorLayout.setVisibility(View.INVISIBLE);
 
         showToolbar("Pedido de Capacitación",false);
+
+        URL_BASE= getResources().getString(R.string.URL_BASE);
+        URL_COLE=getResources().getString(R.string.URL_GET_COLE);
 
         colegioModel= new ColegioModel();
         nombre_spinner= new ArrayList<>();
@@ -132,30 +137,39 @@ public class CapacitacionActivity extends AppCompatActivity implements AdapterVi
         dialog.show();
         Log.e("entrando", "obtener");
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                "https://faltaequipoxyz.000webhostapp.com/ObtenerDatosColegio.php?cue="+cue,
+                URL_BASE + URL_COLE + "?cue="+cue,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         dialog.dismiss();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            JSONArray array = jsonObject.getJSONArray("post");
+                            JSONArray array = jsonObject.getJSONArray("data");
+                            Log.e("array","cant" + array.length());
 
-                            JSONObject o = array.getJSONObject(0);
-                            ColegioModel cole = new ColegioModel(
-                                    o.getInt("id"),
-                                    o.getString("cue"),
-                                    o.getString("nombre_cole"),
-                                    o.getString("localidad"),
-                                    o.getString("inspeccion"),
-                                    o.getString("modalidad"),
-                                    o.getString("ar"),
-                                    o.getString("fp")
-                            );
-                            cargarDatos(cole,txtL);
-                            dial.dismiss();
+                            if(array.length()==1)
+                            {
+                                JSONObject o = array.getJSONObject(0);
+                                ColegioModel cole = new ColegioModel(
+                                        o.getInt("id"),
+                                        o.getString("cue"),
+                                        o.getString("nombre_cole"),
+                                        o.getString("localidad"),
+                                        o.getString("inspeccion"),
+                                        o.getString("modalidad"),
+                                        o.getString("ar"),
+                                        o.getString("fp")
+                                );
+                                cargarDatos(cole,txtL);
+                                dial.dismiss();
+                            }
+                            else {
+                                txtL.setError("CUE no encontrado");
+                            }
+
                         } catch (JSONException e) {
                             Log.e("error cue", e.toString());
+                            dialog.dismiss();
                             txtL.setError("CUE no encontrado");
                             e.printStackTrace();
                         }
@@ -163,7 +177,9 @@ public class CapacitacionActivity extends AppCompatActivity implements AdapterVi
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                dialog.dismiss();
+                Log.e("error cue", error.getMessage());
+                txtL.setError("Verifique la conexión a internet");
             }
         });
 

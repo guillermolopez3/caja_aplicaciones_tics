@@ -1,7 +1,12 @@
 package com.gru.cajaaplicacionestics.view;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,13 +16,17 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.adapter.AdapterMenu;
+import com.gru.cajaaplicacionestics.auxiliares.AnalitycsAplication;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.backend.Paginacion;
 import com.gru.cajaaplicacionestics.model.ModelMenu;
@@ -28,6 +37,9 @@ public class MenuActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<ModelMenu> array;
     SearchView searchView=null;
+
+    private Tracker mTracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +57,34 @@ public class MenuActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setLogo(R.drawable.ministerio);
+
+        if(getSupportActionBar()!=null) //metodo para poner el logo del ministerio en el actionbar
+        {
+            Display display = getWindowManager().getDefaultDisplay(); //obtengo datos de la resolucion de la pantalla
+            Point point = new Point();
+            display.getSize(point);
+            int ancho = (int) (point.x /1.6); //obtengo el ancho de la pantalla y lo divido para obtener un ancho aprox de 430 q es el ancho q el logo se ve bien
+            int alto = (int) (convertDpToPixel(56) / 1.6); //convierto los 56 px del ancho del toolbar y lo divido para obtener aprox 100 px
+
+            Drawable drawable = getResources().getDrawable(R.drawable.logo_completo); //obtengo el logo del minsterio
+            Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+            Drawable newDrawable = new BitmapDrawable(getResources(),Bitmap.createScaledBitmap(bitmap,ancho,alto,true)); //lo muestro con sus medidas
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(newDrawable);
+        }
+
         getSupportActionBar().setTitle("");
+        AnalitycsAplication aplication = (AnalitycsAplication) getApplication();
+        mTracker = aplication.getDefaultTracker();
+        mTracker.enableAutoActivityTracking(true); //trakeo automatico
 
+    }
 
+    //metodo para convertir los dp a pixel
+    public float convertDpToPixel(float dp) {
+        float scale = getResources().getDisplayMetrics().density;
+        return dp * scale + 0.5f;
     }
 
     @Override
@@ -79,5 +115,12 @@ public class MenuActivity extends AppCompatActivity {
         array.add(new ModelMenu(R.drawable.conectar_igualdad));
         array.add(new ModelMenu(R.drawable.nuestra_escuela));
         array.add(new ModelMenu(R.drawable.audiovisuales));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+      /*  mTracker.setScreenName("Menu");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());*/
     }
 }

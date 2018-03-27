@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.gru.cajaaplicacionestics.view.MenuActivity">
 
-    <include layout="@layout/app_bar"/>
+    <include layout="@layout/app_bar_menu_ppal"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/menuRecycler"
         android:background="#f2f2f2"

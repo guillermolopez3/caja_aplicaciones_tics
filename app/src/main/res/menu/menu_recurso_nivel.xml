@@ -23,11 +23,12 @@
         android:icon="@drawable/ic_secundario"
         />
 
+    <!--
     <item
         android:id="@+id/navigation_superior"
         android:title="Superior"
         app:showAsAction="always|withText"
         android:icon="@drawable/ic_superior"
-        />
+        /> -->
 
 </menu>

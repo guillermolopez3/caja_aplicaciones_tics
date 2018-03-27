@@ -28,42 +28,50 @@
                 android:layout_marginTop="30dp"
                 android:padding="25dp">
 
-                <Button
+               <Button
                     android:id="@+id/btnDocAcompa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/botones_ne"
+                    android:backgroundTint="@color/colorPrimary"
                     android:textColor="@android:color/white"
                     android:text="Documento de acompañamiento"/>
 
                 <Button
-                    android:id="@+id/btnOrientAdm"
+                    android:id="@+id/btnApuntesTrabajo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/botones_ne"
+                    android:backgroundTint="@color/colorPrimary"
                     android:textColor="@android:color/white"
-                    android:text="Orientaciones administrativas"/>
+                    android:text="Apuntes de Trabajo"/>
                 <Button
-                    android:id="@+id/btnRecPcial"
+                    android:id="@+id/btnAsistTecn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/botones_ne"
+                    android:backgroundTint="@color/colorPrimary"
                     android:textColor="@android:color/white"
-                    android:text="Recursos Provinciales"/>
+                    android:text="Asistencias Técnicas Sistematizadas "/>
                 <Button
-                    android:id="@+id/btnResolucion"
+                    android:id="@+id/btnNoticia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/botones_ne"
+                    android:backgroundTint="@color/colorPrimary"
                     android:textColor="@android:color/white"
-                    android:text="Resoluciones aprobatorias"/>
+                    android:text="Noticias / Novedades / Experiencias"/>
                 <Button
-                    android:id="@+id/btnDocAutoeval"
+                    android:id="@+id/btnCertificado"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
-                    android:backgroundTint="@color/botones_ne"
-                    android:text="Doc. para la autoevaluación instituc."/>
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Certificados Eje 1 y Eje 2"/>
+
+                <Button
+                    android:id="@+id/btnContacto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Equipo y vías de contacto"/>
 
             </LinearLayout>
 

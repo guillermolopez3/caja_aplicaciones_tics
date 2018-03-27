@@ -1,9 +1,11 @@
 package com.gru.cajaaplicacionestics.auxiliares;
 
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -20,6 +22,10 @@ public class WebViewActivity extends AppCompatActivity {
     ProgressBar progressBar;
     FloatingActionButton fab;
     String url= "http://docs.google.com/viewer?url=";
+
+    public static int MILISEGUNDOS_ESPERA = 3500;
+    private boolean fab_visible=true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +43,8 @@ public class WebViewActivity extends AppCompatActivity {
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setDisplayZoomControls(false);
         webView.loadUrl(url);
 
         webView.setWebViewClient(new WebViewClient(){
@@ -54,6 +62,7 @@ public class WebViewActivity extends AppCompatActivity {
 
         fab         =(FloatingActionButton)findViewById(R.id.fab);
 
+        fab.setVisibility(View.INVISIBLE);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,8 +71,34 @@ public class WebViewActivity extends AppCompatActivity {
             }
         });
 
+        ocultarFab();
 
+    }
 
+    //evento al hacer click en la pantalla, dependiendo si se esta mostrando el fab o no es q se lanza el ocultar
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if(fab_visible==false)
+        {
+            Log.e("entra al if","false");
+            fab.show();
+            ocultarFab();
+            fab_visible=true;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    //pasados los 3.5 seg se oculta
+    private void ocultarFab()
+    {
+        Handler handler= new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                fab.hide();
+                fab_visible=false;
+            }
+        },MILISEGUNDOS_ESPERA);
     }
 
     private void verificarSiLinkEsDeGoogleDocs(String link) //si el link viene desde google docs no agrego la ruta

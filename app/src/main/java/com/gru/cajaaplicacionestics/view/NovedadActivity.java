@@ -14,13 +14,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.auxiliares.AnalitycsAplication;
 import com.gru.cajaaplicacionestics.auxiliares.PaginationErrorCallBack;
 import com.gru.cajaaplicacionestics.view.fragment.FragmentNovedades;
 
 public class NovedadActivity extends AppCompatActivity implements PaginationErrorCallBack {
 
     private NovedadActivity.SectionPagenAdapter mSectionsPagerAdapter;
+    private Tracker mTracker;
 
     private ViewPager mViewPager;
 
@@ -46,6 +50,8 @@ public class NovedadActivity extends AppCompatActivity implements PaginationErro
 
         tabLayout.setupWithViewPager(mViewPager);
 
+        AnalitycsAplication aplication = (AnalitycsAplication) getApplication();
+        mTracker = aplication.getDefaultTracker();
 
     }
 
@@ -106,5 +112,10 @@ public class NovedadActivity extends AppCompatActivity implements PaginationErro
 
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mTracker.setScreenName("Novedades");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
 }

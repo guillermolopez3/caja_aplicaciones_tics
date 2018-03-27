@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gru.cajaaplicacionestics.R;;
@@ -78,7 +79,7 @@ public class AdapterNPost extends RecyclerView.Adapter<AdapterNPost.RecursosHold
             holder.hastag.setVisibility(View.INVISIBLE);
         }
 
-
+        definirIcono(modelRecursos.getId_tipo_activity(),holder.icono);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +89,45 @@ public class AdapterNPost extends RecyclerView.Adapter<AdapterNPost.RecursosHold
         });
     }
 
+    private void definirIcono(int tipoActivity,ImageView imagen)
+    {
+        RelativeLayout.LayoutParams relativeLayout = (RelativeLayout.LayoutParams)imagen.getLayoutParams();
+        if(tipoActivity==2){
+            //ICONO DEL VIDEO EN EL CENTRO
+            Log.e("posic icono","centro");
+            relativeLayout.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,0);
+            relativeLayout.addRule(RelativeLayout.CENTER_IN_PARENT,RelativeLayout.TRUE);
+            imagen.setLayoutParams(relativeLayout);
+        }
+        else {
+            //EL RESTO APARECE A LA DERECHA
+            Log.e("posic icono","derecha");
+            relativeLayout.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,RelativeLayout.TRUE);
+            relativeLayout.addRule(RelativeLayout.CENTER_IN_PARENT,0);
+            imagen.setLayoutParams(relativeLayout);
+        }
+        imagen.setVisibility(View.VISIBLE);
+        switch (tipoActivity){
+            case 1:
+                imagen.setVisibility(View.INVISIBLE);
+                //general
+                break;
+            case 2:
+                //video
+                Picasso.with(activity).load(R.drawable.play).into(imagen);
+               break;
+            case 3:
+                //audio
+                Picasso.with(activity).load(R.drawable.audio).into(imagen);
+                break;
+            case 4:
+                //pfd
+                Picasso.with(activity).load(R.drawable.acrobat).into(imagen);
+                break;
+
+        }
+
+    }
     private void abrirDetalleCorrespondiente(int tipoActivity,ModelPost post) //dependiendo si es audio, video o web muestra distintos activity detalles
     {
         //Log.e("tipo_recurso", tipo_rec);
@@ -150,6 +190,7 @@ public class AdapterNPost extends RecyclerView.Adapter<AdapterNPost.RecursosHold
         private TextView nombreRecurso;
         private TextView descripcionCorta;
         private ImageView imagen;
+        private ImageView icono;
         private Button hastag;
         private CardView cardView;
         public RecursosHolder(View itemView) {
@@ -159,6 +200,7 @@ public class AdapterNPost extends RecyclerView.Adapter<AdapterNPost.RecursosHold
             hastag            = (Button)itemView.findViewById(R.id.buttonCardRecursos);
             cardView          = (CardView)itemView.findViewById(R.id.cardRecursos);
             imagen            = (ImageView)itemView.findViewById(R.id.imagenCardRecursos);
+            icono             = (ImageView)itemView.findViewById(R.id.iconoCateg);
         }
     }
 

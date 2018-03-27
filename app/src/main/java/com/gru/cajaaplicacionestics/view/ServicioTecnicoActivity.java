@@ -62,6 +62,7 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
     ArrayList<Integer> id_spinner;
 
     String cue;
+    String URL_BASE,URL_COLE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,9 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
 
         coordinatorLayout=(CoordinatorLayout)findViewById(R.id.coordinatorST);
         coordinatorLayout.setVisibility(View.INVISIBLE);
+
+        URL_BASE= getResources().getString(R.string.URL_BASE);
+        URL_COLE=getResources().getString(R.string.URL_GET_COLE);
 
         showToolbar("Pedido de Servicio Técnico",false);
 
@@ -132,30 +136,39 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
         dialog.show();
         Log.e("entrando", "obtener");
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                "https://faltaequipoxyz.000webhostapp.com/ObtenerDatosColegio.php?cue="+cue,
+                URL_BASE + URL_COLE + "?cue="+cue,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         dialog.dismiss();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            JSONArray array = jsonObject.getJSONArray("post");
+                            JSONArray array = jsonObject.getJSONArray("data");
+                            Log.e("array","cant" + array.length());
 
-                            JSONObject o = array.getJSONObject(0);
-                            ColegioModel cole = new ColegioModel(
-                                    o.getInt("id"),
-                                    o.getString("cue"),
-                                    o.getString("nombre_cole"),
-                                    o.getString("localidad"),
-                                    o.getString("inspeccion"),
-                                    o.getString("modalidad"),
-                                    o.getString("ar"),
-                                    o.getString("fp")
-                            );
-                            cargarDatos(cole,txtL);
-                            dial.dismiss();
+                            if(array.length()==1)
+                            {
+                                JSONObject o = array.getJSONObject(0);
+                                ColegioModel cole = new ColegioModel(
+                                        o.getInt("id"),
+                                        o.getString("cue"),
+                                        o.getString("nombre_cole"),
+                                        o.getString("localidad"),
+                                        o.getString("inspeccion"),
+                                        o.getString("modalidad"),
+                                        o.getString("ar"),
+                                        o.getString("fp")
+                                );
+                                cargarDatos(cole,txtL);
+                                dial.dismiss();
+                            }
+                            else {
+                                txtL.setError("CUE no encontrado");
+                            }
+
                         } catch (JSONException e) {
                             Log.e("error cue", e.toString());
+                            dialog.dismiss();
                             txtL.setError("CUE no encontrado");
                             e.printStackTrace();
                         }
@@ -163,7 +176,9 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                dialog.dismiss();
+                Log.e("error cue", error.getMessage());
+                txtL.setError("Verifique la conexión a internet");
             }
         });
 

@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:maxLength="9"
-            android:hint="Nro CUE (ej. 111111100)"/>
+            android:hint="Nro CUE (ej. 140111100)"/>
     </android.support.design.widget.TextInputLayout>
 
 
