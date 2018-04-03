@@ -5,32 +5,23 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.gru.cajaaplicacionestics.R;
-import com.gru.cajaaplicacionestics.auxiliares.AnalitycsAplication;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.auxiliares.PaginationErrorCallBack;
-import com.gru.cajaaplicacionestics.backend.PaginacionNE;
 import com.gru.cajaaplicacionestics.backend.PaginacionPost;
 import com.srx.widget.PullToLoadView;
 
 public class NEActivity extends AppCompatActivity implements PaginationErrorCallBack {
-    private Tracker mTracker;
     private String      seccion="";
-    private int     id_seccionNE=1;
+    private int         id_seccionNE=1;
 
-    SearchView searchView=null;
     PullToLoadView      pullToLoadView; //se encarga de ir llenando el recycler
     LinearLayout errorLayout;
     CoordinatorLayout coordinatorLayout;
-    PaginacionPost paginacionPost;
 
    Button btnReintentar;
 
@@ -39,15 +30,14 @@ public class NEActivity extends AppCompatActivity implements PaginationErrorCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        //seccion             = getIntent().getExtras().getString("seleccion");
         String titulo       = getIntent().getExtras().getString("titulo");
         id_seccionNE        = getIntent().getExtras().getInt("ne");
 
-        pullToLoadView      =(PullToLoadView)findViewById(R.id.recyclerPd);
-        coordinatorLayout   =(CoordinatorLayout)findViewById(R.id.postCoordinator);
+        pullToLoadView      = findViewById(R.id.recyclerPd);
+        coordinatorLayout   = findViewById(R.id.postCoordinator);
 
-        errorLayout         =(LinearLayout)findViewById(R.id.error_layout);
-        btnReintentar=(Button) findViewById(R.id.error_btn_retry);
+        errorLayout         = findViewById(R.id.error_layout);
+        btnReintentar       = findViewById(R.id.error_btn_retry);
 
         MetodosComunes.showToolbar(titulo,true,this);
 
@@ -69,12 +59,6 @@ public class NEActivity extends AppCompatActivity implements PaginationErrorCall
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-       /* mTracker.setScreenName("NE");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());*/
-    }
 
     @Override
     public void reintentar(int arrayCount, @Nullable Boolean hayError) {
@@ -99,7 +83,7 @@ public class NEActivity extends AppCompatActivity implements PaginationErrorCall
             {
                 MetodosComunes.manejarActivityError(this,"sinConexion");
 
-                btnReintentar=(Button)findViewById(R.id.error_btn_retry);
+                btnReintentar = findViewById(R.id.error_btn_retry);
                 btnReintentar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

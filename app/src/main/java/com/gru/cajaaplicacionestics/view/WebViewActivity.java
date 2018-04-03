@@ -1,4 +1,4 @@
-package com.gru.cajaaplicacionestics.auxiliares;
+package com.gru.cajaaplicacionestics.view;
 
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -14,7 +14,7 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.gru.cajaaplicacionestics.R;
-import com.gru.cajaaplicacionestics.view.PdfActivity;
+import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 
 public class WebViewActivity extends AppCompatActivity {
 
@@ -37,9 +37,9 @@ public class WebViewActivity extends AppCompatActivity {
 
         }
 
-        webView=(WebView)findViewById(R.id.webView);
+        webView = findViewById(R.id.webView);
         webView.setVisibility(View.GONE);
-        progressBar=(ProgressBar)findViewById(R.id.progressWebView);
+        progressBar = findViewById(R.id.progressWebView);
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
@@ -60,7 +60,7 @@ public class WebViewActivity extends AppCompatActivity {
             }
         });
 
-        fab         =(FloatingActionButton)findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
 
         fab.setVisibility(View.INVISIBLE);
         fab.setOnClickListener(new View.OnClickListener() {

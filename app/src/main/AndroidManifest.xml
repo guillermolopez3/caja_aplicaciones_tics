@@ -14,7 +14,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name=".auxiliares.AnalitycsAplication"
         android:allowBackup="true"
         android:icon="@drawable/icono_fondo_bco"
         android:label="@string/app_name"
@@ -28,35 +27,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.MainActivity" />
-        <activity android:name=".view.SeleccionActivity" />
         <activity android:name=".view.DetalleRecursoGeneralActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.MainActivity" />
-        </activity>
-        <activity android:name=".view.AcercadeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.MainActivity" />
+
         </activity>
         <activity android:name=".view.YoutubeActivity" />
         <activity android:name=".view.EnviarRecursosActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.MainActivity" />
+
         </activity>
         <activity android:name=".view.DetalleRecursoAudio" />
-        <activity android:name=".view.QueEsCajaTICActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.MainActivity" />
-        </activity>
-        <activity android:name=".view.SemanaTicActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.EspecialSemanaTicActivity" />
-        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -71,41 +49,23 @@
 
         <activity android:name=".map.MapsActivity" />
         <activity android:name=".view.ServicioTecnicoActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.MainActivity" />
+
+
         </activity>
         <activity android:name=".view.CapacitacionActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.MainActivity" />
-        </activity>
-        <activity android:name=".view.NovedadesActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.NuevaSeleccioonActivity" />
-        </activity>
-        <activity android:name=".view.NuevaSeleccioonActivity" />
-        <activity android:name=".view.PDActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.NuevaSeleccioonActivity" />
+
+
         </activity>
         <activity android:name=".view.PdfActivity" />
         <activity android:name=".view.NEActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.NuevaSeleccioonActivity" />
+
+
         </activity>
         <activity android:name=".view.RecursosXNivelActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.NuevaSeleccioonActivity" />
+                android:value=".view.MenuActivity" />
         </activity>
-        <activity
-            android:name=".view.RecursosProvincialesActivity"
-            android:label="@string/title_activity_recursos_provinciales"
-            android:theme="@style/AppTheme" />
         <activity android:name=".view.NuestraEscuelaMenuActivity" />
         <activity android:name=".view.MenuActivity" />
         <activity android:name=".view.PostActivity">
@@ -117,7 +77,7 @@
             android:name=".view.NovedadActivity"
             android:label="@string/title_activity_novedad"
             android:theme="@style/AppTheme" />
-        <activity android:name=".auxiliares.WebViewActivity"></activity>
+        <activity android:name=".view.WebViewActivity"/>
     </application>
 
 </manifest>

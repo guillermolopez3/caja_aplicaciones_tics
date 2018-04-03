@@ -10,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.firebase.crash.FirebaseCrash;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.adapter.AdapterNPost;
 import com.gru.cajaaplicacionestics.auxiliares.PaginationErrorCallBack;
@@ -36,7 +37,7 @@ public class PaginacionNovedades
 
     private PaginationErrorCallBack mCallback;
 
-    private String URL_BASE="",URL_GET_ALL="",URL_SEARCH="";
+    private String URL_BASE="",URL_GET_ALL="";
     private int PAGINA_ACTUAL;
 
     private String año;
@@ -141,18 +142,20 @@ public class PaginacionNovedades
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("error",error.toString());
+                        FirebaseCrash.report(new Exception("VooleyError " + error.toString() ));
                        // manejoError(true);
                     }
                 }));
         request.setRetryPolicy(new RetryPolicy() {
             @Override
             public int getCurrentTimeout() {
-                return 50000;
+                FirebaseCrash.report(new Exception("Timeout" + URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&ano=" + año  ));
+                return 8000;
             }
 
             @Override
             public int getCurrentRetryCount() {
-                return 50000;
+                return 8000;
             }
 
             @Override

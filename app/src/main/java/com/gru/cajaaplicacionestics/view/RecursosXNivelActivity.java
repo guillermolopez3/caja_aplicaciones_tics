@@ -1,50 +1,43 @@
 package com.gru.cajaaplicacionestics.view;
 
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationMenu;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.view.MenuItem;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.gru.cajaaplicacionestics.R;
-import com.gru.cajaaplicacionestics.auxiliares.AnalitycsAplication;
 import com.gru.cajaaplicacionestics.auxiliares.BottomNavigationViewHelper;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.view.fragment.FragmentRecursosNIvel;
 
 public class RecursosXNivelActivity extends AppCompatActivity {
-    private Tracker mTracker;
-    SearchView searchView=null;
     Fragment recursos;
 
-
-    String str_web="";
-    String str_video="";
-    String str_audio="";
-    String str_pdf="";
+    FirebaseAnalytics analytics;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recursos_nivel);
 
-        AnalitycsAplication aplication = (AnalitycsAplication) getApplication();
-        mTracker = aplication.getDefaultTracker();
+        analytics=FirebaseAnalytics.getInstance(this);
+        bundle=new Bundle();
 
         MetodosComunes.showToolbar("Espacio Didáctico", true, this);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         BottomNavigationViewHelper.removeShiftMode(navigation);//le quito el efecto de aumento al cliquear los iconos
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         recursos = new FragmentRecursosNIvel();
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, recursos)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+        bundle.putString("nivel_espacio","inicial");
+        analytics.logEvent("nivel",bundle);
         enviarNivel(2);
 
     }
@@ -56,20 +49,26 @@ public class RecursosXNivelActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.navigation_inicial:
                             recursos = new FragmentRecursosNIvel();
+                            bundle.putString("nivel_espacio","inicial");
+                            analytics.logEvent("nivel",bundle);
                             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, recursos)
-                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                                    .commit();
                             enviarNivel(2);
                             return true;
                         case R.id.navigation_primaria:
                             recursos = new FragmentRecursosNIvel();
+                            bundle.putString("nivel_espacio","primario");
+                            analytics.logEvent("nivel",bundle);
                             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, recursos)
-                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                                    .commit();
                             enviarNivel(3);
                             return true;
                         case R.id.navigation_secundaria:
                             recursos = new FragmentRecursosNIvel();
+                            bundle.putString("nivel_espacio","secundario");
+                            analytics.logEvent("nivel",bundle);
                             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, recursos)
-                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                                    .commit();
                             enviarNivel(4);
                             return true;
                         /*case R.id.navigation_superior:
@@ -91,10 +90,5 @@ public class RecursosXNivelActivity extends AppCompatActivity {
         recursos.setArguments(data);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mTracker.setScreenName("Recursos por Nivel");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-    }
+
 }

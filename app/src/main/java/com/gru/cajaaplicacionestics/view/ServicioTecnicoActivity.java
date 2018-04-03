@@ -2,7 +2,6 @@ package com.gru.cajaaplicacionestics.view;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -28,12 +27,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.gru.cajaaplicacionestics.R;
-import com.gru.cajaaplicacionestics.auxiliares.AnalitycsAplication;
+import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.model.ColegioModel;
-import com.gru.cajaaplicacionestics.model.Post;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,7 +41,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ServicioTecnicoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private Tracker mTracker;
     CoordinatorLayout coordinatorLayout;
     ColegioModel colegioModel;
 
@@ -69,16 +64,14 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_servicio_tecnico);
 
-        AnalitycsAplication aplication = (AnalitycsAplication) getApplication();
-        mTracker = aplication.getDefaultTracker();
 
-        coordinatorLayout=(CoordinatorLayout)findViewById(R.id.coordinatorST);
+        coordinatorLayout= findViewById(R.id.coordinatorST);
         coordinatorLayout.setVisibility(View.INVISIBLE);
 
         URL_BASE= getResources().getString(R.string.URL_BASE);
         URL_COLE=getResources().getString(R.string.URL_GET_COLE);
 
-        showToolbar("Pedido de Servicio Técnico",false);
+        MetodosComunes.showToolbar("Pedido de Servicio Técnico",false,this);
 
         colegioModel= new ColegioModel();
         nombre_spinner= new ArrayList<>();
@@ -95,10 +88,10 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
 
         builder.setView(view);
 
-        final TextInputEditText txtCue = (TextInputEditText)view.findViewById(R.id.recursoEnviarTxtUsuario);
-        final TextInputLayout txtLay = (TextInputLayout)view.findViewById(R.id.textInputLayoutDialogCue);
-        Button no = (Button) view.findViewById(R.id.dialogNo);
-        Button si = (Button) view.findViewById(R.id.dialogSi);
+        final TextInputEditText txtCue  = view.findViewById(R.id.recursoEnviarTxtUsuario);
+        final TextInputLayout txtLay    = view.findViewById(R.id.textInputLayoutDialogCue);
+        Button no = view.findViewById(R.id.dialogNo);
+        Button si = view.findViewById(R.id.dialogSi);
 
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
@@ -192,22 +185,22 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
         if((c.getNombre_cole()!="")&&(c.getNombre_cole()!=null)&&(!c.getNombre_cole().equals("null")))
         {
             coordinatorLayout.setVisibility(View.VISIBLE);
-            cueCole     = (TextView)findViewById(R.id.txtCueST);
-            colegio     = (TextView)findViewById(R.id.txtColegioST);
-            ar          = (TextView)findViewById(R.id.txtArST);
-            fp          = (TextView)findViewById(R.id.txtFpST);
-            persona         = (TextInputEditText)findViewById(R.id.txtNombreContacto);
-            tel             = (TextInputEditText)findViewById(R.id.txtTelContacto);
-            mail            = (TextInputEditText)findViewById(R.id.txtMailContacto);
-            detalle         = (TextInputEditText)findViewById(R.id.txtMensaje);
+            cueCole         = findViewById(R.id.txtCueST);
+            colegio         = findViewById(R.id.txtColegioST);
+            ar              = findViewById(R.id.txtArST);
+            fp              = findViewById(R.id.txtFpST);
+            persona         = findViewById(R.id.txtNombreContacto);
+            tel             = findViewById(R.id.txtTelContacto);
+            mail            = findViewById(R.id.txtMailContacto);
+            detalle         = findViewById(R.id.txtMensaje);
 
-            spinner=(Spinner)findViewById(R.id.spinner);
+            spinner         = findViewById(R.id.spinner);
             spinner.setOnItemSelectedListener(this);
 
             llenarSpinner();
 
-            scrollView =(NestedScrollView)findViewById(R.id.netScroll);
-            btn_enviar=(Button)findViewById(R.id.btnEnviarPedido);
+            scrollView = findViewById(R.id.netScroll);
+            btn_enviar = findViewById(R.id.btnEnviarPedido);
 
             id_cole= c.getId();
             cueCole.setText("CUE: "+c.getCue());
@@ -289,13 +282,6 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
 
     }
 
-    public void showToolbar(String tittle, boolean upButton)
-    {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(tittle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(upButton);
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -368,10 +354,4 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
         requestQueue.add(stringRequest);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mTracker.setScreenName("ST");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-    }
 }

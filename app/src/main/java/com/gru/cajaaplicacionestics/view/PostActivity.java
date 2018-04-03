@@ -13,18 +13,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.android.volley.VolleyError;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.auxiliares.PaginationErrorCallBack;
 import com.gru.cajaaplicacionestics.backend.PaginacionPost;
 import com.srx.widget.PullToLoadView;
 
-import org.json.JSONException;
 
 public class PostActivity extends AppCompatActivity implements PaginationErrorCallBack
 {
@@ -36,10 +32,6 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
     PullToLoadView      pullToLoadView; //se encarga de ir llenando el recycler
     LinearLayout        errorLayout;
     CoordinatorLayout   coordinatorLayout;
-    PaginacionPost      paginacionPost;
-
-    /*ImageView           imagenError;
-    TextView            titleError;*/
     Button              btnReintentar;
 
 
@@ -54,20 +46,15 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
         isNuestraEscuela    = getIntent().getBooleanExtra("titulo",false);
         Log.e("ne", "valor" + isNuestraEscuela);
 
-        pullToLoadView      =(PullToLoadView)findViewById(R.id.recyclerPd);
-        coordinatorLayout   =(CoordinatorLayout)findViewById(R.id.postCoordinator);
+        pullToLoadView      = findViewById(R.id.recyclerPd);
+        coordinatorLayout   = findViewById(R.id.postCoordinator);
 
-        errorLayout         =(LinearLayout)findViewById(R.id.error_layout);
-        Button btnReintentar=(Button) findViewById(R.id.error_btn_retry);
+        errorLayout         = findViewById(R.id.error_layout);
 
         MetodosComunes.showToolbar(titulo,true,this);
 
         if(seccion.equals("search")){
             iniciarPaginacionSearch();
-        }
-        else if (isNuestraEscuela)
-        {
-
         }
         else {
             iniciarPaginacion();
@@ -200,7 +187,7 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
             {
                 MetodosComunes.manejarActivityError(this,"sinConexion");
 
-                btnReintentar=(Button)findViewById(R.id.error_btn_retry);
+                btnReintentar= findViewById(R.id.error_btn_retry);
                 btnReintentar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -213,16 +200,7 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
         }
         else
         {
-           /*Snackbar.make(coordinatorLayout, "Problemas de conexión", Snackbar.LENGTH_INDEFINITE)
-                            .setAction("Reintentar", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    errorLayout.setVisibility(View.GONE);
-                                    iniciarPaginacion();
-                                }
-                            })
-                            .show();*/
-            Snackbar.make(coordinatorLayout, "Problemas de conexión", Snackbar.LENGTH_INDEFINITE)
+           Snackbar.make(coordinatorLayout, "Problemas de conexión", Snackbar.LENGTH_INDEFINITE)
                     .show();
         }
 

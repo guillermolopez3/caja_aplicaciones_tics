@@ -1,7 +1,6 @@
 package com.gru.cajaaplicacionestics.view;
 
-import android.content.Intent;
-import android.net.Uri;
+
 import android.os.AsyncTask;
 import android.os.Handler;
 
@@ -26,6 +25,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+//ACTIVITY SOLO PARA VER COMO SE USA EL PDF
 
 public class PdfActivity extends AppCompatActivity{
     PDFView pdfView;

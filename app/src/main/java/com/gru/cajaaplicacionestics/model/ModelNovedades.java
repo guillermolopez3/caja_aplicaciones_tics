@@ -1,7 +1,7 @@
 package com.gru.cajaaplicacionestics.model;
 
 /**
- * Created by guill on 08/10/2017.
+ * usando
  */
 
 public class ModelNovedades

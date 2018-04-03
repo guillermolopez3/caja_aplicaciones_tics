@@ -7,11 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.gru.cajaaplicacionestics.R;
-import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
-import com.gru.cajaaplicacionestics.auxiliares.PaginationErrorCallBack;
 import com.gru.cajaaplicacionestics.backend.PaginacionNovedades;
 import com.srx.widget.PullToLoadView;
 
@@ -44,7 +41,7 @@ public class FragmentNovedades extends Fragment {
         año= getArguments().getString("año");
         Log.e("año","" + año);
 
-        pullToLoadView=(PullToLoadView)v.findViewById(R.id.recyclerNovedades);
+        pullToLoadView = v.findViewById(R.id.recyclerNovedades);
         new PaginacionNovedades(getActivity(),pullToLoadView).iniciarPaginacion(año);
         return v;
     }

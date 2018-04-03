@@ -5,30 +5,22 @@ import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.adapter.AdapterMenu;
-import com.gru.cajaaplicacionestics.auxiliares.AnalitycsAplication;
-import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
-import com.gru.cajaaplicacionestics.backend.Paginacion;
 import com.gru.cajaaplicacionestics.model.ModelMenu;
 
 import java.util.ArrayList;
@@ -36,26 +28,24 @@ import java.util.ArrayList;
 public class MenuActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<ModelMenu> array;
-    SearchView searchView=null;
-
-    private Tracker mTracker;
+    private FirebaseAnalytics firebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        firebaseAnalytics= FirebaseAnalytics.getInstance(this);
 
-        recyclerView= (RecyclerView)findViewById(R.id.menuRecycler);
+        recyclerView= findViewById(R.id.menuRecycler);
 
         llenarArray();
 
-        AdapterMenu adapterMenu = new AdapterMenu(this,array);
+        AdapterMenu adapterMenu = new AdapterMenu(this,array,firebaseAnalytics);
         recyclerView.setAdapter(adapterMenu);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2, LinearLayoutManager.VERTICAL,false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //MetodosComunes.showToolbar(getResources().getString(R.string.nombre_app),false,this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if(getSupportActionBar()!=null) //metodo para poner el logo del ministerio en el actionbar
@@ -75,9 +65,8 @@ public class MenuActivity extends AppCompatActivity {
         }
 
         getSupportActionBar().setTitle("");
-        AnalitycsAplication aplication = (AnalitycsAplication) getApplication();
-        mTracker = aplication.getDefaultTracker();
-        mTracker.enableAutoActivityTracking(true); //trakeo automatico
+
+
 
     }
 
@@ -96,10 +85,13 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Bundle bundle = new Bundle();
         if(item.getItemId()==R.id.action_search){
             Intent i = new Intent(MenuActivity.this,PostActivity.class);
             i.putExtra("seleccion","search");
             i.putExtra("titulo","Busqueda");
+            bundle.putString("nombre_pantalla","buscar");
+            firebaseAnalytics.logEvent("pantalla",bundle);
             startActivity(i);
             Log.e("menu","apreto");
         }
@@ -117,10 +109,5 @@ public class MenuActivity extends AppCompatActivity {
         array.add(new ModelMenu(R.drawable.audiovisuales));
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-      /*  mTracker.setScreenName("Menu");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());*/
-    }
+
 }

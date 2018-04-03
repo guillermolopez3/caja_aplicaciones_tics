@@ -1,19 +1,11 @@
 package com.gru.cajaaplicacionestics.view;
 
-import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.provider.MediaStore;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Surface;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,8 +23,6 @@ import com.google.android.youtube.player.YouTubePlayerView;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.model.ModelPost;
-import com.gru.cajaaplicacionestics.model.NewPost;
-import com.gru.cajaaplicacionestics.model.Post;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +32,6 @@ import org.json.JSONObject;
 public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener
 {
     private YouTubePlayerView youTubePlayerView;
-    private YouTubePlayer.OnInitializedListener onInitializedListener;
     YouTubePlayer mYouTubePlayer;
 
     private ModelPost post;
@@ -53,19 +42,18 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
     String URL_BASE="";
     String URL_VIDEO="";
 
-    private final int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youtube);
 
-        youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtubePlayerView);
-        titulo=(TextView)findViewById(R.id.txtTituloDescripcionRecurso);
-        tag=(TextView) findViewById(R.id.txtTagsDescripcionRecurso);
-        descripcion=(TextView)findViewById(R.id.txtDescripcionRecurso);
-        btnRecargar=(Button)findViewById(R.id.youtubeRecargar);
-        txtFecha = (TextView)findViewById(R.id.txtFechaDescripcionRecurso);
+        youTubePlayerView   = findViewById(R.id.youtubePlayerView);
+        titulo              = findViewById(R.id.txtTituloDescripcionRecurso);
+        tag                 = findViewById(R.id.txtTagsDescripcionRecurso);
+        descripcion         = findViewById(R.id.txtDescripcionRecurso);
+        btnRecargar         = findViewById(R.id.youtubeRecargar);
+        txtFecha            = findViewById(R.id.txtFechaDescripcionRecurso);
 
         URL_BASE=getResources().getString(R.string.URL_BASE);
         URL_VIDEO= getResources().getString(R.string.URL_VIDEO);

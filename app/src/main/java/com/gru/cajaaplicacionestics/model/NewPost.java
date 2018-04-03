@@ -3,7 +3,7 @@ package com.gru.cajaaplicacionestics.model;
 import java.io.Serializable;
 
 /**
- * Created by guill on 07/10/2017.
+ * Usado
  */
 
 public class NewPost implements Serializable

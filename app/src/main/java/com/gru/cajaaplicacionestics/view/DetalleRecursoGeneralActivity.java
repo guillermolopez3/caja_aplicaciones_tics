@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,20 +17,17 @@ import android.widget.TextView;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.model.ModelPost;
-import com.gru.cajaaplicacionestics.model.NewPost;
-import com.gru.cajaaplicacionestics.model.Post;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 
 //TODO:  verificar si la URL que viene empieza con http// ya que si no viene asi la app crashea
 
 public class DetalleRecursoGeneralActivity extends AppCompatActivity
 {
-    Button acceder_recurso;
-    ImageView imagen;
-    TextView titulo,tag,descripcion;
-    ModelPost post= new ModelPost();
+    Button                  acceder_recurso;
+    ImageView               imagen;
+    TextView                titulo,tag,descripcion;
+    ModelPost               post= new ModelPost();
     CollapsingToolbarLayout collapsingToolbarLayout;
 
     @Override
@@ -42,12 +36,12 @@ public class DetalleRecursoGeneralActivity extends AppCompatActivity
         setContentView(R.layout.activity_detalla_recurso);
 
 
-        acceder_recurso=(Button) findViewById(R.id.detalleBtnAccederRecurso);
-        imagen=(ImageView)findViewById(R.id.imagenHeaderDetalle);
-        titulo=(TextView)findViewById(R.id.txtTituloDescripcionRecurso);
-        tag=(TextView) findViewById(R.id.txtTagsDescripcionRecurso);
-        descripcion=(TextView)findViewById(R.id.txtDescripcionRecurso);
-        collapsingToolbarLayout=(CollapsingToolbarLayout) findViewById(R.id.collapsingDetalle);
+        acceder_recurso            =findViewById(R.id.detalleBtnAccederRecurso);
+        imagen                     =findViewById(R.id.imagenHeaderDetalle);
+        titulo                     =findViewById(R.id.txtTituloDescripcionRecurso);
+        tag                        =findViewById(R.id.txtTagsDescripcionRecurso);
+        descripcion                =findViewById(R.id.txtDescripcionRecurso);
+        collapsingToolbarLayout    =findViewById(R.id.collapsingDetalle);
 
         collapsingToolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
 

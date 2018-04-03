@@ -10,7 +10,6 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,12 +26,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.gru.cajaaplicacionestics.R;
-import com.gru.cajaaplicacionestics.auxiliares.AnalitycsAplication;
+import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.model.ColegioModel;
-import com.gru.cajaaplicacionestics.model.SpinnerModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,7 +41,6 @@ import java.util.Map;
 
 public class CapacitacionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private Tracker mTracker;
     CoordinatorLayout coordinatorLayout;
     ColegioModel colegioModel;
 
@@ -69,13 +64,11 @@ public class CapacitacionActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capacitacion);
 
-        AnalitycsAplication aplication = (AnalitycsAplication) getApplication();
-        mTracker = aplication.getDefaultTracker();
 
-        coordinatorLayout=(CoordinatorLayout)findViewById(R.id.coordinatorST);
+        coordinatorLayout = findViewById(R.id.coordinatorST);
         coordinatorLayout.setVisibility(View.INVISIBLE);
 
-        showToolbar("Pedido de Capacitación",false);
+       MetodosComunes.showToolbar("Pedido de Capacitación",false,this);
 
         URL_BASE= getResources().getString(R.string.URL_BASE);
         URL_COLE=getResources().getString(R.string.URL_GET_COLE);
@@ -96,10 +89,10 @@ public class CapacitacionActivity extends AppCompatActivity implements AdapterVi
 
         builder.setView(view);
 
-        final TextInputEditText txtCue = (TextInputEditText)view.findViewById(R.id.recursoEnviarTxtUsuario);
-        final TextInputLayout txtLay = (TextInputLayout)view.findViewById(R.id.textInputLayoutDialogCue);
-        Button no = (Button) view.findViewById(R.id.dialogNo);
-        Button si = (Button) view.findViewById(R.id.dialogSi);
+        final TextInputEditText txtCue = view.findViewById(R.id.recursoEnviarTxtUsuario);
+        final TextInputLayout txtLay   = view.findViewById(R.id.textInputLayoutDialogCue);
+        Button no =  view.findViewById(R.id.dialogNo);
+        Button si =  view.findViewById(R.id.dialogSi);
 
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
@@ -193,22 +186,22 @@ public class CapacitacionActivity extends AppCompatActivity implements AdapterVi
         if((c.getNombre_cole()!="")&&(c.getNombre_cole()!=null)&&(!c.getNombre_cole().equals("null")))
         {
             coordinatorLayout.setVisibility(View.VISIBLE);
-            cueCole         = (TextView)findViewById(R.id.txtCueST);
-            colegio         = (TextView)findViewById(R.id.txtColegioST);
-            ar              = (TextView)findViewById(R.id.txtArST);
-            fp              = (TextView)findViewById(R.id.txtFpST);
-            persona         = (TextInputEditText)findViewById(R.id.txtNombreContacto);
-            tel             = (TextInputEditText)findViewById(R.id.txtTelContacto);
-            mail            = (TextInputEditText)findViewById(R.id.txtMailContacto);
-            detalle         = (TextInputEditText)findViewById(R.id.txtMensaje);
+            cueCole         = findViewById(R.id.txtCueST);
+            colegio         = findViewById(R.id.txtColegioST);
+            ar              = findViewById(R.id.txtArST);
+            fp              = findViewById(R.id.txtFpST);
+            persona         = findViewById(R.id.txtNombreContacto);
+            tel             = findViewById(R.id.txtTelContacto);
+            mail            = findViewById(R.id.txtMailContacto);
+            detalle         = findViewById(R.id.txtMensaje);
 
-            spinner=(Spinner)findViewById(R.id.spinner);
+            spinner         = findViewById(R.id.spinner);
             spinner.setOnItemSelectedListener(this);
 
             llenarSpinner();
 
-            scrollView =(NestedScrollView)findViewById(R.id.netScroll);
-            btn_enviar=(Button)findViewById(R.id.btnEnviarPedido);
+            scrollView = findViewById(R.id.netScroll);
+            btn_enviar = findViewById(R.id.btnEnviarPedido);
 
             id_cole= c.getId();
             cueCole.setText("CUE: "+c.getCue());
@@ -289,14 +282,6 @@ public class CapacitacionActivity extends AppCompatActivity implements AdapterVi
 
     }
 
-    public void showToolbar(String tittle, boolean upButton)
-    {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(tittle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(upButton);
-    }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
        // Log.e("Item seleccionado", ""+ parent.getItemIdAtPosition(position));
@@ -371,10 +356,5 @@ public class CapacitacionActivity extends AppCompatActivity implements AdapterVi
         requestQueue.add(stringRequest);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mTracker.setScreenName("Capacitacion");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-    }
+
 }

@@ -15,11 +15,10 @@ import android.widget.TextView;
 
 import com.gru.cajaaplicacionestics.R;;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
-import com.gru.cajaaplicacionestics.auxiliares.WebViewActivity;
+import com.gru.cajaaplicacionestics.view.WebViewActivity;
 import com.gru.cajaaplicacionestics.model.ModelPost;
 import com.gru.cajaaplicacionestics.view.DetalleRecursoGeneralActivity;
 import com.gru.cajaaplicacionestics.view.DetalleRecursoAudio;
-import com.gru.cajaaplicacionestics.view.PdfActivity;
 import com.gru.cajaaplicacionestics.view.YoutubeActivity;
 import com.squareup.picasso.Picasso;
 
@@ -34,7 +33,6 @@ public class AdapterNPost extends RecyclerView.Adapter<AdapterNPost.RecursosHold
 {
     private Activity activity;
     private List<ModelPost> array;
-    private boolean isLoadingAdded=false; //bandera para saber si es el ultimo
 
     public AdapterNPost(Activity a)
     {
@@ -195,19 +193,14 @@ public class AdapterNPost extends RecyclerView.Adapter<AdapterNPost.RecursosHold
         private CardView cardView;
         public RecursosHolder(View itemView) {
             super(itemView);
-            nombreRecurso     = (TextView)itemView.findViewById(R.id.nombreCardRecursos);
-            descripcionCorta  = (TextView)itemView.findViewById(R.id.descripcionCardRecursos);
-            hastag            = (Button)itemView.findViewById(R.id.buttonCardRecursos);
-            cardView          = (CardView)itemView.findViewById(R.id.cardRecursos);
-            imagen            = (ImageView)itemView.findViewById(R.id.imagenCardRecursos);
-            icono             = (ImageView)itemView.findViewById(R.id.iconoCateg);
+            nombreRecurso     = itemView.findViewById(R.id.nombreCardRecursos);
+            descripcionCorta  = itemView.findViewById(R.id.descripcionCardRecursos);
+            hastag            = itemView.findViewById(R.id.buttonCardRecursos);
+            cardView          = itemView.findViewById(R.id.cardRecursos);
+            imagen            = itemView.findViewById(R.id.imagenCardRecursos);
+            icono             = itemView.findViewById(R.id.iconoCateg);
         }
     }
 
-    protected class LoadingVH extends RecyclerView.ViewHolder
-    {
-        public LoadingVH(View itemView) {
-            super(itemView);
-        }
-    }
+
 }

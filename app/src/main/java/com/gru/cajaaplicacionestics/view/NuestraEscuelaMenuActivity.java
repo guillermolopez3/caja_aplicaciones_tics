@@ -7,23 +7,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.gru.cajaaplicacionestics.R;
 
 public class NuestraEscuelaMenuActivity extends AppCompatActivity {
 
     Button doc_a,apuntes,asistencia,noticias,certificados,contacto;
+    FirebaseAnalytics analytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuestra_escuela_menu);
+        analytics=FirebaseAnalytics.getInstance(this);
+        final Bundle bundle = new Bundle();
 
-        doc_a           =(Button)findViewById(R.id.btnDocAcompa);
-        apuntes         =(Button)findViewById(R.id.btnApuntesTrabajo);
-        asistencia      =(Button)findViewById(R.id.btnAsistTecn);
-        noticias        =(Button)findViewById(R.id.btnNoticia);
-        certificados    =(Button)findViewById(R.id.btnCertificado);
-        contacto        =(Button)findViewById(R.id.btnContacto);
+        doc_a           = findViewById(R.id.btnDocAcompa);
+        apuntes         = findViewById(R.id.btnApuntesTrabajo);
+        asistencia      = findViewById(R.id.btnAsistTecn);
+        noticias        = findViewById(R.id.btnNoticia);
+        certificados    = findViewById(R.id.btnCertificado);
+        contacto        = findViewById(R.id.btnContacto);
 
         if(Build.VERSION.SDK_INT  < Build.VERSION_CODES.LOLLIPOP)
         {
@@ -38,6 +42,7 @@ public class NuestraEscuelaMenuActivity extends AppCompatActivity {
         doc_a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bundle.putString("opcion_menu_ne","doc_acom");
                 ingresarAlRecurso(2,"Documento de acompañamiento");
             }
         });
@@ -45,6 +50,7 @@ public class NuestraEscuelaMenuActivity extends AppCompatActivity {
        apuntes.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+               bundle.putString("opcion_menu_ne","apuntes_tra");
                ingresarAlRecurso(3,"Apuntes de trabajo");
            }
        });
@@ -52,6 +58,7 @@ public class NuestraEscuelaMenuActivity extends AppCompatActivity {
        asistencia.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+               bundle.putString("opcion_menu_ne","asis_tec");
                ingresarAlRecurso(4,"Asistencias técnicas sistematizadas");
            }
        });
@@ -75,10 +82,12 @@ public class NuestraEscuelaMenuActivity extends AppCompatActivity {
        contacto.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+               bundle.putString("opcion_menu_ne","contacto");
                ingresarAlRecurso(7,"Contacto");
            }
        });
 
+       analytics.logEvent("menu_ne",bundle);
     }
 
     private void ingresarAlRecurso(int id, String titulo)

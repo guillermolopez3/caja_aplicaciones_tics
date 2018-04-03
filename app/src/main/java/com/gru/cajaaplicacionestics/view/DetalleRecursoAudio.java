@@ -13,8 +13,6 @@ import android.widget.Toast;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.model.ModelPost;
-import com.gru.cajaaplicacionestics.model.NewPost;
-import com.gru.cajaaplicacionestics.model.Post;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -41,14 +39,14 @@ public class DetalleRecursoAudio extends AppCompatActivity implements MediaPlaye
 
         post = (ModelPost) getIntent().getExtras().get("data");
 
-        imagen=(ImageView)findViewById(R.id.detalleRecursoAudioImg);
-        titulo=(TextView)findViewById(R.id.txtTituloDescripcionRecurso);
-        tag=(TextView)findViewById(R.id.txtTagsDescripcionRecurso);
-        fecha= (TextView)findViewById(R.id.txtFechaDescripcionRecurso);
-        detalle=(TextView)findViewById(R.id.txtDescripcionRecurso);
-        play = (ImageButton)findViewById(R.id.detalleRecursoAudioBtnPlay);
-        stop = (ImageButton)findViewById(R.id.detalleRecursoAudioBtnStop);
-        progressBar=(ProgressBar)findViewById(R.id.progressAudio);
+        imagen      = findViewById(R.id.detalleRecursoAudioImg);
+        titulo      = findViewById(R.id.txtTituloDescripcionRecurso);
+        tag         = findViewById(R.id.txtTagsDescripcionRecurso);
+        fecha       = findViewById(R.id.txtFechaDescripcionRecurso);
+        detalle     = findViewById(R.id.txtDescripcionRecurso);
+        play        = findViewById(R.id.detalleRecursoAudioBtnPlay);
+        stop        = findViewById(R.id.detalleRecursoAudioBtnStop);
+        progressBar = findViewById(R.id.progressAudio);
 
 
         url_audio= MetodosComunes.verificarUrl(post.getLink());

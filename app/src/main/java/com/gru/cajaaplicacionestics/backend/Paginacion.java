@@ -1,7 +1,6 @@
 package com.gru.cajaaplicacionestics.backend;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.firebase.crash.FirebaseCrash;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.adapter.AdapterNPost;
 import com.gru.cajaaplicacionestics.adapter.AdapterPost;
@@ -281,7 +281,7 @@ public class Paginacion
                                     pullToLoadView.setComplete();
                                     isLoading=false;
                                     } catch (JSONException e) {
-                                    Log.e("error",e.getMessage());
+                                     Log.e("error",e.toString());
                                     e.printStackTrace();
                                 }
                             }
@@ -289,12 +289,14 @@ public class Paginacion
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("error",error.toString());
+                        FirebaseCrash.report(new Exception("Error en la peticion" + error.toString() ));
                     }
                 }));
                 //estblezco nuevos tiempos x si el servidor tarda mucho en contestar
                 request.setRetryPolicy(new RetryPolicy() {
                     @Override
                     public int getCurrentTimeout() {
+                        FirebaseCrash.report(new Exception("Timeout" + URL_BASE + URL_JSON + "limite="+ LIMIT + "&seccion=" + seccion ));
                         return 8000;
                     }
 
@@ -342,19 +344,20 @@ public class Paginacion
                                     pullToLoadView.setComplete();
                                     isLoading=false;
                                 } catch (JSONException e) {
-                                    Log.e("error",e.getMessage());
+                                    Log.e("error",e.toString());
                                     e.printStackTrace();
                                 }
                             }
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        FirebaseCrash.report(new Exception("Error en la peticion" + error.getMessage()));
                     }
                 }));
                 request.setRetryPolicy(new RetryPolicy() {
                     @Override
                     public int getCurrentTimeout() {
+                        FirebaseCrash.report(new Exception("Timeout" + URL_BASE + JSON_BUSCAR + "limite="+ LIMIT + "&seccion="+seccion+" &busqueda=" + palabra_buscar ));
                         return 8000;
                     }
 
@@ -490,12 +493,14 @@ public class Paginacion
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        FirebaseCrash.report(new Exception("VolleyError" + error.toString() ));
                         //Log.e("error",error.getMessage());
                     }
                 }));
         request.setRetryPolicy(new RetryPolicy() {
             @Override
             public int getCurrentTimeout() {
+                FirebaseCrash.report(new Exception("Timeout" + URL_BASE + JSON_BUSCAR + "limite="+ LIMIT + "&seccion="+seccion+" &busqueda=" + palabra_buscar ));
                 return 8000;
             }
 

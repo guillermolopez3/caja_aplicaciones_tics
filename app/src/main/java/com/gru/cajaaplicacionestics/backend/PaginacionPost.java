@@ -1,23 +1,20 @@
 package com.gru.cajaaplicacionestics.backend;
 
 import android.app.Activity;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.firebase.crash.FirebaseCrash;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.adapter.AdapterNPost;
-import com.gru.cajaaplicacionestics.adapter.AdapterPost;
 import com.gru.cajaaplicacionestics.auxiliares.PaginationErrorCallBack;
 import com.gru.cajaaplicacionestics.model.ModelPost;
-import com.gru.cajaaplicacionestics.model.NewPost;
 import com.srx.widget.PullCallback;
 import com.srx.widget.PullToLoadView;
 
@@ -25,7 +22,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 
 /**
  * Created by guill on 24/02/2018.
@@ -195,8 +191,9 @@ public class PaginacionPost
 
     public void cargarLista()
     {
+        StringRequest request;
         VolleySingleton.getInstancia(activity).
-                addToRequestQueue(new StringRequest(Request.Method.GET,
+                addToRequestQueue(request= new StringRequest(Request.Method.GET,
                         URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&seccion=" +seccion ,
                         new Response.Listener<String>() {
                             @Override
@@ -235,16 +232,35 @@ public class PaginacionPost
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("error",error.toString());
+                        FirebaseCrash.report(new Exception("VolleyError" + error.toString()));
                         manejoError(true);
                     }
                 }));
+            request.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                FirebaseCrash.report(new Exception("Timeout" + URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&seccion=" +seccion  ));
+                return 8000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 8000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
     }
 
     public void cargarListaSearch(final String consulta)
     {
+        StringRequest request;
         Log.e("url search",URL_BASE + URL_SEARCH + "?page=" + PAGINA_ACTUAL + "&consulta=" +consulta);
         VolleySingleton.getInstancia(activity).
-                addToRequestQueue(new StringRequest(Request.Method.GET,
+                addToRequestQueue(request= new StringRequest(Request.Method.GET,
                         URL_BASE + URL_SEARCH + "?page=" + PAGINA_ACTUAL + "&consulta=" +consulta ,
                         new Response.Listener<String>() {
                             @Override
@@ -282,9 +298,27 @@ public class PaginacionPost
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("error",error.toString());
+                        FirebaseCrash.report(new Exception("VolleyError" + error.toString()));
                         manejoError(true);
                     }
                 }));
+        request.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                FirebaseCrash.report(new Exception("Timeout" + URL_BASE + URL_SEARCH + "?page=" + PAGINA_ACTUAL + "&consulta=" +consulta));
+                return 8000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 8000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
     }
 
     private void cargarListaNe(int seccionNe)
@@ -320,6 +354,7 @@ public class PaginacionPost
                                     isLoading=false;
                                 } catch (JSONException e) {
                                     Log.e("error",e.getMessage());
+                                    FirebaseCrash.report(new Exception("VolleyError " + e.toString() ));
                                     e.printStackTrace();
                                 }
                             }
@@ -332,12 +367,13 @@ public class PaginacionPost
         request.setRetryPolicy(new RetryPolicy() {
             @Override
             public int getCurrentTimeout() {
-                return 50000;
+                FirebaseCrash.report(new Exception("Timeout " + URL_BASE + URL_GET_ALL ));
+                return 8000;
             }
 
             @Override
             public int getCurrentRetryCount() {
-                return 50000;
+                return 8000;
             }
 
             @Override

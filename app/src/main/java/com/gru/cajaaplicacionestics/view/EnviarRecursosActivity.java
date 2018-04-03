@@ -18,10 +18,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.gru.cajaaplicacionestics.R;
-import com.gru.cajaaplicacionestics.auxiliares.AnalitycsAplication;
+import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,7 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EnviarRecursosActivity extends AppCompatActivity {
-    private Tracker mTracker;
     ScrollView scrollView;
     TextInputEditText nombre,titulo,link,categoria,descripcion;
     Button enviar;
@@ -38,17 +35,16 @@ public class EnviarRecursosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar_recursos);
-        AnalitycsAplication aplication = (AnalitycsAplication) getApplication();
-        mTracker = aplication.getDefaultTracker();
-        showToolbar("Compartir Recurso",false);
 
-        scrollView  =(ScrollView) findViewById(R.id.scrollEnviar);
-        enviar      =(Button) findViewById(R.id.recursoEnviarBtnEnviar);
-        nombre      =(TextInputEditText)findViewById(R.id.recursoEnviarTxtUsuario);
-        titulo      =(TextInputEditText)findViewById(R.id.recursoEnviarTxtTitulo);
-        link        =(TextInputEditText)findViewById(R.id.recursoEnviarTxtUrl);
-        categoria   =(TextInputEditText)findViewById(R.id.recursoEnviarTxtCategoria);
-        descripcion =(TextInputEditText)findViewById(R.id.recursoEnviarTxtDetalle);
+        MetodosComunes.showToolbar("Compartir Recurso",false,this);
+
+        scrollView  = findViewById(R.id.scrollEnviar);
+        enviar      = findViewById(R.id.recursoEnviarBtnEnviar);
+        nombre      = findViewById(R.id.recursoEnviarTxtUsuario);
+        titulo      = findViewById(R.id.recursoEnviarTxtTitulo);
+        link        = findViewById(R.id.recursoEnviarTxtUrl);
+        categoria   = findViewById(R.id.recursoEnviarTxtCategoria);
+        descripcion = findViewById(R.id.recursoEnviarTxtDetalle);
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,20 +130,5 @@ public class EnviarRecursosActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    public void showToolbar(String tittle, boolean upButton)
-    {
-        //uso appcompatacty... xq la actividad que maneja esto tiene soporte y es de este tipo
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(tittle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(upButton);
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mTracker.setScreenName("Nuevo Recurso");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-    }
 }
