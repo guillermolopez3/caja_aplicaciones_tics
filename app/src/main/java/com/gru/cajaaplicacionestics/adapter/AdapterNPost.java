@@ -83,6 +83,7 @@ public class AdapterNPost extends RecyclerView.Adapter<AdapterNPost.RecursosHold
             @Override
             public void onClick(View v) {
                 abrirDetalleCorrespondiente(modelRecursos.getId_tipo_activity(),modelRecursos);
+                MetodosComunes.enviarPostSeleccionado(String.valueOf(modelRecursos.getId()),activity);
             }
         });
     }

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.model.NewPost;
 import com.gru.cajaaplicacionestics.view.DetalleRecursoGeneralActivity;
 import com.gru.cajaaplicacionestics.view.DetalleRecursoAudio;
@@ -64,6 +65,8 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.RecursosHolder
             @Override
             public void onClick(View v) {
                 abrirDetalleCorrespondiente(modelRecursos.getCategoria(),modelRecursos);
+                Log.e("entro al analytics",String.valueOf(modelRecursos.getId()));
+                MetodosComunes.enviarPostSeleccionado(String.valueOf(modelRecursos.getId()),activity);
             }
         });
     }

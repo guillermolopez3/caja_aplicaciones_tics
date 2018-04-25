@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.model.ModelNE;
 import com.gru.cajaaplicacionestics.model.NewPost;
 import com.gru.cajaaplicacionestics.view.PdfActivity;
@@ -75,6 +76,7 @@ public class AdapterNE extends RecyclerView.Adapter<AdapterNE.NEHolder>
                 i.putExtra("link",modelRecursos.getUrl_pdf());
                 activity.startActivity(i);
                 //abrirDetalleCorrespondiente(modelRecursos.getCategoria(),modelRecursos);
+                MetodosComunes.enviarPostSeleccionado(String.valueOf(modelRecursos.getId()),activity);
             }
         });
 

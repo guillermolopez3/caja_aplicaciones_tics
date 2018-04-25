@@ -7,6 +7,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,14 +53,26 @@ public class DetalleRecursoGeneralActivity extends AppCompatActivity
 
         if(post!=null)
         {
+            Log.e("descripcion",post.getDescription());
             titulo.setText(post.getTitle());
-            tag.setText(post.getTags());
-
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                descripcion.setText(Html.fromHtml(post.getDescription(),Html.FROM_HTML_MODE_LEGACY));
-            } else {
-                descripcion.setText(Html.fromHtml(post.getDescription()));
+            if((post.getTags() !=null) && (post.getTags()!="") && (!post.getTags().equals("null")))
+            {
+                tag.setText(post.getTags());
             }
+
+            if((post.getDescription() !=null) && (post.getDescription()!="") && (!post.getDescription().equals("null")))
+            {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    descripcion.setText(Html.fromHtml(post.getDescription(),Html.FROM_HTML_MODE_LEGACY));
+                } else {
+                    descripcion.setText(Html.fromHtml(post.getDescription()));
+                }
+            }
+            else {
+                descripcion.setText("");
+            }
+
+
 
           //  descripcion.setText(Html.fromHtml(post.getDescripcionCorta()));
             Picasso.with(this).load(MetodosComunes.verificarUrl(post.getImage())).into(imagen);

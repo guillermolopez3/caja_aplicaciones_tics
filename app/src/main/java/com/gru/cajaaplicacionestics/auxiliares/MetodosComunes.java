@@ -1,19 +1,39 @@
 package com.gru.cajaaplicacionestics.auxiliares;
 
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.view.CapacitacionActivity;
 import com.gru.cajaaplicacionestics.view.EnviarRecursosActivity;
 import com.gru.cajaaplicacionestics.view.ServicioTecnicoActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by guill on 14/11/2017.
@@ -132,6 +152,42 @@ public class MetodosComunes
             return "";
         }
 
+    }
+
+    public static void enviarPostSeleccionado(final String id_post, Activity activity)
+    {
+        String URL= "http://www.igualdadycalidadcba.gov.ar/CajaTIC/api/analitycsPost?id=" + id_post;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("respuesta",response.toString());
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String cod_rta= jsonObject.getString("estado");
+
+                            Log.e("cod rta", cod_rta);
+
+                        } catch (JSONException e) {
+                            Log.e("Insetrado","error");
+                            Log.e("error cue", e.toString());
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Insetrado","error");
+                Log.e("error On response", error.toString());
+            }
+        }){
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(activity);
+        requestQueue.add(stringRequest);
     }
 
 }
