@@ -28,6 +28,14 @@
                 android:layout_marginTop="30dp"
                 android:padding="25dp">
 
+                <Button
+                    android:id="@+id/btnJornadas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:textColor="@android:color/white"
+                    android:text="Jornadas Institucionales"/>
+
                <Button
                     android:id="@+id/btnDocAcompa"
                     android:layout_width="match_parent"

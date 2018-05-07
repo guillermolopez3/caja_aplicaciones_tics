@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_cronograma"
+            android:title="Cronograma 2018" />
+        <item
+            android:id="@+id/nav_jornadas"
+            app:showAsAction="always"
+            android:title="Organizador de Jornadas Institucionales" />
+        <item
+            android:id="@+id/nav_orientacion"
+            android:title="Orientaciones Administrativas 2018" />
+        <item
+            android:id="@+id/nav_recomendacion"
+            android:title="Recomendaciones" />
+        <item
+            android:id="@+id/nav_manae"
+            android:title="Materiales de Apoyo" />
+    </group>
+
+    <item android:title="Equipo y Contacto">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:title="Contacto" />
+
+        </menu>
+    </item>
+
+</menu>

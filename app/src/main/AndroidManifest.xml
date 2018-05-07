@@ -27,13 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.DetalleRecursoGeneralActivity">
-
-        </activity>
+        <activity android:name=".view.DetalleRecursoGeneralActivity"></activity>
         <activity android:name=".view.YoutubeActivity" />
-        <activity android:name=".view.EnviarRecursosActivity">
-
-        </activity>
+        <activity android:name=".view.EnviarRecursosActivity"></activity>
         <activity android:name=".view.DetalleRecursoAudio" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -48,19 +44,10 @@
             android:value="@string/KEY_API_YOUTUBE" />
 
         <activity android:name=".map.MapsActivity" />
-        <activity android:name=".view.ServicioTecnicoActivity">
-
-
-        </activity>
-        <activity android:name=".view.CapacitacionActivity">
-
-
-        </activity>
+        <activity android:name=".view.ServicioTecnicoActivity"></activity>
+        <activity android:name=".view.CapacitacionActivity"></activity>
         <activity android:name=".view.PdfActivity" />
-        <activity android:name=".view.NEActivity">
-
-
-        </activity>
+        <activity android:name=".view.NEActivity"></activity>
         <activity android:name=".view.RecursosXNivelActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -77,7 +64,11 @@
             android:name=".view.NovedadActivity"
             android:label="@string/title_activity_novedad"
             android:theme="@style/AppTheme" />
-        <activity android:name=".view.WebViewActivity"/>
+        <activity android:name=".view.WebViewActivity" />
+        <activity
+            android:name=".view.NEDrawerActivity"
+            android:label="@string/title_activity_nedrawer"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

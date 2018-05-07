@@ -28,7 +28,7 @@ public class RecursosXNivelActivity extends AppCompatActivity {
         analytics=FirebaseAnalytics.getInstance(this);
         bundle=new Bundle();
 
-        MetodosComunes.showToolbar("Espacio Didáctico", true, this);
+        MetodosComunes.showToolbar("Recursos Didácticos", true, this);
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         BottomNavigationViewHelper.removeShiftMode(navigation);//le quito el efecto de aumento al cliquear los iconos

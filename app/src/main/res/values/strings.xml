@@ -107,5 +107,11 @@ Es una herramienta colaborativa para toda  la comunidad educativa, en constante 
 
     <string name="URL_PRUEBA">http://www.muniap.com/api/posts/getPostsSeccion</string>
     <string name="title_activity_novedad">NovedadActivity</string>
+    <string name="title_activity_nedrawer">NEDrawerActivity</string>
+
+
+    <string name="nav_header_title">Jornadas Institucionales</string>
+    <string name="nav_header_subtitle">Menú</string>
+    <string name="nav_header_desc">Navigation header</string>
 </resources>
 

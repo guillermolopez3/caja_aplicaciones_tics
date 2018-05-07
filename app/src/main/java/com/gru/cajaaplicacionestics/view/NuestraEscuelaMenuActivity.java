@@ -13,6 +13,7 @@ import com.gru.cajaaplicacionestics.R;
 public class NuestraEscuelaMenuActivity extends AppCompatActivity {
 
     Button doc_a,apuntes,asistencia,noticias,certificados,contacto;
+    Button jornadas;
     FirebaseAnalytics analytics;
 
     @Override
@@ -22,6 +23,7 @@ public class NuestraEscuelaMenuActivity extends AppCompatActivity {
         analytics=FirebaseAnalytics.getInstance(this);
         final Bundle bundle = new Bundle();
 
+        jornadas        = findViewById(R.id.btnJornadas);
         doc_a           = findViewById(R.id.btnDocAcompa);
         apuntes         = findViewById(R.id.btnApuntesTrabajo);
         asistencia      = findViewById(R.id.btnAsistTecn);
@@ -31,6 +33,7 @@ public class NuestraEscuelaMenuActivity extends AppCompatActivity {
 
         if(Build.VERSION.SDK_INT  < Build.VERSION_CODES.LOLLIPOP)
         {
+            jornadas.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             doc_a.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             apuntes.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             asistencia.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -39,6 +42,13 @@ public class NuestraEscuelaMenuActivity extends AppCompatActivity {
             contacto.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
 
+        jornadas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(NuestraEscuelaMenuActivity.this,NEDrawerActivity.class);
+                startActivity(i);
+            }
+        });
         doc_a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

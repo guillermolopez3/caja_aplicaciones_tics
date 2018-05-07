@@ -85,7 +85,7 @@ public class WebViewActivity extends AppCompatActivity {
                 String valor = hr.getExtra();
 
                try{
-                   if(valor!=null)
+                   if(valor!=null && hr.getType()==7)
                    {
                        if(valor.endsWith(".pdf")) //al hacer click en un pdf lo abro
                        {
@@ -153,7 +153,7 @@ public class WebViewActivity extends AppCompatActivity {
 
     private void verificarSiLinkEsDeGoogleDocs(String link) //si el link viene desde google docs no agrego la ruta
     {
-        Log.e("link",url);
+       /* Log.e("link",url);
         if(link.startsWith("https://docs"))
         {
             url=link;
@@ -164,6 +164,16 @@ public class WebViewActivity extends AppCompatActivity {
             url = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/pdf_vie?url=" + link;
             //url= link;
             Log.e("link",url);
+        }*/
+
+        if(link.endsWith("pdf"))
+        {
+            url = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/pdf_vie?url=" + link;
+            Log.e("link pdf",url);
+        }
+        else {
+            url=link;
+            Log.e("link comun",url);
         }
 
 
