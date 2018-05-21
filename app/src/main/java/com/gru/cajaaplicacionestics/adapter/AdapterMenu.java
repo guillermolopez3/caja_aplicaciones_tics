@@ -14,7 +14,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.view.NovedadActivity;
 import com.gru.cajaaplicacionestics.model.ModelMenu;
-import com.gru.cajaaplicacionestics.view.NuestraEscuelaMenuActivity;
+import com.gru.cajaaplicacionestics.view.ne.NuestraEscuelaMenuActivity;
 import com.gru.cajaaplicacionestics.view.PostActivity;
 import com.gru.cajaaplicacionestics.view.RecursosXNivelActivity;
 import com.squareup.picasso.Picasso;

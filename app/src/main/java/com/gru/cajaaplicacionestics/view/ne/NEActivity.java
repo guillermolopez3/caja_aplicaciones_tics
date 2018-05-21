@@ -1,4 +1,4 @@
-package com.gru.cajaaplicacionestics.view;
+package com.gru.cajaaplicacionestics.view.ne;
 
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;

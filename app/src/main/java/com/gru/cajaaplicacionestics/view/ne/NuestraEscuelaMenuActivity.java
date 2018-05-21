@@ -1,4 +1,4 @@
-package com.gru.cajaaplicacionestics.view;
+package com.gru.cajaaplicacionestics.view.ne;
 
 import android.content.Intent;
 import android.os.Build;

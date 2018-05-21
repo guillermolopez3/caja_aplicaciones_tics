@@ -1,7 +1,5 @@
 package com.gru.cajaaplicacionestics.view.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,12 +10,7 @@ import android.view.ViewGroup;
 
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.adapter.AdapterNPost;
-import com.gru.cajaaplicacionestics.auxiliares.ContenidoNE;
-import com.gru.cajaaplicacionestics.model.ModelNE;
-import com.gru.cajaaplicacionestics.model.ModelPost;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.gru.cajaaplicacionestics.backend.RecursosNE;
 
 public class NEFragment extends Fragment {
 
@@ -58,23 +51,22 @@ public class NEFragment extends Fragment {
 
     private void cargarArray()
     {
-        List<ModelPost> array= new ArrayList<>();
         if(seccion.equals("cronograma")){
-            array = ContenidoNE.cronograma();
+           RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+                    ,getActivity(),"cronograma",adapter);
         }
         else if (seccion.equals("jornada")){
-            array = ContenidoNE.jornadas();
+            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+                    ,getActivity(),"jornadas",adapter);
         }
         else if (seccion.equals("orientacion")){
-            array = ContenidoNE.orientacion();
+           RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+                    ,getActivity(),"orientacion",adapter);
         }
         else if(seccion.equals("recomendaciones"))
         {
-            array = ContenidoNE.recomendaciones();
-        }
-        for(ModelPost post : array)
-        {
-            adapter.add(post);
+            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+                    ,getActivity(),"recomendaciones",adapter);
         }
     }
 

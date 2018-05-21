@@ -1,4 +1,4 @@
-package com.gru.cajaaplicacionestics.view;
+package com.gru.cajaaplicacionestics.view.ne;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -52,6 +52,7 @@ public class NEDrawerActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            finish(); //cierro el activity si el drawer esta cerrado y se presiona atras
         }
     }
 
