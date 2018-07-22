@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.view.semana_tic.ObtenerRecursosST;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -33,6 +35,7 @@ public class Splash extends AppCompatActivity
         Timer timer = new Timer();
         timer.schedule(task, splashDelay);//Pasado los 3 segundos dispara la tarea
     }
+
 
     @Override
     protected void onDestroy() {

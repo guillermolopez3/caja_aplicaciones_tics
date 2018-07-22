@@ -1,5 +1,6 @@
 package com.gru.cajaaplicacionestics.view.ne;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -10,14 +11,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.view.fragment.NEFragment;
+import com.gru.cajaaplicacionestics.view.fragment.TabsFragment;
 
 public class NEDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     NEFragment fragment;
+    private String menuMostrar=""; //defino que menú muestro dependiendo de donde vengo
+    private Bundle bundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +32,7 @@ public class NEDrawerActivity extends AppCompatActivity
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        menuMostrar = getIntent().getStringExtra("menu_mostrar");
 
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -33,15 +41,25 @@ public class NEDrawerActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView =  findViewById(R.id.nav_view);
+        View vi = navigationView.getHeaderView(0); //obtengo el header para el titulo
+        TextView txtNav = vi.findViewById(R.id.navHeaderTitulo); //txt del header del nav
+
+        navigationView.getMenu().clear();
+
+        if(menuMostrar.equals("jornada"))
+        {
+            navigationView.inflateMenu(R.menu.activity_nedrawer_drawer); //seteo el menu
+            txtNav.setText("Jornadas Institucionales");
+        }
+        else if(menuMostrar.equals("ateneos"))
+        {
+            navigationView.inflateMenu(R.menu.menu_ateneos);
+            txtNav.setText("Ateneos didácticos");
+        }
+
         navigationView.setNavigationItemSelectedListener(this);
 
-        fragment = new NEFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("seccion","cronograma");
-        fragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
-        getSupportActionBar().setTitle("Cronograma 2018");
+        cargarFragmentAlIniciar();
 
     }
 
@@ -62,8 +80,46 @@ public class NEDrawerActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Bundle bundle = new Bundle();
+        bundle = new Bundle();
 
+        if(menuMostrar.equals("jornada"))
+        {
+            cargarMenuJornada(id);
+        }
+        else if(menuMostrar.equals("ateneos"))
+        {
+            cargarMenuAteneo(id);
+        }
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    private void cargarFragmentAlIniciar()
+    {
+        fragment = new NEFragment();
+        bundle = new Bundle();
+
+        if(menuMostrar.equals("jornada"))
+        {
+            bundle.putString("seccion","cronograma");
+            fragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
+            getSupportActionBar().setTitle("Cronograma 2018");
+        }else if(menuMostrar.equals("ateneos"))
+        {
+            bundle.putString("seccion","ateneo_modelo_aval");
+            fragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
+            getSupportActionBar().setTitle("Ateneo Modelo Aval");
+        }
+    }
+
+    private void cargarMenuJornada(int id)
+    {
         if (id == R.id.nav_cronograma) {
             fragment = new NEFragment();
             bundle.putString("seccion","cronograma");
@@ -94,12 +150,42 @@ public class NEDrawerActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
             getSupportActionBar().setTitle("Recomendaciones para el 2018");
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.mat_apoyo) {
+            TabsFragment mFragment = new TabsFragment();
+            /*bundle.putString("seccion","recomendaciones");
+            fragment.setArguments(bundle);*/
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,mFragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
+            getSupportActionBar().setTitle("Materiales de apoyo");
 
         }
+    }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+    private void cargarMenuAteneo(int id)
+    {
+        if (id == R.id.nav_ateneo_aval) {
+            fragment = new NEFragment();
+            bundle.putString("seccion","ateneo_modelo_aval");
+            fragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
+            getSupportActionBar().setTitle("Ateneo Modelo Aval");
+        } else if (id == R.id.nav_ateneo_activ) {
+            fragment = new NEFragment();
+            bundle.putString("seccion","ateneo_actividad");
+            fragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
+            getSupportActionBar().setTitle("Actividades Obligatorias");
+
+        } else if (id == R.id.nav_ateneo_memo) {
+            fragment = new NEFragment();
+            bundle.putString("seccion", "ateneo_memo");
+            fragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
+            getSupportActionBar().setTitle("Memo 15-18 Ateneo Didáctico");
+        }
+
     }
 }

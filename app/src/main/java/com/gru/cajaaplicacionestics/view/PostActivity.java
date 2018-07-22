@@ -70,7 +70,14 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
         {
             pullToLoadView.setVisibility(View.VISIBLE);
         }
-        new PaginacionPost(this,pullToLoadView,idSeccionSeleccionada()).iniciarPaginacion();
+        if(seccion.equals("ac")) //ac= aprender conectados
+        {
+            new PaginacionPost(this,pullToLoadView,idSeccionSeleccionada()).iniciarPaginacionAprenderConectados();
+        }
+        else {
+            new PaginacionPost(this,pullToLoadView,idSeccionSeleccionada()).iniciarPaginacion();
+        }
+
 
     }
 

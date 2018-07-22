@@ -146,6 +146,46 @@ public class PaginacionPost
         pullToLoadView.initLoad();
     }
 
+    //paginacion para aprender conectados
+    public void iniciarPaginacionAprenderConectados()
+    {
+        pullToLoadView.isLoadMoreEnabled(true);
+
+        URL_BASE    =activity.getResources().getString(R.string.URL_BASE);
+        URL_GET_ALL =activity.getResources().getString(R.string.URL_GET_ALL_POST_APRENDER_CONECTADPS);
+
+
+        pullToLoadView.setPullCallback(new PullCallback() {
+            @Override
+            public void onLoadMore() {
+                PAGINA_ACTUAL++;
+                cargarListaAprenderConectados();
+            }
+
+            //evento ni bien ingresa y cuando haces swipe para arriba
+            @Override
+            public void onRefresh() {
+                Log.e("estoy en","onLoadMore");
+                adapter.clear(); //limpio el adapter
+                hasLoadedAll=false;
+                PAGINA_ACTUAL=1; //reinicio el contador
+                cargarListaAprenderConectados();
+
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+
+            @Override
+            public boolean hasLoadedAllItems() {
+                return hasLoadedAll;
+            }
+        });
+        pullToLoadView.initLoad();
+    }
+
     public void iniciarPaginacionSearch(final String consulta)
     {
         Log.e("estoy en","paginacion search");
@@ -237,6 +277,72 @@ public class PaginacionPost
                     }
                 }));
             request.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                FirebaseCrash.report(new Exception("Timeout" + URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&seccion=" +seccion  ));
+                return 8000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 8000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+    }
+
+    public void cargarListaAprenderConectados()
+    {
+        StringRequest request;
+        VolleySingleton.getInstancia(activity).
+                addToRequestQueue(request= new StringRequest(Request.Method.GET,
+                        URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response); //convierte toda la respuesta en json
+                                    JSONArray array= jsonObject.getJSONArray("data"); //lo que est en corchetes lo convierto en array
+                                    Log.e("rta",URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&seccion=" +seccion);
+                                    TOTAL_PAGES= Integer.parseInt(jsonObject.getString("last_page")); //obtengo del JsonObject el valor de la última pagina
+
+                                    for(int i=0; i< array.length();i++)
+                                    {
+                                        JSONObject o = array.getJSONObject(i);
+                                        ModelPost post = new ModelPost(
+                                                o.getInt("id"),
+                                                o.getString("created_at"),
+                                                o.getString("title"),
+                                                o.getString("copete"),
+                                                o.getString("image"),
+                                                o.getString("tags"),
+                                                o.getInt("id_tipo_activity"),
+                                                o.getString("description"),
+                                                o.getString("link")
+                                        );
+                                        adapter.add(post);
+                                    }
+                                    if(adapter.getArrayCount()==0)manejoError(false); //si no hay datos en el array, muestro el error
+                                    pullToLoadView.setComplete();
+                                    isLoading=false;
+                                } catch (JSONException e) {
+                                    Log.e("error",e.getMessage());
+                                    manejoError(true);
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("error",error.toString());
+                        FirebaseCrash.report(new Exception("VolleyError" + error.toString()));
+                        manejoError(true);
+                    }
+                }));
+        request.setRetryPolicy(new RetryPolicy() {
             @Override
             public int getCurrentTimeout() {
                 FirebaseCrash.report(new Exception("Timeout" + URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&seccion=" +seccion  ));

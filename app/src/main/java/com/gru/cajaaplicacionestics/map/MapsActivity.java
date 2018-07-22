@@ -63,7 +63,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
 
-        LatLng coordenadas = new LatLng(-31.435321,-64.175470);
+        LatLng coordenadas = new LatLng(-29.786655,-63.942434);
         MarkerOptions markerOptions= new MarkerOptions().position(coordenadas).title("Toca para ver como llegar");
         //mMap.addMarker(markerOptions);
         Marker marker=mMap.addMarker(markerOptions);

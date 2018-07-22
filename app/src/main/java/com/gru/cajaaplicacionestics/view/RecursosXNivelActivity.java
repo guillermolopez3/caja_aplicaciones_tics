@@ -71,12 +71,18 @@ public class RecursosXNivelActivity extends AppCompatActivity {
                                     .commit();
                             enviarNivel(4);
                             return true;
-                        /*case R.id.navigation_superior:
+                         case R.id.navigation_superior:
                             recursos = new FragmentRecursosNIvel();
                             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, recursos)
                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                             enviarNivel(5);
-                            return true;*/
+                            return true;
+                        case R.id.navigation_especial:
+                            recursos = new FragmentRecursosNIvel();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, recursos)
+                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                            enviarNivel(6);
+                            return true;
                     }
                     return false;
                 }

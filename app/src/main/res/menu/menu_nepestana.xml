@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.gru.cajaaplicacionestics.view.ne.NEPestanaActivity">
+    <item
+        android:id="@+id/VerEscuchar"
+        android:orderInCategory="100"
+        android:title="Ver y Escuchar"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/Leer"
+        android:orderInCategory="100"
+        android:title="Leer"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/Hacer"
+        android:orderInCategory="100"
+        android:title="Hacer"
+        app:showAsAction="never" />
+</menu>

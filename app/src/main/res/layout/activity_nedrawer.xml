@@ -20,6 +20,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_nedrawer"
-        app:menu="@menu/activity_nedrawer_drawer" />
+        />
 
 </android.support.v4.widget.DrawerLayout>

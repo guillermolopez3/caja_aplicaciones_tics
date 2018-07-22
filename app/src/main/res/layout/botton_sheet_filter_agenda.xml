@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:elevation="6dp"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    app:behavior_hideable="true"
+    android:layout_marginBottom="15dp"
+    app:behavior_peekHeight="0dp" >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:padding="16dp"
+            android:gravity="center"
+            android:text="Referencia" />
+
+        <ImageButton
+            android:id="@+id/cerrarMenuBottonSeet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:layout_gravity="center"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_abajo"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="SEDES"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <android.support.design.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipIcon="@drawable/ic_circulo_naranja"
+                app:chipBackgroundColor="@color/transparent"
+                app:chipStrokeColor="@color/borde_chip"
+                app:chipStrokeWidth="1dp"
+                android:layout_marginRight="5dp"
+                android:text="Córdoba"/>
+
+            <android.support.design.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipIcon="@drawable/ic_circulo_verde"
+                app:chipBackgroundColor="@color/transparent"
+                app:chipStrokeColor="@color/borde_chip"
+                app:chipStrokeWidth="1dp"
+                android:text="Río Cuarto"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <android.support.design.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipIcon="@drawable/ic_circulo_rojo"
+                app:chipBackgroundColor="@color/transparent"
+                app:chipStrokeColor="@color/borde_chip"
+                app:chipStrokeWidth="1dp"
+                android:layout_marginTop="5dp"
+                android:text="Villa María"/>
+            <android.support.design.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipIcon="@drawable/ic_circulo_azul"
+                app:chipBackgroundColor="@color/transparent"
+                app:chipStrokeColor="@color/borde_chip"
+                app:chipStrokeWidth="1dp"
+                android:layout_marginTop="5dp"
+                android:text="San Francisco"/>
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

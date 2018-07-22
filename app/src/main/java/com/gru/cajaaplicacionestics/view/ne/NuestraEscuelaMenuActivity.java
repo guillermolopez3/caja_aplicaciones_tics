@@ -12,7 +12,7 @@ import com.gru.cajaaplicacionestics.R;
 
 public class NuestraEscuelaMenuActivity extends AppCompatActivity {
 
-    Button doc_a,apuntes,asistencia,noticias,certificados,contacto;
+    Button doc_a,apuntes,asistencia,noticias,certificados,contacto,circulo,ateneos, monitoreo;
     Button jornadas;
     FirebaseAnalytics analytics;
 
@@ -24,12 +24,15 @@ public class NuestraEscuelaMenuActivity extends AppCompatActivity {
         final Bundle bundle = new Bundle();
 
         jornadas        = findViewById(R.id.btnJornadas);
+        circulo         = findViewById(R.id.btnCirculo);
         doc_a           = findViewById(R.id.btnDocAcompa);
         apuntes         = findViewById(R.id.btnApuntesTrabajo);
         asistencia      = findViewById(R.id.btnAsistTecn);
         noticias        = findViewById(R.id.btnNoticia);
         certificados    = findViewById(R.id.btnCertificado);
         contacto        = findViewById(R.id.btnContacto);
+        ateneos         = findViewById(R.id.btnAteneos);
+        monitoreo       = findViewById(R.id.btnMonitoreo);
 
         if(Build.VERSION.SDK_INT  < Build.VERSION_CODES.LOLLIPOP)
         {
@@ -46,9 +49,37 @@ public class NuestraEscuelaMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(NuestraEscuelaMenuActivity.this,NEDrawerActivity.class);
+                i.putExtra("menu_mostrar","jornada");
                 startActivity(i);
             }
         });
+
+        circulo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NuestraEscuelaMenuActivity.this,NEFragmentGralActivity.class);
+                intent.putExtra("seccion","circulo");
+                intent.putExtra("titulo","Circulo de directores");
+                startActivity(intent);
+            }
+        });
+
+        ateneos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(NuestraEscuelaMenuActivity.this,NEDrawerActivity.class);
+                i.putExtra("menu_mostrar","ateneos");
+                startActivity(i);
+            }
+        });
+
+        monitoreo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         doc_a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

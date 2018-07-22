@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class NEFragment extends Fragment {
 
     private void cargarArray()
     {
+        Log.e("seccion en fragment", seccion);
         if(seccion.equals("cronograma")){
            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
                     ,getActivity(),"cronograma",adapter);
@@ -67,6 +69,47 @@ public class NEFragment extends Fragment {
         {
             RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
                     ,getActivity(),"recomendaciones",adapter);
+        }
+        else if(seccion.equals("verEscuchar"))
+        {
+            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+                    ,getActivity(),"verEscuchar",adapter);
+        }
+        else if(seccion.equals("circulo"))
+        {
+            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+                    ,getActivity(),"circulo",adapter);
+        }
+        else if(seccion.equals("ateneo_modelo_aval"))
+        {
+            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+                    ,getActivity(),"ateneo_modelo_aval",adapter);
+        }
+        else if(seccion.equals("ateneo_actividad"))
+        {
+            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+                    ,getActivity(),"ateneo_actividad",adapter);
+        }
+        else if(seccion.equals("ateneo_memo"))
+        {
+            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+                    ,getActivity(),"ateneo_memo",adapter);
+        }
+        // links para la semana tic
+        else if(seccion.equals("agenda"))
+        {
+            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/semana_tic.json"
+                    ,getActivity(),"agenda",adapter);
+        }
+        else if(seccion.equals("noticia"))
+        {
+            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/semana_tic.json"
+                    ,getActivity(),"noticia",adapter);
+        }
+        // fin semana tic
+        else {
+            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+                    ,getActivity(),seccion,adapter);
         }
     }
 

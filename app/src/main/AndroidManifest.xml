@@ -27,9 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.DetalleRecursoGeneralActivity"></activity>
+        <activity android:name=".view.DetalleRecursoGeneralActivity" />
         <activity android:name=".view.YoutubeActivity" />
-        <activity android:name=".view.EnviarRecursosActivity"></activity>
+        <activity android:name=".view.EnviarRecursosActivity" />
         <activity android:name=".view.DetalleRecursoAudio" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -44,10 +44,10 @@
             android:value="@string/KEY_API_YOUTUBE" />
 
         <activity android:name=".map.MapsActivity" />
-        <activity android:name=".view.ServicioTecnicoActivity"></activity>
-        <activity android:name=".view.CapacitacionActivity"></activity>
+        <activity android:name=".view.ServicioTecnicoActivity" />
+        <activity android:name=".view.CapacitacionActivity" />
         <activity android:name=".view.PdfActivity" />
-        <activity android:name=".view.ne.NEActivity"></activity>
+        <activity android:name=".view.ne.NEActivity" />
         <activity android:name=".view.RecursosXNivelActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -68,7 +68,11 @@
         <activity
             android:name=".view.ne.NEDrawerActivity"
             android:label="@string/title_activity_nedrawer"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".view.ne.NEFragmentGralActivity" />
+        <activity android:name=".view.semana_tic.MenuSemanaTicActivity" />
+        <activity android:name=".map.NewMapActivity"/>
+        <activity android:name=".view.semana_tic.Agenda_ST"/>
     </application>
 
 </manifest>

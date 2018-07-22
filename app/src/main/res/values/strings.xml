@@ -74,6 +74,7 @@ Es una herramienta colaborativa para toda  la comunidad educativa, en constante 
     <string name="URL_BASE1">http://www.muniap.com/api/</string>
     <string name="URL_POST_SEARCH">posts/getPostsSearch</string>
     <string name="URL_GET_ALL_POST">posts/getPostsSeccion</string>
+    <string name="URL_GET_ALL_POST_APRENDER_CONECTADPS">posts/aprenderConectados</string>
     <string name="URL_GET_ALL_POST_LEVEL">posts/getPostsLevel</string>
     <string name="URL_GET_ALL_NOVEDADES">posts/getNovedades</string>
     <string name="URL_GET_ALL_NE">posts/getNuestraEscuela</string>
@@ -113,5 +114,9 @@ Es una herramienta colaborativa para toda  la comunidad educativa, en constante 
     <string name="nav_header_title">Jornadas Institucionales</string>
     <string name="nav_header_subtitle">Menú</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="title_activity_nepestana">NEPestanaActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
 </resources>
 

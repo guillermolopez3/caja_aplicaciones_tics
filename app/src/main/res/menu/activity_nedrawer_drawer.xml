@@ -19,10 +19,11 @@
             android:id="@+id/nav_recomendacion"
             android:title="Recomendaciones" />
         <item
-            android:id="@+id/nav_manae"
+            android:id="@+id/mat_apoyo"
             android:title="Materiales de Apoyo" />
     </group>
 
+    <!--
     <item android:title="Equipo y Contacto">
         <menu>
             <item
@@ -30,6 +31,6 @@
                 android:title="Contacto" />
 
         </menu>
-    </item>
+    </item>-->
 
 </menu>

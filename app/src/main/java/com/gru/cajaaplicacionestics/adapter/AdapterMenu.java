@@ -17,6 +17,7 @@ import com.gru.cajaaplicacionestics.model.ModelMenu;
 import com.gru.cajaaplicacionestics.view.ne.NuestraEscuelaMenuActivity;
 import com.gru.cajaaplicacionestics.view.PostActivity;
 import com.gru.cajaaplicacionestics.view.RecursosXNivelActivity;
+import com.gru.cajaaplicacionestics.view.semana_tic.MenuSemanaTicActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -61,25 +62,9 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.MenuHolder>
         Intent i;
         Bundle params = new Bundle();
         switch (position){
-            case 2:
-                i = new Intent(activity,PostActivity.class);
-                i.putExtra("seleccion","pd");
-                i.putExtra("titulo","Primaria Digital");
-                params.putString("nombre_pantalla","PD");
-                activity.startActivity(i);
-                break;
-            case 3:
-                i = new Intent(activity,PostActivity.class);
-                i.putExtra("seleccion","ci");
-                i.putExtra("titulo","Conectar Igualdad");
-                params.putString("nombre_pantalla","CI");
-                activity.startActivity(i);
-                break;
-            case 4:
-                i = new Intent(activity,NuestraEscuelaMenuActivity.class);
-               // i.putExtra("seleccion","ci");
-                //i.putExtra("titulo","Conectar Igualdad");
-                params.putString("nombre_pantalla","NE");
+            case 0:
+                i = new Intent(activity,NovedadActivity.class);
+                params.putString("nombre_pantalla","Novedades");
                 activity.startActivity(i);
                 break;
             case 1:
@@ -87,18 +72,31 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.MenuHolder>
                 params.putString("nombre_pantalla","RD");
                 activity.startActivity(i);
                 break;
-            case 0:
-                i = new Intent(activity,NovedadActivity.class);
-                params.putString("nombre_pantalla","Novedades");
+            case 2:
+                i = new Intent(activity,PostActivity.class);
+                i.putExtra("seleccion","ac");
+                i.putExtra("titulo","Aprender Conectados");
+                params.putString("nombre_pantalla","PD");
                 activity.startActivity(i);
                 break;
-            case 5:
+            case 3:
+                i = new Intent(activity,NuestraEscuelaMenuActivity.class);
+               // i.putExtra("seleccion","ci");
+                //i.putExtra("titulo","Conectar Igualdad");
+                params.putString("nombre_pantalla","NE");
+                activity.startActivity(i);
+                break;
+            case 4:
                 i = new Intent(activity,PostActivity.class);
                 i.putExtra("seleccion","canal");
                 i.putExtra("titulo","Audiovisuales");
                 params.putString("nombre_pantalla","Canal");
                 activity.startActivity(i);
                 break;
+            case 5:
+                activity.startActivity(new Intent(activity, MenuSemanaTicActivity.class));
+                break;
+
         }
         analytics.logEvent("pantalla",params);
     }

@@ -32,6 +32,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -188,6 +191,17 @@ public class MetodosComunes
 
         RequestQueue requestQueue = Volley.newRequestQueue(activity);
         requestQueue.add(stringRequest);
+    }
+
+    public static Date convertirStringFecha(String fecha)
+    {
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        try{
+            Date date = format.parse(fecha);
+            format = new SimpleDateFormat("dd-MM-yyyy");
+            return date;
+        }
+        catch (Exception e){ return null;}
     }
 
 }
