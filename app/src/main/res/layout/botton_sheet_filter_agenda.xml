@@ -36,7 +36,7 @@
             android:layout_weight="0.1"
             android:layout_gravity="center"
             android:background="@color/transparent"
-            android:src="@drawable/ic_abajo"/>
+            app:srcCompat="@drawable/ic_abajo"/>
 
     </LinearLayout>
 

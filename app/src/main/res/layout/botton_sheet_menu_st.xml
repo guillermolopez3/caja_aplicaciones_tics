@@ -36,7 +36,7 @@
             android:layout_weight="0.1"
             android:layout_gravity="center"
             android:background="@color/transparent"
-            android:src="@drawable/ic_abajo"/>
+            app:srcCompat="@drawable/ic_abajo"/>
 
     </LinearLayout>
 
@@ -51,6 +51,7 @@
             android:id="@+id/btnRio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/blanco"
             android:text="Rio Cuarto"
             android:padding="20dp"
             android:textColor="@color/colorPrimary"/>
@@ -59,6 +60,7 @@
             android:id="@+id/btnMaria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/blanco"
             android:text="Villa María"
             android:textColor="@color/colorPrimary"/>
 
@@ -66,6 +68,7 @@
             android:id="@+id/btnSan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/blanco"
             android:text="San Francisco"
             android:textColor="@color/colorPrimary"/>
 
@@ -73,6 +76,7 @@
             android:id="@+id/btnCba"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/blanco"
             android:text="Córdoba"
             android:textColor="@color/colorPrimary"/>
 

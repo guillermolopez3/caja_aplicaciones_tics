@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
-        android:src="@drawable/ic_filter_list" />
+        app:srcCompat="@drawable/ic_filter_list" />
 
     <include layout="@layout/botton_sheet_filter_agenda"/>
 </android.support.design.widget.CoordinatorLayout>

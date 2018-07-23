@@ -17,6 +17,7 @@ import com.gru.cajaaplicacionestics.model.ModelMenu;
 import com.gru.cajaaplicacionestics.view.ne.NuestraEscuelaMenuActivity;
 import com.gru.cajaaplicacionestics.view.PostActivity;
 import com.gru.cajaaplicacionestics.view.RecursosXNivelActivity;
+import com.gru.cajaaplicacionestics.view.semana_tic.MenuST;
 import com.gru.cajaaplicacionestics.view.semana_tic.MenuSemanaTicActivity;
 import com.squareup.picasso.Picasso;
 
@@ -94,7 +95,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.MenuHolder>
                 activity.startActivity(i);
                 break;
             case 5:
-                activity.startActivity(new Intent(activity, MenuSemanaTicActivity.class));
+                activity.startActivity(new Intent(activity, MenuST.class));
                 break;
 
         }
