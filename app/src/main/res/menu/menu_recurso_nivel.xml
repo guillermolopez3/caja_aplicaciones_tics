@@ -31,9 +31,9 @@
         />
     <item
         android:id="@+id/navigation_especial"
-        android:title="Especial"
+        android:title="Accesible"
         app:showAsAction="always|withText"
-        android:icon="@drawable/especial"
+        android:icon="@drawable/ic_accessibility"
         />
 
 </menu>

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.view.AprenderConectadosActivity;
 import com.gru.cajaaplicacionestics.view.NovedadActivity;
 import com.gru.cajaaplicacionestics.model.ModelMenu;
 import com.gru.cajaaplicacionestics.view.ne.NuestraEscuelaMenuActivity;
@@ -74,7 +75,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.MenuHolder>
                 activity.startActivity(i);
                 break;
             case 2:
-                i = new Intent(activity,PostActivity.class);
+                i = new Intent(activity,AprenderConectadosActivity.class);
                 i.putExtra("seleccion","ac");
                 i.putExtra("titulo","Aprender Conectados");
                 params.putString("nombre_pantalla","PD");

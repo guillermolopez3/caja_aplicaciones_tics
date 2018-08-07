@@ -21,6 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.google.firebase.crash.FirebaseCrash;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.adapter.AdapterListST;
+import com.gru.cajaaplicacionestics.adapter.AdapterPruebaTituloEntreRecycler;
 import com.gru.cajaaplicacionestics.backend.VolleySingleton;
 import com.gru.cajaaplicacionestics.model.ItemSTModel;
 
@@ -36,7 +37,8 @@ public class FragmentST extends Fragment
     private String dia;
     private ArrayList<ItemSTModel> lista;
     RecyclerView recyclerView;
-    AdapterListST adapter;
+    //AdapterListST adapter;
+    AdapterPruebaTituloEntreRecycler adapter;
     private ProgressBar progressBar;
 
     public FragmentST(){}
@@ -55,7 +57,8 @@ public class FragmentST extends Fragment
         cargarLista();
         progressBar = view.findViewById(R.id.progress);
         recyclerView = view.findViewById(R.id.recycler);
-        adapter = new AdapterListST(lista,getActivity());
+        //adapter = new AdapterListST(lista,getActivity());
+        adapter = new AdapterPruebaTituloEntreRecycler(lista,getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
         return view;
@@ -69,7 +72,7 @@ public class FragmentST extends Fragment
         StringRequest request;
         VolleySingleton.getInstancia(getActivity()).
                 addToRequestQueue(request= new StringRequest(Request.Method.GET,
-                        "http://www.muniap.com/images/agenda_st.json" ,
+                        "http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/agenda_st1.json" ,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {

@@ -142,7 +142,6 @@ public class NewMapActivity extends AppCompatActivity implements OnMapReadyCallb
 
     private void establecerCoordenadas(String lugar)
     {
-        String titulo = "";
         LatLng coordenadas = new LatLng(-31.337208, -64.207352);;
         if(lugar.equals("rio"))
         {

@@ -79,4 +79,5 @@ public class AdapterListST extends RecyclerView.Adapter<AdapterListST.HolderST>
             filtro      = itemView.findViewById(R.id.circuloIndicador);
         }
     }
+
 }

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import com.gru.cajaaplicacionestics.R;
@@ -12,7 +13,6 @@ import com.gru.cajaaplicacionestics.view.fragment.NEFragment;
 
 public class MenuST extends AppCompatActivity {
 
-    private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -21,18 +21,16 @@ public class MenuST extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.nav_info:
-                    cargarFragmentInfo();
-                    //mTextMessage.setText(R.string.title_home);
+                    cambiarFragment("info");
                     return true;
                 case R.id.nav_event:
-                    cargarFragmentAgenda();
-                   // mTextMessage.setText(R.string.title_dashboard);
+                   cambiarFragment("agenda");
                     return true;
                 case R.id.nav_place:
-                    //mTextMessage.setText(R.string.title_notifications);
+                   cambiarFragment("map");
                     return true;
             }
-            return false;
+            return true;
         }
     };
 
@@ -41,23 +39,24 @@ public class MenuST extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_st);
 
-        //mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation =  findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setSelectedItemId(R.id.nav_event);
     }
 
-    private void cargarFragmentInfo()
+    private void cambiarFragment(String tab)
     {
-        Fragment fragment = new NEFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("seccion","noticia");
-        fragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,fragment).commit();
-    }
-
-    private void cargarFragmentAgenda()
-    {
-        Fragment fragment = new FragmentAgendaST();
+        Fragment fragment = null;
+        Log.e("MenuST","Cambiar fragment");
+        if(tab.equals("info"))
+        {
+            fragment = new FragmentInfoST();
+        }else if(tab.equals("agenda"))
+        {
+            fragment = new FragmentAgendaST();
+        } else if (tab.equals("map")) {
+            fragment = new FragmentMapaST();
+        }
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,fragment).commit();
     }
 

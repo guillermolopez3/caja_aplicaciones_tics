@@ -75,7 +75,8 @@
         <activity android:name=".view.semana_tic.Agenda_ST" />
         <activity
             android:name=".view.semana_tic.MenuST"
-            android:label="@string/title_activity_menu_st"></activity>
+            android:label="@string/title_activity_menu_st" />
+        <activity android:name=".view.AprenderConectadosActivity"/>
     </application>
 
 </manifest>

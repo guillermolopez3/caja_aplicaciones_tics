@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:labelVisibilityMode="labeled"
-        android:background="?android:attr/windowBackground"
+        android:background="@color/borde_chip"
         app:menu="@menu/navigation" />
 
 </LinearLayout>

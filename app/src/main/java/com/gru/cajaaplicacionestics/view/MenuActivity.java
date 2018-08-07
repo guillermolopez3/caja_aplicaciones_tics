@@ -98,7 +98,7 @@ public class MenuActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
 
         //dialogST();
-        obtenerPopup();
+       // obtenerPopup();
 
 
 
@@ -251,17 +251,17 @@ public class MenuActivity extends AppCompatActivity {
                                     }
 
                                 } catch (JSONException e) {
-                                    Log.e("error",e.getMessage());
-                                    e.printStackTrace();
+                                   // Log.e("error",e.getMessage());
+                                   // e.printStackTrace();
                                 } catch (UnsupportedEncodingException e) {
-                                    e.printStackTrace();
+                                    //e.printStackTrace();
                                 }
 
                             }
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("error volley",error.getMessage());
+                       // Log.e("error volley",error.getMessage());
                     }
                 }));
     }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.auxiliares.PaginationErrorCallBack;
@@ -38,6 +39,8 @@ public class NEActivity extends AppCompatActivity implements PaginationErrorCall
 
         errorLayout         = findViewById(R.id.error_layout);
         btnReintentar       = findViewById(R.id.error_btn_retry);
+        FloatingActionsMenu fab = findViewById(R.id.menu_fab);
+        fab.setVisibility(View.GONE);
 
         MetodosComunes.showToolbar(titulo,true,this);
 
