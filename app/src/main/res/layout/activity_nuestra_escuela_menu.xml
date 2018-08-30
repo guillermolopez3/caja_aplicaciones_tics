@@ -23,7 +23,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="30dp"
                 android:padding="25dp">
@@ -32,6 +32,7 @@
                     android:id="@+id/btnJornadas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:textColor="@android:color/white"
                     android:text="Jornadas Institucionales"/>
@@ -40,6 +41,7 @@
                     android:id="@+id/btnCirculo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:textColor="@android:color/white"
                     android:text="Circulo de directores"/>
@@ -48,6 +50,7 @@
                     android:id="@+id/btnAteneos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:textColor="@android:color/white"
                     android:text="Ateneos didácticos"/>
@@ -56,6 +59,7 @@
                     android:id="@+id/btnMonitoreo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:textColor="@android:color/white"
                     android:visibility="gone"
@@ -65,6 +69,7 @@
                     android:id="@+id/btnDocAcompa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                   android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:textColor="@android:color/white"
                     android:text="Documento de acompañamiento"/>
@@ -73,6 +78,7 @@
                     android:id="@+id/btnApuntesTrabajo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:textColor="@android:color/white"
                     android:visibility="gone"
@@ -81,6 +87,7 @@
                     android:id="@+id/btnAsistTecn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:textColor="@android:color/white"
                     android:visibility="gone"
@@ -89,6 +96,7 @@
                     android:id="@+id/btnNoticia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:textColor="@android:color/white"
                     android:text="Noticias / Novedades / Experiencias"/>
@@ -96,6 +104,7 @@
                     android:id="@+id/btnCertificado"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:textColor="@android:color/white"
                     android:backgroundTint="@color/colorPrimary"
                     android:text="Certificados Eje 1 y Eje 2"/>
@@ -104,6 +113,7 @@
                     android:id="@+id/btnContacto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:textColor="@android:color/white"
                     android:backgroundTint="@color/colorPrimary"
                     android:text="Equipo y vías de contacto"/>

@@ -26,7 +26,7 @@ public class AdapterPruebaTituloEntreRecycler extends RecyclerView.Adapter<Recyc
     private final int TYPE_CABECERA =0;
     private final int TYPE_CUERPO =1;
 
-    private final String CBA="cba1",SAN="sanf",MARIA="vmaria",RIO="rioc";
+    private final String CBA="cba1",SAN="sanf",MARIA="vmaria",RIO="rioc",JM="jamaria";
 
     private boolean es_pos_cero = false; //es para mostrar solo una vez el titulo al principio
 
@@ -62,7 +62,7 @@ public class AdapterPruebaTituloEntreRecycler extends RecyclerView.Adapter<Recyc
             old_city = new_city;
             return TYPE_CUERPO;
         }*/
-       if(ciu.equals(CBA) || ciu.equals(SAN) || ciu.equals(MARIA) || ciu.equals(RIO) )
+       if(ciu.equals(CBA) || ciu.equals(SAN) || ciu.equals(MARIA) || ciu.equals(RIO) || ciu.equals(JM) )
        {
            return TYPE_CABECERA;
        }
@@ -119,6 +119,8 @@ public class AdapterPruebaTituloEntreRecycler extends RecyclerView.Adapter<Recyc
                 holderST.filtro.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_circulo_rojo));
             }else if(model.getCiudad().equals("san")){
                 holderST.filtro.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_circulo_azul));
+            }else if(model.getCiudad().equals("jmaria")){
+                holderST.filtro.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_circulo_rosa));
             }
         }catch (Exception e){}
     }
@@ -136,6 +138,9 @@ public class AdapterPruebaTituloEntreRecycler extends RecyclerView.Adapter<Recyc
             texto = "Córdoba";
         }else if(new_city.equals(SAN)){
             texto = "San Francisco";
+        }
+        else if(new_city.equals(JM)){
+            texto = "Jesús María";
         }
         titulo.ciudad.setText(texto);
     }

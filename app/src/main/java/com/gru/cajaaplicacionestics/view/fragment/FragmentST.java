@@ -72,7 +72,7 @@ public class FragmentST extends Fragment
         StringRequest request;
         VolleySingleton.getInstancia(getActivity()).
                 addToRequestQueue(request= new StringRequest(Request.Method.GET,
-                        "http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/agenda_st1.json" ,
+                        "http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/agenda2_st1.json" ,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {

@@ -25,9 +25,7 @@ public class AprenderConectadosActivity extends AppCompatActivity implements Pag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aprender_conectados);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle("Aprender Conectados");
+        MetodosComunes.showToolbar("Aprender Conectados",true,this);
 
         adapter = new SectionAdapter(getSupportFragmentManager());
         pager = findViewById(R.id.containerViewPager);

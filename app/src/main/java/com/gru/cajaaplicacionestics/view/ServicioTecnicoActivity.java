@@ -40,6 +40,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/*
+    TODO: eliminar esta clase
+ */
 public class ServicioTecnicoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     CoordinatorLayout coordinatorLayout;
     ColegioModel colegioModel;
@@ -69,7 +72,7 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
         coordinatorLayout.setVisibility(View.INVISIBLE);
 
         URL_BASE= getResources().getString(R.string.URL_BASE);
-        URL_COLE=getResources().getString(R.string.URL_GET_COLE);
+        URL_COLE=getResources().getString(R.string.URL_GET_INSTITUCION);
 
         MetodosComunes.showToolbar("Pedido de Servicio Técnico",false,this);
 
@@ -149,8 +152,8 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
                                         o.getString("localidad"),
                                         o.getString("inspeccion"),
                                         o.getString("modalidad"),
-                                        o.getString("ar"),
-                                        o.getString("fp")
+                                        o.getString("nombre_ar_sistemas"),
+                                        o.getString("nombre_facilitador")
                                 );
                                 cargarDatos(cole,txtL);
                                 dial.dismiss();

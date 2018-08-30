@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.auxiliares.PaginationErrorCallBack;
@@ -60,7 +61,13 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
             iniciarPaginacion();
         }
 
-        MetodosComunes.abrirActivityFab(this);
+        if(seccion.equals("canal"))
+        {
+            FloatingActionsMenu floatingActionsMenu = findViewById(R.id.menu_fab);
+            floatingActionsMenu.setVisibility(View.GONE);
+        }
+        else {MetodosComunes.abrirActivityFab(this);}
+
 
     }
 

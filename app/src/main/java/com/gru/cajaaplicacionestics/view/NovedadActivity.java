@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.auxiliares.PaginationErrorCallBack;
 import com.gru.cajaaplicacionestics.view.fragment.FragmentNovedades;
 
@@ -29,9 +30,11 @@ public class NovedadActivity extends AppCompatActivity implements PaginationErro
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_novedad);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        /*Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Novedades");
+        toolbar.setTitle("Novedades");*/
+
+        MetodosComunes.showToolbar("Novedades",true,this);
 
         mSectionsPagerAdapter = new NovedadActivity.SectionPagenAdapter(getSupportFragmentManager());
 

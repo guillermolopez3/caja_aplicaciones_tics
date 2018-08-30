@@ -5,10 +5,10 @@ android {
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.gru.cajaaplicacionestics"
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 28
-        versionCode 23
-        versionName "1.0.11"
+        versionCode 26
+        versionName "1.0.14"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -24,6 +24,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     implementation 'com.android.support:support-vector-drawable:28.0.0-}'
+    implementation 'com.google.firebase:firebase-messaging:17.3.0'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -49,3 +50,4 @@ dependencies {
 
 }
 apply plugin: 'com.google.gms.google-services'
+

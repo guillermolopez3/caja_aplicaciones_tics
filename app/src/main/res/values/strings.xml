@@ -79,6 +79,8 @@ Es una herramienta colaborativa para toda  la comunidad educativa, en constante 
     <string name="URL_GET_ALL_NOVEDADES">posts/getNovedades</string>
     <string name="URL_GET_ALL_NE">posts/getNuestraEscuela</string>
     <string name="URL_GET_COLE">posts/getColegio</string>
+    <string name="URL_GET_INSTITUCION">getColegios</string>
+    <string name="URL_TIPO_PROBLEMA_RECLAMO">getProblemasReclamos</string>
 
     <string name="JSON_SECCION">GetPostSeccion.php?</string>
     <string name="JSON_BUSQUDA_SECCION">NuevaBusquedaPost.php?</string>

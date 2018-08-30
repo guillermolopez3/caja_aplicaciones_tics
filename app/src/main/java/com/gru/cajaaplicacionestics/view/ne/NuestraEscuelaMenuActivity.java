@@ -43,6 +43,8 @@ public class NuestraEscuelaMenuActivity extends AppCompatActivity {
             noticias.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             certificados.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             contacto.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            circulo.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            ateneos.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
 
         jornadas.setOnClickListener(new View.OnClickListener() {

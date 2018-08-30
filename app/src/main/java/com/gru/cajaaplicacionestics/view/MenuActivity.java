@@ -140,7 +140,7 @@ public class MenuActivity extends AppCompatActivity {
         array.add(new ModelMenu(R.drawable.aprender_conectados));
         array.add(new ModelMenu(R.drawable.nuestra_escuela));
         array.add(new ModelMenu(R.drawable.audiovisuales));
-        array.add(new ModelMenu(R.drawable.logoazultic));
+        array.add(new ModelMenu(R.drawable.programa_docentesyescuela));
     }
 
 

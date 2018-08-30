@@ -95,9 +95,9 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.MenuHolder>
                 params.putString("nombre_pantalla","Canal");
                 activity.startActivity(i);
                 break;
-            case 5:
+           /* case 5:
                 activity.startActivity(new Intent(activity, MenuST.class));
-                break;
+                break;*/
 
         }
         analytics.logEvent("pantalla",params);
