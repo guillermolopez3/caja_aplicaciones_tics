@@ -44,6 +44,7 @@ public class NEDrawerActivity extends AppCompatActivity
         View vi = navigationView.getHeaderView(0); //obtengo el header para el titulo
         TextView txtNav = vi.findViewById(R.id.navHeaderTitulo); //txt del header del nav
 
+
         navigationView.getMenu().clear();
 
         if(menuMostrar.equals("jornada"))

@@ -15,6 +15,8 @@ import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.view.AprenderConectadosActivity;
 import com.gru.cajaaplicacionestics.view.NovedadActivity;
 import com.gru.cajaaplicacionestics.model.ModelMenu;
+import com.gru.cajaaplicacionestics.view.PpadeActivity;
+import com.gru.cajaaplicacionestics.view.PpadeNewActivity;
 import com.gru.cajaaplicacionestics.view.ne.NuestraEscuelaMenuActivity;
 import com.gru.cajaaplicacionestics.view.PostActivity;
 import com.gru.cajaaplicacionestics.view.RecursosXNivelActivity;
@@ -95,9 +97,9 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.MenuHolder>
                 params.putString("nombre_pantalla","Canal");
                 activity.startActivity(i);
                 break;
-           /* case 5:
-                activity.startActivity(new Intent(activity, MenuST.class));
-                break;*/
+            case 5:
+                activity.startActivity(new Intent(activity, PpadeNewActivity.class));
+                break;
 
         }
         analytics.logEvent("pantalla",params);

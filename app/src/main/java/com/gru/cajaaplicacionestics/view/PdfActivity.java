@@ -47,9 +47,9 @@ public class PdfActivity extends AppCompatActivity{
             url_pdf= getIntent().getExtras().getString("link");
         }
         Log.e("url-pdf",url_pdf);
-        pdfView     = (PDFView)findViewById(R.id.pdfView);
-        progressBar =(ProgressBar)findViewById(R.id.progressNovedad);
-        fab         =(FloatingActionButton)findViewById(R.id.fab);
+        pdfView     = findViewById(R.id.pdfView);
+        progressBar = findViewById(R.id.progressNovedad);
+        fab         = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

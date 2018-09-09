@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.FragmentPpade.FragmentCohortes">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardCronogramaPpade"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        card_view:cardCornerRadius="6dp"
+        card_view:cardElevation="@dimen/cardview_default_elevation"
+        android:layout_margin="8dp">
+
+        <ImageView
+            android:id="@+id/imgCronograma"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/crono_ppade" />
+    </android.support.v7.widget.CardView>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:weightSum="9"
+       android:orientation="horizontal">
+
+       <Button
+           android:id="@+id/btnES"
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:layout_weight="3"
+           android:backgroundTint="@color/colorPrimary"
+           android:text="Experiencias significativas"
+           android:textColor="@color/blanco"
+           android:textSize="11sp" />
+
+       <Button
+           android:id="@+id/btnEep"
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:layout_weight="3"
+           android:backgroundTint="@color/colorPrimary"
+           android:text="Enseñanza entre pares"
+           android:textColor="@color/blanco"
+           android:textSize="11sp" />
+
+       <Button
+           android:id="@+id/btnCl"
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:layout_weight="3"
+           android:backgroundTint="@color/colorPrimary"
+           android:text="círculos de lectura"
+           android:textColor="@color/blanco"
+           android:textSize="11sp" />
+   </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtTituloCohortes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="Experiencias significativas"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

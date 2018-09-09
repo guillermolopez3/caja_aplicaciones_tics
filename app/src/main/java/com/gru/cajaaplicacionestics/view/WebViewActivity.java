@@ -110,7 +110,7 @@ public class WebViewActivity extends AppCompatActivity {
 
         fab = findViewById(R.id.fab);
 
-        fab.setVisibility(View.INVISIBLE);
+        fab.hide();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

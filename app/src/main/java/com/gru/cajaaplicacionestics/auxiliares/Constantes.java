@@ -10,4 +10,9 @@ public class Constantes
     public static final String URL_TIPO_RECLAMO = "getProblemasReclamos?id=";
     public static final String URL_COLE = "getColegios";
     public static final String URL_NUEVO_RECURSO = "nuevoRecurso";
+
+    //url ppade
+    public static final String URL_PPADE_PRESENTACION = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/view/ppade.html";
+    public static final String URL_PPADE_CONTACTO = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/view/ppade_contacto.html";
+    public static final String URL_PPADE_COHORTE = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/ppade.json";
 }

@@ -63,7 +63,7 @@
         <activity
             android:name=".view.NovedadActivity"
             android:label="@string/title_activity_novedad"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.MenuActivity" />
@@ -81,6 +81,13 @@
             android:name=".view.semana_tic.MenuST"
             android:label="@string/title_activity_menu_st" />
         <activity android:name=".view.AprenderConectadosActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MenuActivity" />
+        </activity>
+        <activity android:name=".view.PpadeActivity" />
+        <activity android:name=".view.WebClieActivity"></activity>
+        <activity android:name=".view.PpadeNewActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.MenuActivity" />
