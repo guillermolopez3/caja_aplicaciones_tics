@@ -1,8 +1,9 @@
 package com.gru.cajaaplicacionestics.backend;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -47,6 +48,7 @@ public class Paginacion
     int LIMIT=0,CANTIDAD_POST=15;
     int PAGINA_ACTUAL=1;
 
+
     public Paginacion(Activity activity, PullToLoadView pullToLoadView,int seccion) {
         this.activity = activity;
         this.pullToLoadView = pullToLoadView;
@@ -57,6 +59,7 @@ public class Paginacion
         recyclerView.setAdapter(adapter);
 
     }
+
 
     public Paginacion(Activity activity, PullToLoadView pullToLoadView) {
         this.activity = activity;

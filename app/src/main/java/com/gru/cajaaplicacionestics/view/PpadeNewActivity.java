@@ -1,14 +1,13 @@
 package com.gru.cajaaplicacionestics.view;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 
 import com.gru.cajaaplicacionestics.R;
@@ -33,7 +32,7 @@ public class PpadeNewActivity extends AppCompatActivity implements PaginationErr
         setContentView(R.layout.fragment_cohortes);
 
 
-        MetodosComunes.showToolbar("Cohortes",true,this);
+        MetodosComunes.showToolbar("PP-ADE",true,this);
 
         mSectionsPagerAdapter = new PpadeNewActivity.SectionPagenAdapter(getSupportFragmentManager());
 
@@ -102,13 +101,13 @@ public class PpadeNewActivity extends AppCompatActivity implements PaginationErr
         public CharSequence getPageTitle(int position) {
             switch (position){
                 case 0:
-                    return "Cuarta";
+                    return "4ª Cohorte";
                 case 1:
-                    return "Tercera";
+                    return "3ª Cohorte";
                 case 2:
-                    return "Segunda";
+                    return "2ª Cohorte";
                 case 3:
-                    return "Primera";
+                    return "1ª Cohorte";
                 case 4:
                     return "Equipo y contacto";
                 case 5:

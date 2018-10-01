@@ -2,12 +2,10 @@ package com.gru.cajaaplicacionestics.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gru.cajaaplicacionestics.R;
-import com.gru.cajaaplicacionestics.view.semana_tic.ObtenerRecursosST;
 
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 

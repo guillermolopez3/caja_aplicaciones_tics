@@ -1,21 +1,23 @@
 package com.gru.cajaaplicacionestics.view.FragmentPpade;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -26,9 +28,8 @@ import com.gru.cajaaplicacionestics.adapter.AdapterPpade;
 import com.gru.cajaaplicacionestics.auxiliares.Constantes;
 import com.gru.cajaaplicacionestics.backend.VolleySingleton;
 import com.gru.cajaaplicacionestics.model.ModelPpade;
-import com.gru.cajaaplicacionestics.view.PdfActivity;
 import com.gru.cajaaplicacionestics.view.WebViewActivity;
-import com.gru.cajaaplicacionestics.view.semana_tic.ObtenerRecursosST;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -55,8 +56,11 @@ public class FragmentCohortes extends Fragment
     CardView cardView;
 
     ImageView img_crono;
-    TextView titulo_cohortes;
-    Button btn_es,btn_eep,btn_cl;
+    String url_img_crono;
+    ProgressBar progressBar;
+
+    AppCompatButton btn_es,btn_eep,btn_cl;
+
 
     public FragmentCohortes() {
         // Required empty public constructor
@@ -82,10 +86,10 @@ public class FragmentCohortes extends Fragment
 
 
         cardView =view.findViewById(R.id.cardCronogramaPpade);
-        titulo_cohortes = view.findViewById(R.id.txtTituloCohortes);
-        titulo_cohortes.setVisibility(View.INVISIBLE);
 
         img_crono = view.findViewById(R.id.imgCronograma);
+        progressBar = view.findViewById(R.id.progress);
+
 
         btn_es = view.findViewById(R.id.btnES);
         btn_eep = view.findViewById(R.id.btnEep);
@@ -109,8 +113,7 @@ public class FragmentCohortes extends Fragment
             public void onClick(View view) {
                 adapterPpade = new AdapterPpade(getActivity(),array_eep,getFragmentManager());
                 recyclerView.setAdapter(adapterPpade);
-                titulo_cohortes.setText("Enseñanza entre pares");
-                titulo_cohortes.setVisibility(View.VISIBLE);
+                btnSeleccionadoNoSeleccionado(btn_eep,btn_cl,btn_es);
             }
         });
 
@@ -119,8 +122,7 @@ public class FragmentCohortes extends Fragment
             public void onClick(View view) {
                 adapterPpade = new AdapterPpade(getActivity(),array_cl,getFragmentManager());
                 recyclerView.setAdapter(adapterPpade);
-                titulo_cohortes.setText("Círculos de lectura");
-                titulo_cohortes.setVisibility(View.VISIBLE);
+                btnSeleccionadoNoSeleccionado(btn_cl,btn_eep,btn_es);
             }
         });
 
@@ -146,13 +148,36 @@ public class FragmentCohortes extends Fragment
         cargarLista();
     }
 
+
     private void cargarES()
     {
         adapterPpade = new AdapterPpade(getActivity(),array_es,getFragmentManager());
         recyclerView.setAdapter(adapterPpade);
-        titulo_cohortes.setText("Experiencias significativas");
-        titulo_cohortes.setVisibility(View.VISIBLE);
+        btnSeleccionadoNoSeleccionado(btn_es,btn_eep,btn_cl);
+        Picasso.with(getActivity()).load(url_img_crono).into(img_crono, new Callback() {
+            @Override
+            public void onSuccess() {
+                if(progressBar!=null)
+                {
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
 
+            @Override
+            public void onError() {
+
+            }
+        });
+    }
+
+    @SuppressLint("RestrictedApi")
+    private void btnSeleccionadoNoSeleccionado(AppCompatButton btn_selec,AppCompatButton btn_1, AppCompatButton btn_2)
+    {
+        ColorStateList color_seleccionado = new ColorStateList(new int[][]{new int[0]},new int[]{0xff007297});
+        ColorStateList color_no_seleccionado = new ColorStateList(new int[][]{new int[0]},new int[]{0xff00b0ed});
+        btn_selec.setSupportBackgroundTintList(color_seleccionado);
+        btn_1.setSupportBackgroundTintList(color_no_seleccionado);
+        btn_2.setSupportBackgroundTintList(color_no_seleccionado);
     }
 
     private void cargarLista()
@@ -183,6 +208,7 @@ public class FragmentCohortes extends Fragment
                                                     o.getString("link"),
                                                     o.getString("sub_seccion")
                                             );
+                                            url_img_crono = o.getString("image");
                                         }
                                         else if(o.get("sub_seccion").equals("es"))
                                         {

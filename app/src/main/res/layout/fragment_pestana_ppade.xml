@@ -9,7 +9,7 @@
     tools:context=".view.FragmentPpade.FragmentCohortes">
 
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardCronogramaPpade"
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -17,13 +17,31 @@
         card_view:cardElevation="@dimen/cardview_default_elevation"
         android:layout_margin="8dp">
 
-        <ImageView
-            android:id="@+id/imgCronograma"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/crono_ppade" />
-    </android.support.v7.widget.CardView>
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
+
+            <ImageView
+                android:id="@+id/imgCronograma"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/crono_ppade" />
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
 
    <LinearLayout
        android:layout_width="match_parent"
@@ -31,48 +49,39 @@
        android:weightSum="9"
        android:orientation="horizontal">
 
-       <Button
+       <androidx.appcompat.widget.AppCompatButton
            android:id="@+id/btnES"
            android:layout_width="0dp"
            android:layout_height="match_parent"
            android:layout_weight="3"
-           android:backgroundTint="@color/colorPrimary"
+           app:backgroundTint="@color/colorPrimary"
            android:text="Experiencias significativas"
            android:textColor="@color/blanco"
            android:textSize="11sp" />
 
-       <Button
+       <androidx.appcompat.widget.AppCompatButton
            android:id="@+id/btnEep"
            android:layout_width="0dp"
            android:layout_height="match_parent"
            android:layout_weight="3"
-           android:backgroundTint="@color/colorPrimary"
+           app:backgroundTint="@color/colorPrimary"
            android:text="Enseñanza entre pares"
            android:textColor="@color/blanco"
            android:textSize="11sp" />
 
-       <Button
+       <androidx.appcompat.widget.AppCompatButton
            android:id="@+id/btnCl"
            android:layout_width="0dp"
            android:layout_height="match_parent"
            android:layout_weight="3"
-           android:backgroundTint="@color/colorPrimary"
+           app:backgroundTint="@color/colorPrimary"
            android:text="círculos de lectura"
            android:textColor="@color/blanco"
            android:textSize="11sp" />
    </LinearLayout>
 
-    <TextView
-        android:id="@+id/txtTituloCohortes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:text="Experiencias significativas"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

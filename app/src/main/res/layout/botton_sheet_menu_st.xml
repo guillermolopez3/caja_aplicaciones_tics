@@ -93,7 +93,7 @@
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
-            <android.support.design.chip.Chip
+            <com.google.android.material.chip.Chip
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipIcon="@drawable/ic_circulo_rojo"
@@ -103,7 +103,7 @@
                 android:layout_marginRight="5dp"
                 android:text="25"/>
 
-            <android.support.design.chip.Chip
+            <com.google.android.material.chip.Chip
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipIcon="@drawable/ic_circulo_rojo"
@@ -115,7 +115,7 @@
         </LinearLayout>
 
 
-        <android.support.design.chip.Chip
+        <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:chipIcon="@drawable/ic_circulo_azul"

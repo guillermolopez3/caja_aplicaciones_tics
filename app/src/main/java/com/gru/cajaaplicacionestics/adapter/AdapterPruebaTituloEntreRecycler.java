@@ -1,8 +1,8 @@
 package com.gru.cajaaplicacionestics.adapter;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -125,7 +125,7 @@ public class AdapterPruebaTituloEntreRecycler extends RecyclerView.Adapter<Recyc
         }catch (Exception e){}
     }
 
-    private void itemTitulo(final RecyclerView.ViewHolder holder,final int position)
+    private void itemTitulo(final RecyclerView.ViewHolder holder, final int position)
     {
         HolderTitulo titulo = (HolderTitulo)holder;
         String texto="";

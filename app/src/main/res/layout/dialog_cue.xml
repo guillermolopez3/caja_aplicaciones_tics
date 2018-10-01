@@ -19,21 +19,21 @@
         android:text="Ingrese el CUE"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutDialogCue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:layout_marginTop="@dimen/edittext_margin_compartir">
 
-        <android.support.design.widget.TextInputEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/recursoEnviarTxtUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:maxLength="9"
             android:hint="Nro CUE (ej. 140111100)"/>
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <LinearLayout
