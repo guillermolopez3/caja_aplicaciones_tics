@@ -15,4 +15,6 @@ public class Constantes
     public static final String URL_PPADE_PRESENTACION = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/view/ppade.html";
     public static final String URL_PPADE_CONTACTO = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/view/ppade_contacto.html";
     public static final String URL_PPADE_COHORTE = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/ppade.json";
+
+    public static final String URL_INSERTAR_USUARIO = "insertarUsuario";
 }

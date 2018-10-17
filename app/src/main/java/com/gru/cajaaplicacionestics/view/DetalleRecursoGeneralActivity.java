@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
@@ -83,9 +84,14 @@ public class DetalleRecursoGeneralActivity extends AppCompatActivity
             public void onClick(View v) {
                 if(post.getLink()!="")
                 {
-                    Uri uri = Uri.parse(MetodosComunes.verificarUrl(post.getLink()));
-                    Intent i = new Intent(Intent.ACTION_VIEW,uri);
-                    startActivity(i);
+                    try{
+                        Uri uri = Uri.parse(MetodosComunes.verificarUrl(post.getLink()));
+                        Intent i = new Intent(Intent.ACTION_VIEW,uri);
+                        startActivity(i);
+
+                    }catch (Exception e){
+                        Toast.makeText(DetalleRecursoGeneralActivity.this, "No se pudo abrir el recurso, compruebe la conexión", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }

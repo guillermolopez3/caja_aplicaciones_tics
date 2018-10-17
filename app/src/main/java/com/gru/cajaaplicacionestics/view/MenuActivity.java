@@ -126,6 +126,10 @@ public class MenuActivity extends AppCompatActivity {
             startActivity(i);
             Log.e("menu","apreto");
         }
+        else if(item.getItemId() == R.id.nav_perfil)
+        {
+            startActivity(new Intent(MenuActivity.this,ProfileActivity.class));
+        }
         return super.onOptionsItemSelected(item);
     }
 

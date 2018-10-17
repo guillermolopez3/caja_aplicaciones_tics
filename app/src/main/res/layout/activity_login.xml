@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".view.LoginActivity">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="26sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Iniciar Sesión"/>
+
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/loginGoogle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"/>
+
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/loginFacebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:layout_marginBottom="30dp"/>
+
+
+    <TextView
+        android:id="@+id/txtAnonymus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continuar sin iniciar sesión"
+        android:gravity="center"/>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:indeterminate="true"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+</LinearLayout>

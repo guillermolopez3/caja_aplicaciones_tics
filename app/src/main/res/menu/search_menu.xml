@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:appcompat="http://schemas.android.com/tools">
 
-
     <item
-        android:title=""
+        android:title="Buscar"
         android:id="@+id/action_search"
         android:icon="@drawable/ic_action_search"
         app:showAsAction="always|collapseActionView" />
+
+    <item
+        android:id="@+id/nav_perfil"
+        android:title="Perfil"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_person" />
 
 </menu>
