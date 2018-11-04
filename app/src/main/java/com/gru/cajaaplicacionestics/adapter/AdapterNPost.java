@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.gru.cajaaplicacionestics.R;;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
+import com.gru.cajaaplicacionestics.backend.FavoritosBackend;
 import com.gru.cajaaplicacionestics.view.WebViewActivity;
 import com.gru.cajaaplicacionestics.model.ModelPost;
 import com.gru.cajaaplicacionestics.view.DetalleRecursoGeneralActivity;
@@ -33,12 +36,13 @@ public class AdapterNPost extends RecyclerView.Adapter<AdapterNPost.RecursosHold
 {
     private Activity activity;
     private List<ModelPost> array;
+    private boolean muestro_fav = false;
 
-    public AdapterNPost(Activity a)
+    public AdapterNPost(Activity a,boolean muestro_fav)
     {
-        Log.e("estoy en","constructor");
         activity=a;
         array=new ArrayList<>();
+        this.muestro_fav = muestro_fav;
     }
     @Override
     public AdapterNPost.RecursosHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -50,27 +54,28 @@ public class AdapterNPost extends RecyclerView.Adapter<AdapterNPost.RecursosHold
     public void onBindViewHolder(AdapterNPost.RecursosHolder holder, int position) {
         final ModelPost modelRecursos= array.get(position);
         holder.nombreRecurso.setText(modelRecursos.getTitle());
+        String img = modelRecursos.getImage();
 
-        if((modelRecursos.getCopete()!=null) && (modelRecursos.getCopete()!="") && (!modelRecursos.getCopete().equals("null"))) {
+        if((modelRecursos.getCopete()!=null) && (!modelRecursos.getCopete().equals("")) && (!modelRecursos.getCopete().equals("null"))) {
             holder.descripcionCorta.setText(modelRecursos.getCopete());
         }
         else {
             holder.descripcionCorta.setVisibility(View.GONE);
         }
 
+        try{
+            if((img!=null) && (!img.equals("")) && (!img.equals("null")))
+            {
+
+                Picasso.with(activity).load(MetodosComunes.verificarUrl(img)).into(holder.imagen);
+            }
+            else {
+                Picasso.with(activity).load(R.drawable.fondo_card).into(holder.imagen);
+            }
+        }catch (Exception e){}
 
 
-        String img = modelRecursos.getImage();
-        if((img!=null) && (img!="") && (!img.equals("null")))
-        {
-
-            Picasso.with(activity).load(MetodosComunes.verificarUrl(img)).into(holder.imagen);
-        }
-        else {
-            Picasso.with(activity).load(R.drawable.fondo_card).into(holder.imagen);
-        }
-
-        if((modelRecursos.getTags()!=null) && (modelRecursos.getTags()!="") && (!modelRecursos.getTags().equals("null")))
+        if((modelRecursos.getTags()!=null) && (!modelRecursos.getTags().equals("")) && (!modelRecursos.getTags().equals("null")))
         {
             holder.hastag.setText(modelRecursos.getTags());
         }else {
@@ -84,6 +89,54 @@ public class AdapterNPost extends RecyclerView.Adapter<AdapterNPost.RecursosHold
             public void onClick(View v) {
                 abrirDetalleCorrespondiente(modelRecursos.getId_tipo_activity(),modelRecursos);
                 MetodosComunes.enviarPostSeleccionado(String.valueOf(modelRecursos.getId()),activity);
+            }
+        });
+
+        if(muestro_fav){
+            if(MetodosComunes.estaLogueado())
+            {
+                holder.favBtn.setVisibility(View.VISIBLE);
+                manejoDeFavoritos(holder.favBtn,modelRecursos);
+            }else {
+                holder.favBtn.setVisibility(View.GONE);
+            }
+        }else {
+            holder.favBtn.setVisibility(View.GONE);
+        }
+    }
+
+    //manejo lo relacionado al btn fav, si viene q es fav desde BD lo pinto, si hago click lo agrego o no a fav
+    private void manejoDeFavoritos(final Button bnFav, final ModelPost model)
+    {
+        final Drawable star_empty = activity.getResources().getDrawable(R.drawable.star_empty);
+        final Drawable star_full = activity.getResources().getDrawable(R.drawable.star);
+
+        if(model.getFav() == null || !model.getFav())
+        {
+            bnFav.setCompoundDrawablesRelativeWithIntrinsicBounds(star_empty,null,null,null);
+        }else {
+
+            bnFav.setCompoundDrawablesRelativeWithIntrinsicBounds(star_full,null,null,null);
+        }
+
+        bnFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Drawable x = bnFav.getCompoundDrawables()[0];
+
+                if(x.getConstantState().equals(star_full.getConstantState()))
+                {
+                    bnFav.setCompoundDrawablesRelativeWithIntrinsicBounds(star_empty,null,null,null);
+                    model.setFav(false);
+                    FavoritosBackend.quitarFav(model.getId(),activity);
+                    Log.e("fav","quito");
+                }else {
+                    bnFav.setCompoundDrawablesRelativeWithIntrinsicBounds(star_full,null,null,null);
+                    model.setFav(true);
+                    FavoritosBackend.insertarFav(model.getId(),activity);
+                    Log.e("fav","agrego");
+                }
+
             }
         });
     }
@@ -192,6 +245,7 @@ public class AdapterNPost extends RecyclerView.Adapter<AdapterNPost.RecursosHold
         private ImageView icono;
         private Button hastag;
         private CardView cardView;
+        private Button favBtn;
         public RecursosHolder(View itemView) {
             super(itemView);
             nombreRecurso     = itemView.findViewById(R.id.nombreCardRecursos);
@@ -200,6 +254,8 @@ public class AdapterNPost extends RecyclerView.Adapter<AdapterNPost.RecursosHold
             cardView          = itemView.findViewById(R.id.cardRecursos);
             imagen            = itemView.findViewById(R.id.imagenCardRecursos);
             icono             = itemView.findViewById(R.id.iconoCateg);
+            favBtn            = itemView.findViewById(R.id.btnFav);
+            //imgFav            = itemView.findViewById(R.id.btnFav);
         }
     }
 

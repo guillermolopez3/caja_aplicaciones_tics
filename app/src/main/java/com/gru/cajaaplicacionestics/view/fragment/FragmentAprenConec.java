@@ -43,7 +43,7 @@ public class FragmentAprenConec extends Fragment implements PaginationErrorCallB
             pullToLoadView.setVisibility(View.VISIBLE);
         }
 
-        new PaginacionPost(getActivity(),pullToLoadView,seccion).iniciarPaginacion();
+        new PaginacionPost(getActivity(),pullToLoadView,seccion,true).iniciarPaginacion();
     }
 
     @Override

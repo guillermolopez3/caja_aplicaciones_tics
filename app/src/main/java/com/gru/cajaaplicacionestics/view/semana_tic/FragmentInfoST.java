@@ -46,7 +46,7 @@ public class FragmentInfoST extends Fragment
         progressBar = view.findViewById(R.id.progress);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        adapter = new AdapterNPost(getActivity());
+        adapter = new AdapterNPost(getActivity(),true);
         cargarLista();
         recyclerView.setAdapter(adapter);
 

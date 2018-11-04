@@ -46,16 +46,15 @@ public class PaginacionPost
     private int TOTAL_PAGES=1;
 
 
-    public PaginacionPost(Activity activity, PullToLoadView pullToLoadView,int seccion)
+    public PaginacionPost(Activity activity, PullToLoadView pullToLoadView,int seccion,boolean muestro_fav)
     {
         this.activity = activity;
         this.pullToLoadView = pullToLoadView;
         this.seccion=seccion;
         recyclerView = pullToLoadView.getRecyclerView();
         recyclerView.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false));
-        adapter= new AdapterNPost(activity);
+        adapter= new AdapterNPost(activity,muestro_fav);
         recyclerView.setAdapter(adapter);
-
 
         mCallback=(PaginationErrorCallBack)activity;
     }
@@ -159,7 +158,7 @@ public class PaginacionPost
             @Override
             public void onLoadMore() {
                 PAGINA_ACTUAL++;
-                cargarListaAprenderConectados();
+               // cargarListaAprenderConectados();
             }
 
             //evento ni bien ingresa y cuando haces swipe para arriba
@@ -169,7 +168,7 @@ public class PaginacionPost
                 adapter.clear(); //limpio el adapter
                 hasLoadedAll=false;
                 PAGINA_ACTUAL=1; //reinicio el contador
-                cargarListaAprenderConectados();
+                //cargarListaAprenderConectados();
 
             }
 
@@ -229,20 +228,58 @@ public class PaginacionPost
         pullToLoadView.initLoad();
     }
 
+    public void iniciarPaginacionFav()
+    {
+        Log.e("estoy en","paginacion fav");
+        pullToLoadView.isLoadMoreEnabled(true);
+
+
+        pullToLoadView.setPullCallback(new PullCallback() {
+            @Override
+            public void onLoadMore() {
+                PAGINA_ACTUAL++;
+                cargarListaFav();
+
+            }
+
+            //evento ni bien ingresa y cuando haces swipe para arriba
+            @Override
+            public void onRefresh() {
+                Log.e("estoy en","onLoadMore ");
+                adapter.clear(); //limpio el adapter
+                hasLoadedAll=false;
+                PAGINA_ACTUAL=1; //reinicio el contador
+                cargarListaFav();
+
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+
+            @Override
+            public boolean hasLoadedAllItems() {
+                return hasLoadedAll;
+            }
+        });
+        pullToLoadView.initLoad();
+    }
+
+
     public void cargarLista()
     {
+        final String URL = FavoritosBackend.getUrlAprenderConectados(PAGINA_ACTUAL,seccion);
         StringRequest request;
         VolleySingleton.getInstancia(activity).
                 addToRequestQueue(request= new StringRequest(Request.Method.GET,
-                        URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&seccion=" +seccion ,
+                        URL ,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 try {
                                     JSONObject jsonObject = new JSONObject(response); //convierte toda la respuesta en json
                                     JSONArray array= jsonObject.getJSONArray("data"); //lo que est en corchetes lo convierto en array
-                                    Log.e("rta",URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&seccion=" +seccion);
-                                    TOTAL_PAGES= Integer.parseInt(jsonObject.getString("last_page")); //obtengo del JsonObject el valor de la última pagina
 
                                     for(int i=0; i< array.length();i++)
                                     {
@@ -258,6 +295,14 @@ public class PaginacionPost
                                                 o.getString("description"),
                                                 o.getString("link")
                                         );
+                                        if(o.has("fav"))
+                                        {
+                                            if(o.getString("fav").equals("null")){
+                                                post.setFav(false);
+                                            }else {
+                                                post.setFav(true);
+                                            }
+                                        }
                                         adapter.add(post);
                                     }
                                     if(adapter.getArrayCount()==0)manejoError(false); //si no hay datos en el array, muestro el error
@@ -276,7 +321,7 @@ public class PaginacionPost
                         manejoError(true);
                     }
                 }));
-            request.setRetryPolicy(new RetryPolicy() {
+        request.setRetryPolicy(new RetryPolicy() {
             @Override
             public int getCurrentTimeout() {
                 FirebaseCrash.report(new Exception("Timeout" + URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&seccion=" +seccion  ));
@@ -295,7 +340,7 @@ public class PaginacionPost
         });
     }
 
-    public void cargarListaAprenderConectados()
+  /*  public void cargarListaAprenderConectados()
     {
         StringRequest request;
         VolleySingleton.getInstancia(activity).
@@ -359,22 +404,21 @@ public class PaginacionPost
 
             }
         });
-    }
+    }*/
 
-    public void cargarListaSearch(final String consulta)
+    public void cargarListaFav()
     {
+        final String URL = FavoritosBackend.getUrlFav(PAGINA_ACTUAL);
         StringRequest request;
-        Log.e("url search",URL_BASE + URL_SEARCH + "?page=" + PAGINA_ACTUAL + "&consulta=" +consulta);
         VolleySingleton.getInstancia(activity).
                 addToRequestQueue(request= new StringRequest(Request.Method.GET,
-                        URL_BASE + URL_SEARCH + "?page=" + PAGINA_ACTUAL + "&consulta=" +consulta ,
+                        URL,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 try {
                                     JSONObject jsonObject = new JSONObject(response); //convierte toda la respuesta en json
                                     JSONArray array= jsonObject.getJSONArray("data"); //lo que est en corchetes lo convierto en array
-                                    TOTAL_PAGES= Integer.parseInt(jsonObject.getString("last_page")); //obtengo del JsonObject el valor de la última pagina
 
                                     for(int i=0; i< array.length();i++)
                                     {
@@ -390,6 +434,90 @@ public class PaginacionPost
                                                 o.getString("description"),
                                                 o.getString("link")
                                         );
+                                        if(o.has("fav"))
+                                        {
+                                            if(o.getString("fav").equals("null")){
+                                                post.setFav(false);
+                                            }else {
+                                                post.setFav(true);
+                                            }
+                                        }
+                                        adapter.add(post);
+                                    }
+                                    if(adapter.getArrayCount()==0)manejoError(false); //si no hay datos en el array, muestro el error
+                                    pullToLoadView.setComplete();
+                                    isLoading=false;
+                                } catch (JSONException e) {
+                                    Log.e("error fav",e.getMessage());
+                                    manejoError(true);
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("error fav",error.toString());
+                        FirebaseCrash.report(new Exception("VolleyError" + error.toString()));
+                        manejoError(true);
+                    }
+                }));
+        request.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                FirebaseCrash.report(new Exception("Timeout" + URL));
+                return 8000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 8000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+    }
+
+
+
+    public void cargarListaSearch(final String consulta)
+    {
+        String URL = FavoritosBackend.getUrlsearch(PAGINA_ACTUAL,consulta);
+        StringRequest request;
+        Log.e("url search",URL);
+        VolleySingleton.getInstancia(activity).
+                addToRequestQueue(request= new StringRequest(Request.Method.GET,
+                        URL ,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response); //convierte toda la respuesta en json
+                                    JSONArray array= jsonObject.getJSONArray("data"); //lo que est en corchetes lo convierto en array
+
+                                    for(int i=0; i< array.length();i++)
+                                    {
+                                        JSONObject o = array.getJSONObject(i);
+                                        ModelPost post = new ModelPost(
+                                                o.getInt("id"),
+                                                o.getString("created_at"),
+                                                o.getString("title"),
+                                                o.getString("copete"),
+                                                o.getString("image"),
+                                                o.getString("tags"),
+                                                o.getInt("id_tipo_activity"),
+                                                o.getString("description"),
+                                                o.getString("link")
+                                        );
+                                        if(o.has("fav"))
+                                        {
+                                            if(o.getString("fav").equals("null")){
+                                                post.setFav(false);
+                                            }else {
+                                                post.setFav(true);
+                                            }
+                                        }
                                         adapter.add(post);
                                     }
                                     if(adapter.getArrayCount()==0)manejoError(false); //si no hay datos en el array, muestro el error

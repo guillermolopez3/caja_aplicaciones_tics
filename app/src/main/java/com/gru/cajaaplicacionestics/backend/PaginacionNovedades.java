@@ -49,7 +49,7 @@ public class PaginacionNovedades
         this.pullToLoadView = pullToLoadView;
         recyclerView = pullToLoadView.getRecyclerView();
         recyclerView.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false));
-        adapter= new AdapterNPost(activity);
+        adapter= new AdapterNPost(activity,true);
         recyclerView.setAdapter(adapter);
 
 
@@ -100,19 +100,16 @@ public class PaginacionNovedades
 
     public void cargarLista()
     {
+        String URL = FavoritosBackend.getUrlNovedades(PAGINA_ACTUAL,año);
         Request request;
         VolleySingleton.getInstancia(activity).
-                addToRequestQueue(request = new StringRequest(Request.Method.GET,URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&ano=" + año
-                         ,
+                addToRequestQueue(request = new StringRequest(Request.Method.GET,URL,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 try {
                                     JSONObject jsonObject = new JSONObject(response); //convierte toda la respuesta en json
-                                    //JSONArray array= jsonObject.getJSONArray("data"); //lo que est en corchetes lo convierto en array
                                     JSONArray array= jsonObject.getJSONArray("data"); //lo que est en corchetes lo convierto en array
-
-                                   // TOTAL_PAGES= Integer.parseInt(jsonObject.getString("last_page")); //obtengo del JsonObject el valor de la última pagina
 
                                     for(int i=0; i< array.length();i++)
                                     {
@@ -128,14 +125,23 @@ public class PaginacionNovedades
                                                 o.getString("description"),
                                                 o.getString("link")
                                         );
+                                        if(o.has("fav"))
+                                        {
+                                            if(o.getString("fav").equals("null")){
+                                                post.setFav(false);
+                                            }else {
+                                                post.setFav(true);
+                                            }
+
+                                        }
+
                                         adapter.add(post);
                                     }
-                                    //if(adapter.getArrayCount()==0)manejoError(false); //si no hay datos en el array, muestro el error
                                     pullToLoadView.setComplete();
                                     isLoading=false;
                                 } catch (JSONException e) {
                                     Log.e("error",e.getMessage());
-                                   // manejoError(true);
+                                    // manejoError(true);
                                 }
                             }
                         }, new Response.ErrorListener() {
@@ -143,7 +149,7 @@ public class PaginacionNovedades
                     public void onErrorResponse(VolleyError error) {
                         Log.e("error",error.toString());
                         FirebaseCrash.report(new Exception("VooleyError " + error.toString() ));
-                       // manejoError(true);
+                        // manejoError(true);
                     }
                 }));
         request.setRetryPolicy(new RetryPolicy() {

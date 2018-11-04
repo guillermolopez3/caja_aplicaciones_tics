@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.google.firebase.auth.FirebaseAuth;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.view.ReclamosActivity;
 import com.gru.cajaaplicacionestics.view.EnviarRecursosActivity;
@@ -130,6 +131,11 @@ public class MetodosComunes
             imagenError.setImageResource(R.drawable.sin_conexion);
             titleError.setText("Lo sentimos! Hubo un problema. Verifique la conexión a internet");
             btnReintentar.setVisibility(View.VISIBLE);
+        }else if(accion.equals("sinFav")){
+            imagenError.setVisibility(View.VISIBLE);
+            imagenError.setImageResource(R.drawable.search_error);
+            titleError.setText("Todavía no cargaste ningún favorito");
+            btnReintentar.setVisibility(View.GONE);
         }
 
     }
@@ -204,5 +210,17 @@ public class MetodosComunes
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
     }
+
+    public static boolean estaLogueado()
+    {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if(auth.getCurrentUser() != null)
+        {
+            return true; //usuario logueado
+        }else {
+            return false;
+        }
+    }
+
 
 }

@@ -18,6 +18,7 @@ public class ModelPost implements Serializable
     private int id_tipo_activity;
     private String description;
     private String link;
+    private Boolean fav;
 
     public ModelPost(){}
 
@@ -43,6 +44,17 @@ public class ModelPost implements Serializable
         this.link = link;
     }
 
+    public ModelPost(int id, String title, String copete, String image, int id_tipo_activity, String description, String link, boolean fav) {
+        this.id = id;
+        this.title = title;
+        this.copete = copete;
+        this.image = image;
+        this.id_tipo_activity = id_tipo_activity;
+        this.description = description;
+        this.link = link;
+        this.fav = fav;
+    }
+
     public ModelPost(int id, String created_at, String title, String copete, String image, String tags) {
         this.id = id;
         this.created_at = created_at;
@@ -56,6 +68,14 @@ public class ModelPost implements Serializable
         this.id = id;
         this.image = image;
         this.link = link;
+    }
+
+    public Boolean getFav() {
+        return fav;
+    }
+
+    public void setFav(Boolean fav) {
+        this.fav = fav;
     }
 
     public int getId() {

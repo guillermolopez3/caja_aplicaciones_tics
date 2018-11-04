@@ -42,7 +42,7 @@ public class NEFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerFragmentNe);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        adapter = new AdapterNPost(getActivity());
+        adapter = new AdapterNPost(getActivity(),false);
         cargarArray();
         recyclerView.setAdapter(adapter);
 

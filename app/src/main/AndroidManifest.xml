@@ -113,6 +113,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.MenuActivity" />
         </activity>
+        <activity android:name=".view.qr.QrReadActivity"/>
     </application>
 
 </manifest>

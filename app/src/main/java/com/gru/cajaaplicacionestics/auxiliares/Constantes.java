@@ -11,10 +11,23 @@ public class Constantes
     public static final String URL_COLE = "getColegios";
     public static final String URL_NUEVO_RECURSO = "nuevoRecurso";
 
+    public static final String URL_GET_NOVEDADES_FAV = "getAllNovedadesConFav";
+    public static final String URL_GET_RECURSOS_DIDAC_FAV = "getPostEspacioDidaConFav";
+    public static final String URL_GET_APRENDER_CONECTADOS_FAV = "getAprenderConectadosConFav";
+    public static final String URL_SEARCH_FAV = "getSearchFav";
+    public static final String URL_GET_ALL_FAV = "getAllFav";
+
+    //novedades
+    public static final String URL_GET_ALL_NOVEDADES = "posts/getNovedades";
+
     //url ppade
     public static final String URL_PPADE_PRESENTACION = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/view/ppade.html";
     public static final String URL_PPADE_CONTACTO = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/view/ppade_contacto.html";
     public static final String URL_PPADE_COHORTE = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/ppade.json";
 
     public static final String URL_INSERTAR_USUARIO = "insertarUsuario";
+
+    //fav
+    public static final String URL_INSERTAR_FAV = "insertarFav";
+    public static final String URL_QUITAR_FAV = "quitarFav";
 }

@@ -58,7 +58,7 @@ public class NEActivity extends AppCompatActivity implements PaginationErrorCall
         {
             pullToLoadView.setVisibility(View.VISIBLE);
         }
-        new PaginacionPost(this,pullToLoadView,2).iniciarPaginacionNe(id_seccionNE);
+        new PaginacionPost(this,pullToLoadView,2,false).iniciarPaginacionNe(id_seccionNE);
 
     }
 

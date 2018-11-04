@@ -46,14 +46,15 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="10dp">
 
-
             <TextView
                 android:id="@+id/nombreCardRecursos"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:text="Nombre"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+
 
             <TextView
                 android:id="@+id/descripcionCardRecursos"
@@ -62,12 +63,43 @@
                 android:maxLines="3"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
 
-            <Button
-                android:id="@+id/buttonCardRecursos"
-                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="wrap_content"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/black_overlay"/>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="#PRIMARIA" />
+                android:weightSum="10"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonCardRecursos"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:gravity="left|center"
+                    android:text="#PRIMARIA" />
+
+                <Button
+                    android:id="@+id/btnFav"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:drawableLeft="@drawable/star_empty"
+
+                    android:textSize="13sp"
+                    android:text="Favoritos"
+                    android:textAllCaps="false"
+                    android:background="@color/transparent"
+                    />
+
+
+            </LinearLayout>
+
         </LinearLayout>
 
 

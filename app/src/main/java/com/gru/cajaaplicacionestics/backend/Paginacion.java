@@ -49,7 +49,7 @@ public class Paginacion
     int PAGINA_ACTUAL=1;
 
 
-    public Paginacion(Activity activity, PullToLoadView pullToLoadView,int seccion) {
+    /*public Paginacion(Activity activity, PullToLoadView pullToLoadView,int seccion) {
         this.activity = activity;
         this.pullToLoadView = pullToLoadView;
         this.seccion=seccion;
@@ -58,7 +58,7 @@ public class Paginacion
         adapter= new AdapterPost(activity,new ArrayList<NewPost>());
         recyclerView.setAdapter(adapter);
 
-    }
+    }*/
 
 
     public Paginacion(Activity activity, PullToLoadView pullToLoadView) {
@@ -66,12 +66,12 @@ public class Paginacion
         this.pullToLoadView = pullToLoadView;
         recyclerView = pullToLoadView.getRecyclerView();
         recyclerView.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false));
-        m_adapter= new AdapterNPost(activity);
+        m_adapter= new AdapterNPost(activity,true);
         recyclerView.setAdapter(m_adapter);
 
     }
 
-    public void iniciarPaginacion()
+   /* public void iniciarPaginacion()
     {
         pullToLoadView.isLoadMoreEnabled(true);
 
@@ -112,9 +112,9 @@ public class Paginacion
             }
         });
         pullToLoadView.initLoad();
-    }
+    }*/
 
-    public void iniciarPaginacionBusqueda(String palabra)
+    /*public void iniciarPaginacionBusqueda(String palabra)
     {
         LIMIT=0;
         adapter.clear(); //limpio el adapter
@@ -158,9 +158,9 @@ public class Paginacion
             }
         });
         pullToLoadView.initLoad();
-    }
+    }*/
 
-    public void iniciarPaginacionFiltrada(final String web, final String video, final String audio, final String pdf)
+   /* public void iniciarPaginacionFiltrada(final String web, final String video, final String audio, final String pdf)
     {
         LIMIT=0;
         adapter.clear(); //limpio el adapter
@@ -204,7 +204,7 @@ public class Paginacion
             }
         });
         pullToLoadView.initLoad();
-    }
+    }*/
 
     public void iniciarPaginacionRecursosxNivel(final int nivel)
     {
@@ -458,11 +458,11 @@ public class Paginacion
 
     private void cargarListaRecursosXNivel(int nivel)
     {
-        Log.e("url",URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&level=" + nivel );
+        String URL = FavoritosBackend.getUrlEspacioDidactico(PAGINA_ACTUAL,nivel);
+        Log.e("url",URL );
         StringRequest request;
         VolleySingleton.getInstancia(activity).
-                addToRequestQueue(request = new StringRequest(Request.Method.GET,
-                        URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&level=" + nivel,
+                addToRequestQueue(request = new StringRequest(Request.Method.GET,URL,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -484,6 +484,14 @@ public class Paginacion
                                                 o.getString("description"),
                                                 o.getString("link")
                                         );
+                                        if(o.has("fav"))
+                                        {
+                                            if(o.getString("fav").equals("null")){
+                                                post.setFav(false);
+                                            }else {
+                                                post.setFav(true);
+                                            }
+                                        }
                                         m_adapter.add(post);
                                     }
                                     pullToLoadView.setComplete();

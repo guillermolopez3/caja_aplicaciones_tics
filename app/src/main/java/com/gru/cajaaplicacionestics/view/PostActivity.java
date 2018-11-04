@@ -61,7 +61,7 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
             iniciarPaginacion();
         }
 
-        if(seccion.equals("canal"))
+        if(seccion.equals("canal") || seccion.equals("fav"))
         {
             FloatingActionsMenu floatingActionsMenu = findViewById(R.id.menu_fab);
             floatingActionsMenu.setVisibility(View.GONE);
@@ -79,10 +79,14 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
         }
         if(seccion.equals("ac")) //ac= aprender conectados
         {
-            new PaginacionPost(this,pullToLoadView,idSeccionSeleccionada()).iniciarPaginacionAprenderConectados();
+            new PaginacionPost(this,pullToLoadView,idSeccionSeleccionada(),true).iniciarPaginacionAprenderConectados();
+        }
+        else if(seccion.equals("fav")){
+            Log.e("inicio", "pag fav");
+            new PaginacionPost(this,pullToLoadView,idSeccionSeleccionada(),true).iniciarPaginacionFav();
         }
         else {
-            new PaginacionPost(this,pullToLoadView,idSeccionSeleccionada()).iniciarPaginacion();
+            new PaginacionPost(this,pullToLoadView,idSeccionSeleccionada(),true).iniciarPaginacion();
         }
 
 
@@ -91,7 +95,7 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
     private void iniciarPaginacionSearch()
     {
         showRecyclerOrInformation(true);
-        new PaginacionPost(PostActivity.this,pullToLoadView,idSeccionSeleccionada());
+        new PaginacionPost(PostActivity.this,pullToLoadView,idSeccionSeleccionada(),true);
 
     }
 
@@ -101,7 +105,7 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
         int id=1;
         if(seccion.equals("pd"))
         {
-           id=1;
+            id=1;
         }
         else if(seccion.equals("ci")){
             id=2;
@@ -111,6 +115,9 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
         }
         else if(seccion.equals("canal")){
             id=6; //6 es el id en la BD del canañ de youtube
+        }
+        else if(seccion.equals("fav")){
+            id=7;
         }
         return id;
     }
@@ -132,7 +139,7 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
             @Override
             public boolean onQueryTextSubmit(String query) {
                 showRecyclerOrInformation(false);
-                new PaginacionPost(PostActivity.this,pullToLoadView,idSeccionSeleccionada()).iniciarPaginacionSearch(query);
+                new PaginacionPost(PostActivity.this,pullToLoadView,idSeccionSeleccionada(),true).iniciarPaginacionSearch(query);
                 searchView.clearFocus();
                 return true;
             }
@@ -195,26 +202,33 @@ public class PostActivity extends AppCompatActivity implements PaginationErrorCa
                 else
                 {
                     MetodosComunes.manejarActivityError(this,"buscarSinRecursos"); //busco y no encontre nada
-               }
+                }
             }
             else
             {
-                MetodosComunes.manejarActivityError(this,"sinConexion");
+                if(seccion.equals("fav"))
+                {
+                    MetodosComunes.manejarActivityError(this,"sinFav"); //busco y no encontre nada
+                }
+                else{
 
-                btnReintentar= findViewById(R.id.error_btn_retry);
-                btnReintentar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        errorLayout.setVisibility(View.GONE);
-                        iniciarPaginacion();
-                    }
-                });
+                    MetodosComunes.manejarActivityError(this,"sinConexion");
+
+                    btnReintentar= findViewById(R.id.error_btn_retry);
+                    btnReintentar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            errorLayout.setVisibility(View.GONE);
+                            iniciarPaginacion();
+                        }
+                    });
+                }
 
             }
         }
         else
         {
-           Snackbar.make(coordinatorLayout, "Problemas de conexión", Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(coordinatorLayout, "Problemas de conexión", Snackbar.LENGTH_INDEFINITE)
                     .show();
         }
 

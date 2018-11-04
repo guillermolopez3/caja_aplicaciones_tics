@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CajaAplicacionesTics.iml" filepath="$PROJECT_DIR$/CajaAplicacionesTics.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/caja_aplicaciones_tics.iml" filepath="$PROJECT_DIR$/caja_aplicaciones_tics.iml" />
     </modules>
   </component>
 </project>
