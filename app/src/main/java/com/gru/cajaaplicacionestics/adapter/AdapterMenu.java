@@ -20,6 +20,7 @@ import com.gru.cajaaplicacionestics.view.ne.NuestraEscuelaMenuActivity;
 import com.gru.cajaaplicacionestics.view.PostActivity;
 import com.gru.cajaaplicacionestics.view.RecursosXNivelActivity;
 import com.gru.cajaaplicacionestics.view.prueba.Prueba;
+import com.gru.cajaaplicacionestics.view.prueba.PruebaInfiniteScroll;
 import com.gru.cajaaplicacionestics.view.qr.QrReadActivity;
 import com.squareup.picasso.Picasso;
 
@@ -103,8 +104,9 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.MenuHolder>
                 activity.startActivity(i);
                 break;
             case 7:
-                activity.startActivity(new Intent(activity,QrReadActivity.class));
+                //activity.startActivity(new Intent(activity,QrReadActivity.class));
                 //activity.startActivity(new Intent(activity, Prueba.class));
+                activity.startActivity(new Intent(activity, PruebaInfiniteScroll.class));
                 break;
 
         }
