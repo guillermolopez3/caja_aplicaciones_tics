@@ -3,7 +3,6 @@ package com.gru.cajaaplicacionestics.view;
 import androidx.annotation.Nullable;
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -30,9 +29,6 @@ public class NovedadActivity extends AppCompatActivity implements PaginationErro
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_novedad);
 
-        /*Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle("Novedades");*/
 
         MetodosComunes.showToolbar("Novedades",true,this);
 
@@ -42,8 +38,6 @@ public class NovedadActivity extends AppCompatActivity implements PaginationErro
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = findViewById(R.id.tabs);
-
-
         tabLayout.setupWithViewPager(mViewPager);
 
     }
@@ -66,11 +60,11 @@ public class NovedadActivity extends AppCompatActivity implements PaginationErro
             switch (position){
                 case 0:
                     fragment2018 = new FragmentNovedades();
-                    fragment2018.setArguments(sendYear("2018"));
+                    fragment2018.setArguments(sendYear("2019"));
                     return fragment2018;
                 case 1:
                     fragment2017 = new FragmentNovedades();
-                    fragment2017.setArguments(sendYear("2017"));
+                    fragment2017.setArguments(sendYear("2018"));
                     return fragment2017;
                 default:
                     return null;
@@ -91,9 +85,9 @@ public class NovedadActivity extends AppCompatActivity implements PaginationErro
         public CharSequence getPageTitle(int position) {
             switch (position){
                 case 0:
-                    return "Año 2018";
+                    return "Año 2019";
                 case 1:
-                    return "Año 2017";
+                    return "Año 2018";
             }
             return null;
         }

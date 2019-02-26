@@ -56,6 +56,10 @@ public class NEDrawerActivity extends AppCompatActivity
             navigationView.inflateMenu(R.menu.menu_ateneos);
             txtNav.setText("Ateneos didácticos");
         }
+        else if(menuMostrar.equals("formacion")){
+            navigationView.inflateMenu(R.menu.menu_formacion);
+            txtNav.setText("Formación Situada 2019");
+        }
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -90,6 +94,9 @@ public class NEDrawerActivity extends AppCompatActivity
         {
             cargarMenuAteneo(id);
         }
+        else if(menuMostrar.equals("formacion")){
+            cargarMenuFormacion(id);
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -115,19 +122,28 @@ public class NEDrawerActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
             getSupportActionBar().setTitle("Ateneo Modelo Aval");
+        }else if(menuMostrar.equals("formacion"))
+        {
+            bundle.putString("seccion","proyectando_2019");
+            fragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
+            getSupportActionBar().setTitle("Proyectando el año 2019");
         }
     }
 
     private void cargarMenuJornada(int id)
     {
-        if (id == R.id.nav_cronograma) {
+        //Poner formacion situada
+
+       /* if (id == R.id.nav_cronograma) {
             fragment = new NEFragment();
             bundle.putString("seccion","cronograma");
             fragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
             getSupportActionBar().setTitle("Cronograma 2018");
-        } else if (id == R.id.nav_jornadas) {
+        } else  if (id == R.id.nav_jornadas) {
             fragment = new NEFragment();
             bundle.putString("seccion","jornada");
             fragment.setArguments(bundle);
@@ -150,7 +166,7 @@ public class NEDrawerActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
             getSupportActionBar().setTitle("Recomendaciones para el 2018");
-        } else if (id == R.id.mat_apoyo) {
+        } else */if (id == R.id.mat_apoyo) {
             TabsFragment mFragment = new TabsFragment();
             /*bundle.putString("seccion","recomendaciones");
             fragment.setArguments(bundle);*/
@@ -185,6 +201,42 @@ public class NEDrawerActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
             getSupportActionBar().setTitle("Memo 15-18 Ateneo Didáctico");
+        }
+
+    }
+
+    private void cargarMenuFormacion(int id)
+    {
+        if (id == R.id.nav_formacion_intro) {
+            fragment = new NEFragment();
+            bundle.putString("seccion","proyectando_2019");
+            fragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
+            getSupportActionBar().setTitle("Proyectando el año 2019");
+        } else if (id == R.id.nav_formacion_aspectos) {
+            fragment = new NEFragment();
+            bundle.putString("seccion","formacion_aspectos");
+            fragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
+            getSupportActionBar().setTitle("Aspectos Priorizados");
+
+        } else if (id == R.id.nav_formacion_recomendacion) {
+            fragment = new NEFragment();
+            bundle.putString("seccion", "formacion_recomendacion");
+            fragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
+            getSupportActionBar().setTitle("Recomendaciones");
+        }
+        else if (id == R.id.nav_formacion_cronograma) {
+            fragment = new NEFragment();
+            bundle.putString("seccion", "cronograma_formacion");
+            fragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
+            getSupportActionBar().setTitle("Cronograma de Jornadas Institucionales");
         }
 
     }

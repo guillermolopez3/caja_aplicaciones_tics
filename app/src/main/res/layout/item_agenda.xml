@@ -60,7 +60,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="14dp"
-                android:src="@drawable/ic_disertante"
+                app:srcCompat="@drawable/ic_disertante"
                 android:layout_gravity="center"
                 android:layout_marginRight="2dp"/>
 
@@ -88,7 +88,7 @@
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:paddingLeft="2dp"
-                android:src="@drawable/ic_circulo_rojo" />
+                app:srcCompat="@drawable/ic_circulo_rojo" />
 
             <TextView
                 android:layout_width="wrap_content"

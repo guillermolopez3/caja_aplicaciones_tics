@@ -2,11 +2,13 @@ package com.gru.cajaaplicacionestics.view.qr;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.zxing.client.android.camera.CameraConfigurationUtils;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
@@ -22,7 +24,9 @@ public class QrReadActivity extends Activity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        qr = new IntentIntegrator(this);
+        qr = new IntentIntegrator(this).setCaptureActivity(CaptureActivityPortrait.class);
+        qr.setOrientationLocked(false);
+        qr.setPrompt("Escanea el código QR");
         qr.initiateScan();
 
     }
@@ -76,7 +80,7 @@ public class QrReadActivity extends Activity
     {
         Intent i;
         ModelPost p = new ModelPost();
-        p.setTitle("Experiencias Practicar");
+        p.setTitle("Experiencias PracTIC.ar");
         p.setLink(link);
         p.setCreated_at("05/11/2018");
         if(activity.equals("y")) //link de youtube

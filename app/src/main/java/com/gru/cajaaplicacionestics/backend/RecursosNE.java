@@ -10,6 +10,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.gru.cajaaplicacionestics.adapter.AdapterNPost;
 import com.gru.cajaaplicacionestics.model.ModelNE;
 import com.gru.cajaaplicacionestics.model.ModelPost;
+import com.gru.cajaaplicacionestics.nuestra_escuela.auxiliares.IReturnPeticionGet;
+import com.gru.cajaaplicacionestics.nuestra_escuela.model.SectionRecyclerNEModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +33,7 @@ public class RecursosNE
         cargarLista(act,url,nombre_array,adapter);
         return lista;
     }
+
 
     private static void cargarLista(Activity activity, String url_recurso, final String nombre_array, final AdapterNPost adapt)
     {
@@ -61,6 +64,7 @@ public class RecursosNE
                                         );
                                         adapt.add(post);
                                     }
+                                    //adapt.notifyDataSetChanged();
 
                                 } catch (JSONException e) {
                                     Log.e("error",e.getMessage());
@@ -77,4 +81,6 @@ public class RecursosNE
                     }
                 }));
     }
+
+
 }

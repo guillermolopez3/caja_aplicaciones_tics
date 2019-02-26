@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -22,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".view.prueba.Prueba"/>
         <activity android:name=".view.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,13 +35,20 @@
         <activity android:name=".view.EnviarRecursosActivity" />
         <activity android:name=".view.DetalleRecursoAudio" />
 
+
+        <service android:name=".service.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/KEY_API_YOUTUBE" />
-
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
-
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -113,7 +121,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.MenuActivity" />
         </activity>
-        <activity android:name=".view.qr.QrReadActivity"/>
+        <activity
+            android:name=".view.qr.QrReadActivity"
+            android:stateNotNeeded="false"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".view.qr.CaptureActivityPortrait"
+            android:stateNotNeeded="false"
+            android:theme="@style/zxing_CaptureTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".nuestra_escuela.DummyNEActivity" />
     </application>
 
 </manifest>

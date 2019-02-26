@@ -42,7 +42,7 @@ public class NEActivity extends AppCompatActivity implements PaginationErrorCall
         FloatingActionsMenu fab = findViewById(R.id.menu_fab);
         fab.setVisibility(View.GONE);
 
-        MetodosComunes.showToolbar(titulo,true,this);
+        MetodosComunes.showToolbar(titulo,false,this);
 
         iniciarPaginacion();
 
