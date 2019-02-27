@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.prueba.PruebaInfiniteScroll"></activity>
+        <activity android:name=".prueba_endless_scroll.PruebaInfiniteScroll"></activity>
         <activity android:name=".view.prueba.Prueba" />
         <activity android:name=".view.Splash">
             <intent-filter>

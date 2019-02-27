@@ -1,4 +1,4 @@
-package com.gru.cajaaplicacionestics.view.prueba;
+package com.gru.cajaaplicacionestics.prueba_endless_scroll;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,17 +8,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.firebase.crash.FirebaseCrash;
 import com.gru.cajaaplicacionestics.R;
-import com.gru.cajaaplicacionestics.adapter.AdapterPruebaInfinite;
 import com.gru.cajaaplicacionestics.backend.FavoritosBackend;
 import com.gru.cajaaplicacionestics.backend.VolleySingleton;
 import com.gru.cajaaplicacionestics.model.ModelPost;
@@ -35,7 +33,7 @@ public class PruebaInfiniteScroll extends AppCompatActivity
     private RecyclerView recyclerView;
     private  int pagina_actual = 1; //representa la pag que tiene q cargar
     private int ultima_pagina = 0;
-    private ArrayList<ModelPost> lista;
+    private ArrayList<Item> lista;
     private AdapterPruebaInfinite adapterPruebaInfinite;
 
     @Override
@@ -53,15 +51,16 @@ public class PruebaInfiniteScroll extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapterPruebaInfinite);
 
-        fetchData();
+        fetchData(true);
 
         //detecto el dezplazamiento
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 //detecto cuando llego al final de la lista
-                if(dy >0){
+                /*if(dy >0){
                     if(!recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN))
                     {
                         if(pagina_actual <= ultima_pagina){
@@ -69,18 +68,32 @@ public class PruebaInfiniteScroll extends AppCompatActivity
                             Log.e("deveria","cargar mas");
                         }
                     }
+                }*/
+                //TODO: fijarse si no aparece el progress al medio cuando sigo cargando paginas
+                if( (pagina_actual <= ultima_pagina) && !(hasFooter()) ){
+                    if(linearLayoutManager.findLastCompletelyVisibleItemPosition() >= linearLayoutManager.getItemCount() -2)
+                    {
+                        lista.add(new Footer());
+                        adapterPruebaInfinite.notifyDataSetChanged();
+                        fetchData(false);
+                    }
                 }
             }
         });
 
     }
 
+    public boolean hasFooter(){
+        return lista.get(lista.size() -1) instanceof Footer;
+    }
 
-    public void fetchData()
+
+    public void fetchData(boolean showProgress)
     {
         String URL = FavoritosBackend.getUrlNovedades(pagina_actual,"2018");
         Request request;
-        progressBar.setVisibility(View.VISIBLE);
+        if(showProgress) { progressBar.setVisibility(View.VISIBLE);}
+
         VolleySingleton.getInstancia(this).
                 addToRequestQueue(request = new StringRequest(Request.Method.GET,URL,
                         new Response.Listener<String>() {
@@ -97,7 +110,7 @@ public class PruebaInfiniteScroll extends AppCompatActivity
                                     for(int i=0; i< array.length();i++)
                                     {
                                         JSONObject o = array.getJSONObject(i);
-                                        ModelPost post = new ModelPost(
+                                        PruebaModelPost post = new PruebaModelPost(
                                                 o.getInt("id"),
                                                 o.getString("created_at"),
                                                 o.getString("title"),
@@ -116,6 +129,10 @@ public class PruebaInfiniteScroll extends AppCompatActivity
                                                 post.setFav(true);
                                             }
 
+                                        }
+
+                                        if(!lista.isEmpty() && lista.get(lista.size()-1) instanceof Footer){
+                                            lista.remove(lista.size()-1);
                                         }
 
                                         lista.add(post);

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.view.AprenderConectadosActivity;
 import com.gru.cajaaplicacionestics.view.NovedadActivity;
@@ -19,9 +18,7 @@ import com.gru.cajaaplicacionestics.view.PpadeNewActivity;
 import com.gru.cajaaplicacionestics.view.ne.NuestraEscuelaMenuActivity;
 import com.gru.cajaaplicacionestics.view.PostActivity;
 import com.gru.cajaaplicacionestics.view.RecursosXNivelActivity;
-import com.gru.cajaaplicacionestics.view.prueba.Prueba;
-import com.gru.cajaaplicacionestics.view.prueba.PruebaInfiniteScroll;
-import com.gru.cajaaplicacionestics.view.qr.QrReadActivity;
+import com.gru.cajaaplicacionestics.prueba_endless_scroll.PruebaInfiniteScroll;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
