@@ -7,8 +7,8 @@ android {
         applicationId "com.gru.cajaaplicacionestics"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 32
-        versionName "2.2.1"
+        versionCode 34
+        versionName "2.2.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -25,7 +25,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     implementation 'androidx.vectordrawable:vectordrawable:1.0.1'
-    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'com.google.firebase:firebase-messaging:17.4.0'
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-alpha4', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -42,7 +42,7 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.0'
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
     implementation 'com.getbase:floatingactionbutton:1.10.1'
-    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.github.barteksc:android-pdf-viewer:2.7.0'
     implementation 'com.github.tosslife:pullloadview:1.1.0'
