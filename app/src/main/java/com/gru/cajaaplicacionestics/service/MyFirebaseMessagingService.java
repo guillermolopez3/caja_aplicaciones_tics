@@ -17,7 +17,6 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.gru.cajaaplicacionestics.R;
-import com.gru.cajaaplicacionestics.view.prueba.Prueba;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,11 +34,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
         /*if(remoteMessage.getData().size() >0){
             type = "json";
             sendMyNotification(remoteMessage.getData().toString());
-        }
+        }*/
         if(remoteMessage.getNotification() != null){
             type = "message";
-            sendMyNotification(remoteMessage.getNotification().getBody());
-        }*/
+            sendMyNotification(remoteMessage.getNotification().getBody(),remoteMessage.getNotification().getTitle());
+        }
         //Log.e("click",remoteMessage.getNotification().getClickAction());
 
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -65,25 +64,30 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
         }
     }
 
-    private void sendMyNotification(String body)
+
+    private void sendMyNotification(String body, String titulo)
     {
-        String id="", msg="", title="", click="";
+        String msg="", title="";
         long notificatioId = System.currentTimeMillis();
 
         if(type.equals("json")){
             try{
                 JSONObject jsonObject = new JSONObject(body);
-                id = jsonObject.getString("id");
+                Log.e("json",jsonObject.toString());
+                title = jsonObject.getString("title");
                 msg = jsonObject.getString("body");
-                click = jsonObject.getString("click_action");
             }catch (JSONException e){
                 Log.e("exc",e.toString());}
         }
         else if(type.equals("message")){
             msg = body;
+            title = titulo;
         }
 
-        Intent intent = new Intent(this, Prueba.class);
+        String url = "http://www.igualdadycalidadcba.gov.ar/SIPEC-CBA/capacitacion-v2/capacitacion.php?opt=estatal";
+        //Intent intent = new Intent(this, WebViewActivity.class);
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) (Math.random() * 100), intent, 0);
 
@@ -96,7 +100,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
 
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Notification.Builder notificationBuilder = new Notification.Builder(this)
-                .setContentTitle("CajaTic")
+                .setContentTitle(title)
                 .setStyle(new Notification.BigTextStyle().bigText(msg))
                 .setContentText(msg)
                 .setAutoCancel(true)

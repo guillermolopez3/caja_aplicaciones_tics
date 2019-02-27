@@ -19,17 +19,18 @@ import java.util.TimerTask;
 public class Splash extends AppCompatActivity
 {
     private boolean estaAutenticado = false; //variable para saber si esta logueado el usuario
+    private boolean abroDesdePushNot = false;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
 
-        /*if(getIntent().hasExtra("valor") && getIntent().getStringExtra("valor").equals("abrir_activity")){
-            startActivity(new Intent(this,Prueba.class));
-            Toast.makeText(this, "recibo el pending", Toast.LENGTH_LONG).show();
-            //finish();
-        }*/
+        if(getIntent().hasExtra("valor") && getIntent().getStringExtra("valor").equals("abrir_activity")){
+            //startActivity(new Intent(this,Prueba.class));
+            //Toast.makeText(this, "recibo el pending", Toast.LENGTH_LONG).show();
+            abroDesdePushNot = true;
+        }
 
         //valido si el usuario esta logueado
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -63,7 +64,7 @@ public class Splash extends AppCompatActivity
 
     private void irAmenu()
     {
-        startActivity(new Intent(Splash.this,MenuActivity.class));
+        startActivity(new Intent(Splash.this,MenuActivity.class).putExtra("push",abroDesdePushNot));
         finish();
     }
 

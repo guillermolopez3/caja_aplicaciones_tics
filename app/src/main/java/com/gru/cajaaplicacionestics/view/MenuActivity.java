@@ -6,6 +6,8 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 public class MenuActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<ModelMenu> array;
+    private boolean abroNotifPush=false; //variable para ver si hice click en una notif push
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,17 @@ public class MenuActivity extends AppCompatActivity {
 
         }*/
         getSupportActionBar().setTitle("");
+
+        if(getIntent().getExtras()!= null)
+        {
+            abroNotifPush = getIntent().getBooleanExtra("push",false);
+            if(abroNotifPush){
+                String url = "http://www.igualdadycalidadcba.gov.ar/SIPEC-CBA/capacitacion-v2/capacitacion.php?opt=estatal";
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(intent);
+            }
+        }
     }
 
     //metodo para convertir los dp a pixel
