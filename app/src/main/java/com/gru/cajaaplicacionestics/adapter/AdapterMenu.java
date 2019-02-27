@@ -19,6 +19,7 @@ import com.gru.cajaaplicacionestics.view.PpadeNewActivity;
 import com.gru.cajaaplicacionestics.view.ne.NuestraEscuelaMenuActivity;
 import com.gru.cajaaplicacionestics.view.PostActivity;
 import com.gru.cajaaplicacionestics.view.RecursosXNivelActivity;
+import com.gru.cajaaplicacionestics.view.prueba.Prueba;
 import com.gru.cajaaplicacionestics.view.qr.QrReadActivity;
 import com.squareup.picasso.Picasso;
 
@@ -32,13 +33,11 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.MenuHolder>
 {
     Activity activity;
     ArrayList<ModelMenu> array;
-    private FirebaseAnalytics analytics;
 
-    public AdapterMenu(Activity a, ArrayList<ModelMenu> modelMenus,FirebaseAnalytics analytics)
+    public AdapterMenu(Activity a, ArrayList<ModelMenu> modelMenus)
     {
         activity=a;
         array= modelMenus;
-        this.analytics=analytics;
     }
     @Override
     public MenuHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -83,8 +82,6 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.MenuHolder>
                 break;
             case 3:
                 i = new Intent(activity,NuestraEscuelaMenuActivity.class);
-               // i.putExtra("seleccion","ci");
-                //i.putExtra("titulo","Conectar Igualdad");
                 params.putString("nombre_pantalla","NE");
                 activity.startActivity(i);
                 break;
@@ -107,10 +104,10 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.MenuHolder>
                 break;
             case 7:
                 activity.startActivity(new Intent(activity,QrReadActivity.class));
+                //activity.startActivity(new Intent(activity, Prueba.class));
                 break;
 
         }
-        analytics.logEvent("pantalla",params);
     }
 
     @Override

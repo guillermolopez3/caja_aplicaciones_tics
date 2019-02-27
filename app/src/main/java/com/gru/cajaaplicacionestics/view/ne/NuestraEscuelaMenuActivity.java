@@ -9,10 +9,11 @@ import android.widget.Button;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.nuestra_escuela.DummyNEActivity;
 
 public class NuestraEscuelaMenuActivity extends AppCompatActivity {
 
-    Button doc_a,apuntes,asistencia,noticias,certificados,contacto,circulo,ateneos, monitoreo;
+    Button doc_a,apuntes,asistencia,noticias,certificados,contacto,circulo,ateneos, monitoreo,recDig;
     Button jornadas;
     FirebaseAnalytics analytics;
 
@@ -23,6 +24,7 @@ public class NuestraEscuelaMenuActivity extends AppCompatActivity {
         analytics=FirebaseAnalytics.getInstance(this);
         final Bundle bundle = new Bundle();
 
+        recDig       = findViewById(R.id.btnRecDig);
         jornadas        = findViewById(R.id.btnJornadas);
         circulo         = findViewById(R.id.btnCirculo);
         doc_a           = findViewById(R.id.btnDocAcompa);
@@ -36,6 +38,7 @@ public class NuestraEscuelaMenuActivity extends AppCompatActivity {
 
         if(Build.VERSION.SDK_INT  < Build.VERSION_CODES.LOLLIPOP)
         {
+            recDig.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             jornadas.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             doc_a.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             apuntes.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -43,20 +46,35 @@ public class NuestraEscuelaMenuActivity extends AppCompatActivity {
             noticias.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             certificados.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             contacto.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            circulo.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+           // circulo.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             ateneos.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
 
-        jornadas.setOnClickListener(new View.OnClickListener() {
+        circulo.setVisibility(View.GONE);
+
+        recDig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(NuestraEscuelaMenuActivity.this,NEDrawerActivity.class);
-                i.putExtra("menu_mostrar","jornada");
+                Intent i = new Intent(NuestraEscuelaMenuActivity.this,DummyNEActivity.class);
+                i.putExtra("titulo","Recursos Digitales");
+                i.putExtra("vista","recursos");
                 startActivity(i);
             }
         });
 
-        circulo.setOnClickListener(new View.OnClickListener() {
+        jornadas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               /* Intent i = new Intent(NuestraEscuelaMenuActivity.this,NEDrawerActivity.class);
+                i.putExtra("menu_mostrar","jornada");
+                startActivity(i);*/
+               startActivity(new Intent(NuestraEscuelaMenuActivity.this,DummyNEActivity.class)
+               .putExtra("titulo","Jornada")
+               .putExtra("vista","jornadas"));
+            }
+        });
+
+        /*circulo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(NuestraEscuelaMenuActivity.this,NEFragmentGralActivity.class);
@@ -64,7 +82,7 @@ public class NuestraEscuelaMenuActivity extends AppCompatActivity {
                 intent.putExtra("titulo","Circulo de directores");
                 startActivity(intent);
             }
-        });
+        });*/
 
         ateneos.setOnClickListener(new View.OnClickListener() {
             @Override

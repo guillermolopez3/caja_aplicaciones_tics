@@ -4,63 +4,47 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.view.prueba.Prueba;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Created by guill on 10/05/2017.
- */
 
 public class Splash extends AppCompatActivity
 {
-    private long splashDelay = 3000;
-
-    private FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
-
-    private boolean estaAutenticado = false;
+    private boolean estaAutenticado = false; //variable para saber si esta logueado el usuario
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
 
-       // FirebaseApp.initializeApp(this);
+        /*if(getIntent().hasExtra("valor") && getIntent().getStringExtra("valor").equals("abrir_activity")){
+            startActivity(new Intent(this,Prueba.class));
+            Toast.makeText(this, "recibo el pending", Toast.LENGTH_LONG).show();
+            //finish();
+        }*/
 
         //valido si el usuario esta logueado
-        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseMessaging.getInstance().subscribeToTopic("informacion");
+        long splashDelay = 3000;
 
-        if(firebaseAuth.getCurrentUser() != null)
-        {
+        if(firebaseAuth.getCurrentUser() != null){
             estaAutenticado = true;
         }
-
-      /*  mAuthStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
-                    estaAutenticado = true;
-
-                }
-            }
-        };*/
 
         TimerTask task = new TimerTask() {
             @Override
             public void run()
             {
-                if(sharePref())
-                {
+                if(sharePref()){
                     irAmenu();
                 }else {
                     if(estaAutenticado){
@@ -90,23 +74,19 @@ public class Splash extends AppCompatActivity
     }
 
     //compueba si el usuario decidió ingresar en modo anonimo
-    private boolean sharePref()
-    {
+    private boolean sharePref(){
         SharedPreferences pref = getSharedPreferences("anon",MODE_PRIVATE);
-        boolean anon = pref.getBoolean("anon",false);
-        return  anon;
+        return  pref.getBoolean("anon",false);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        //firebaseAuth.addAuthStateListener(authStateListener);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        //firebaseAuth.removeAuthStateListener(authStateListener);
     }
 
 

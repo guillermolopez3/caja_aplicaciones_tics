@@ -19,9 +19,7 @@ public class NEFragment extends Fragment {
     AdapterNPost adapter;
     String seccion="cronograma";
 
-    public NEFragment() {
-        // Required empty public constructor
-    }
+    public NEFragment() {}
 
 
     @Override
@@ -95,7 +93,7 @@ public class NEFragment extends Fragment {
             RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
                     ,getActivity(),"ateneo_memo",adapter);
         }
-        // links para la semana tic
+        /*// links para la semana tic
         else if(seccion.equals("agenda"))
         {
             RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/semana_tic.json"
@@ -105,6 +103,10 @@ public class NEFragment extends Fragment {
         {
             RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/semana_tic.json"
                     ,getActivity(),"noticia",adapter);
+        }*/
+        else if(seccion.equals("formacion")){
+            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+                    ,getActivity(),seccion,adapter);
         }
         // fin semana tic
         else {

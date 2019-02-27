@@ -28,8 +28,8 @@ import org.json.JSONObject;
 
 public class PaginacionNovedades
 {
-    Activity activity;
-    RecyclerView recyclerView;
+    private Activity activity;
+    private RecyclerView recyclerView;
     private PullToLoadView pullToLoadView;
     private AdapterNPost adapter;
     private boolean isLoading=false;

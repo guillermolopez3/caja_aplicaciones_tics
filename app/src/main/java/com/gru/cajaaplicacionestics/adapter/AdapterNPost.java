@@ -66,7 +66,6 @@ public class AdapterNPost extends RecyclerView.Adapter<AdapterNPost.RecursosHold
         try{
             if((img!=null) && (!img.equals("")) && (!img.equals("null")))
             {
-
                 Picasso.with(activity).load(MetodosComunes.verificarUrl(img)).into(holder.imagen);
             }
             else {

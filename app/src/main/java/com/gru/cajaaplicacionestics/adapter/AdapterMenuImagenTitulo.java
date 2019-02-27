@@ -62,21 +62,7 @@ public class AdapterMenuImagenTitulo extends RecyclerView.Adapter<AdapterMenuIma
 
     private void cargarMenuST(viewHolder holder, final int position, ImagenTituloModel model )
     {
-        try{
-            switch (position)
-            {
-                case 0:
-                    Picasso.with(activity).load(R.drawable.mapas_st).into(holder.imagen);
-                    break;
-                case 1:
-                    Picasso.with(activity).load(R.drawable.agenda_st).into(holder.imagen);
-                    break;
-                case 2:
-                    Picasso.with(activity).load(R.drawable.info_st).into(holder.imagen);
-            }
-        }catch (Exception e){}
-
-        holder.titulo.setText(model.getTitulo());
+       holder.titulo.setText(model.getTitulo());
 
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,27 +92,6 @@ public class AdapterMenuImagenTitulo extends RecyclerView.Adapter<AdapterMenuIma
         });
     }
 
-    private void cargarSubMenuST(viewHolder holder, final int position, ImagenTituloModel model)
-    {
-        try{
-            Picasso.with(activity).load(R.drawable.info).into(holder.imagen);
-        }
-        catch (Exception ex){}
-
-        holder.titulo.setText(model.getTitulo());
-
-        holder.card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (position)
-                {
-                    case 0:
-                        activity.startActivity(new Intent(activity, MapsActivity.class));
-                        break;
-                }
-            }
-        });
-    }
 
     class viewHolder extends RecyclerView.ViewHolder
     {

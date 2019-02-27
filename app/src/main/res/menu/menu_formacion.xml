@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_formacion_intro"
+            android:title="Proyectando el 2019" />
+        <item
+            android:id="@+id/nav_formacion_aspectos"
+            app:showAsAction="always"
+            android:title="Aspectos Priorizados" />
+        <item
+            android:id="@+id/nav_formacion_recomendacion"
+            android:title="Recomendaciones" />
+        <item
+            android:id="@+id/nav_formacion_cronograma"
+            android:title="Cronograma Jornadas" />
+
+    </group>
+
+
+
+</menu>
