@@ -70,6 +70,7 @@ public class QrReadActivity extends Activity
         if(!dato.isEmpty())
         {
             int tamano = dato.length();
+            Log.e("dato",dato);
             String primera_letra = dato.substring(0,1);
             String link = dato.substring(2,tamano);
             abrirActivity(link,primera_letra);
