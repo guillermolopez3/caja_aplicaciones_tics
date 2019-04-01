@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.prueba.Prueba"/>
+        <activity android:name=".view.notificaciones.NotificacionesActivity"></activity>
+        <activity android:name=".view.prueba.Prueba" />
         <activity android:name=".view.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,13 +36,11 @@
         <activity android:name=".view.EnviarRecursosActivity" />
         <activity android:name=".view.DetalleRecursoAudio" />
 
-
         <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
