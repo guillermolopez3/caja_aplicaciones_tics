@@ -270,6 +270,7 @@ public class PaginacionPost
     public void cargarLista()
     {
         final String URL = FavoritosBackend.getUrlAprenderConectados(PAGINA_ACTUAL,seccion);
+        Log.e("URL AC",URL);
         StringRequest request;
         VolleySingleton.getInstancia(activity).
                 addToRequestQueue(request= new StringRequest(Request.Method.GET,

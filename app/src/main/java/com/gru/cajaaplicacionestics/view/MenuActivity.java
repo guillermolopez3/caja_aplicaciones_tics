@@ -14,19 +14,32 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
+import android.os.Handler;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.adapter.AdapterMenu;
 import com.gru.cajaaplicacionestics.model.ModelMenu;
+import com.gru.cajaaplicacionestics.view.notificaciones.NotificacionesActivity;
+
 import java.util.ArrayList;
 
 public class MenuActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<ModelMenu> array;
     private boolean abroNotifPush=false; //variable para ver si hice click en una notif push
+    private FloatingActionButton fab;
+
+    public static int MILISEGUNDOS_ESPERA = 4000;
+    private boolean fab_visible=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +47,7 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         recyclerView= findViewById(R.id.menuRecycler);
+        fab = findViewById(R.id.fab);
 
         llenarArray();
 
@@ -73,6 +87,14 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
+        ocultarFab();
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuActivity.this, NotificacionesActivity.class));
+            }
+        });
     }
 
     //metodo para convertir los dp a pixel
@@ -118,5 +140,30 @@ public class MenuActivity extends AppCompatActivity {
         array.add(new ModelMenu(R.drawable.qrlogo));
     }
 
+    //pasados los 3.5 seg se oculta
+    private void ocultarFab()
+    {
+        Handler handler= new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                fab.hide();
+                fab_visible=false;
+            }
+        },MILISEGUNDOS_ESPERA);
+    }
+
+    //evento al hacer click en la pantalla, dependiendo si se esta mostrando el fab o no es q se lanza el ocultar
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if(fab_visible==false)
+        {
+            Log.e("entra al if","false");
+            fab.show();
+            ocultarFab();
+            fab_visible=true;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 
 }

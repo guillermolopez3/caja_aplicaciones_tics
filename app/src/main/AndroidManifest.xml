@@ -22,7 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.notificaciones.NotificacionesActivity"></activity>
+        <activity android:name=".view.notificaciones.NotificacionesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MenuActivity" />
+        </activity>
         <activity android:name=".view.prueba.Prueba" />
         <activity android:name=".view.Splash">
             <intent-filter>
