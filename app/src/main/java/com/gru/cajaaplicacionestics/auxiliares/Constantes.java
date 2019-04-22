@@ -30,4 +30,7 @@ public class Constantes
     //fav
     public static final String URL_INSERTAR_FAV = "insertarFav";
     public static final String URL_QUITAR_FAV = "quitarFav";
+
+    //notificaciones
+    public static final String URL_NOTIFICACIONES = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/alertas.json";
 }

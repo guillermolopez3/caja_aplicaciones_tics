@@ -21,6 +21,7 @@
         android:roundIcon="@drawable/icono_fondo_bco"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic= "true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".view.notificaciones.NotificacionesActivity">
             <meta-data

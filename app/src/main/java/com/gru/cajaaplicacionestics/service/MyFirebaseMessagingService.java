@@ -17,12 +17,14 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.view.notificaciones.NotificacionesActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService
 {
@@ -35,6 +37,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
             type = "json";
             sendMyNotification(remoteMessage.getData().toString());
         }*/
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            configurarCanales();
+        }
         if(remoteMessage.getNotification() != null){
             type = "message";
             sendMyNotification(remoteMessage.getNotification().getBody(),remoteMessage.getNotification().getTitle());
@@ -50,7 +55,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void configurarCanales(){
-        CharSequence adminChannelName = "";
+        /*CharSequence adminChannelName = "";
         String adminChannelDescription = "";
 
         NotificationChannel adminChannel;
@@ -61,7 +66,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
         adminChannel.enableVibration(true);
         if (notificationManager != null) {
             notificationManager.createNotificationChannel(adminChannel);
-        }
+        }*/
+        CharSequence name = "name";
+        String description = "description";
+        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+        NotificationChannel channel = new NotificationChannel("id", name, importance);
+        channel.setDescription(description);
+        // Register the channel with the system; you can't change the importance
+        // or other notification behaviors after this
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
     }
 
 
@@ -85,9 +99,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
         }
 
         String url = "http://www.igualdadycalidadcba.gov.ar/SIPEC-CBA/capacitacion-v2/capacitacion.php?opt=estatal";
-        //Intent intent = new Intent(this, WebViewActivity.class);
+        Intent intent = new Intent(this, NotificacionesActivity.class);
         Uri uri = Uri.parse(url);
-        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+        //Intent intent = new Intent(Intent.ACTION_VIEW,uri);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) (Math.random() * 100), intent, 0);
 
@@ -101,15 +115,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Notification.Builder notificationBuilder = new Notification.Builder(this)
                 .setContentTitle(title)
-                .setStyle(new Notification.BigTextStyle().bigText(msg))
                 .setContentText(msg)
+                .setStyle(new Notification.BigTextStyle().bigText(msg))
+                .setSmallIcon(R.drawable.logo_blanco)
                 .setAutoCancel(true)
                 .setPriority(Notification.PRIORITY_HIGH)
                 .setDefaults(Notification.FLAG_AUTO_CANCEL | Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND)
-                //.setSound(soundUri)
+                .setSound(soundUri)
                 .setSmallIcon(currentapiVersion)
                 .setContentIntent(pendingIntent);
-        NotificationManager manager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        //NotificationManager manager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManagerCompat manager = NotificationManagerCompat.from(this);
         manager.notify((int) notificatioId, notificationBuilder.build());
     }
 }

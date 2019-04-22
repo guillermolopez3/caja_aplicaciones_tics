@@ -4,17 +4,40 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.firebase.crash.FirebaseCrash;
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.adapter.AdapterNPost;
 import com.gru.cajaaplicacionestics.adapter.AdapterNotificaciones;
+import com.gru.cajaaplicacionestics.auxiliares.Constantes;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
+import com.gru.cajaaplicacionestics.backend.VolleySingleton;
 import com.gru.cajaaplicacionestics.model.ModelNotificaciones;
+import com.gru.cajaaplicacionestics.model.ModelPost;
+import com.gru.cajaaplicacionestics.model.NewPost;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class NotificacionesActivity extends AppCompatActivity {
     RecyclerView recycler;
+    ProgressBar progressBar;
+    AdapterNotificaciones adapter;
+    ArrayList<ModelNotificaciones> lista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,26 +45,64 @@ public class NotificacionesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notificaciones);
 
         recycler = findViewById(R.id.recycler);
+        progressBar = findViewById(R.id.progress);
 
         MetodosComunes.showToolbar("Notificaciones",true,this);
 
-        AdapterNotificaciones adapter = new AdapterNotificaciones(getNot());
+        lista = new ArrayList<>();
+        adapter = new AdapterNotificaciones(lista, this);
 
         recycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         recycler.setHasFixedSize(true);
         recycler.setAdapter(adapter);
-
+        cargarLista();
     }
 
-    private ArrayList<ModelNotificaciones> getNot()
+    private void cargarLista()
     {
-        ArrayList<ModelNotificaciones> list = new ArrayList<>();
-        ModelNotificaciones model = new ModelNotificaciones("Primer Curso sobre programación en scratch","9/4/2019","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
-        list.add(model);
+        VolleySingleton.getInstancia(this).
+                addToRequestQueue(new StringRequest(Request.Method.GET,
+                        Constantes.URL_NOTIFICACIONES,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    //de esta manera me toma los acentos
+                                    response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    JSONArray array= jsonObject.getJSONArray("notificaciones");
 
-        model = new ModelNotificaciones("Segundo Curso","9/4/2019","Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.");
-        list.add(model);
+                                    for(int i=0; i< array.length();i++)
+                                    {
+                                        JSONObject o = array.getJSONObject(i);
+                                        ModelNotificaciones post = new ModelNotificaciones(
+                                                o.getString("titulo"),
+                                                o.getString("fecha"),
+                                                o.getString("nivel"),
+                                                o.getString("destinatario"),
+                                                o.getString("modalidad"),
+                                                o.getString("hs_cert"),
+                                                o.getBoolean("esNuevo"),
+                                                o.getString("link")
+                                        );
+                                        lista.add(post);
+                                    }
+                                    progressBar.setVisibility(View.GONE);
+                                    adapter.notifyDataSetChanged();
 
-        return list;
+                                } catch (JSONException e) {
+                                    Log.e("error",e.getMessage());
+                                   // e.printStackTrace();
+                                } catch (UnsupportedEncodingException e) {
+                                    //e.printStackTrace();
+                                }
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }));
     }
 }

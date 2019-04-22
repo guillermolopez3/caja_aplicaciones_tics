@@ -81,10 +81,11 @@ public class MenuActivity extends AppCompatActivity {
         {
             abroNotifPush = getIntent().getBooleanExtra("push",false);
             if(abroNotifPush){
-                String url = "http://www.igualdadycalidadcba.gov.ar/SIPEC-CBA/capacitacion-v2/capacitacion.php?opt=estatal";
-                Uri uri = Uri.parse(url);
-                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
-                startActivity(intent);
+//                String url = "http://www.igualdadycalidadcba.gov.ar/SIPEC-CBA/capacitacion-v2/capacitacion.php?opt=estatal";
+//                Uri uri = Uri.parse(url);
+//                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+//                startActivity(intent);
+                startActivity(new Intent(MenuActivity.this,NotificacionesActivity.class));
             }
         }
         ocultarFab();

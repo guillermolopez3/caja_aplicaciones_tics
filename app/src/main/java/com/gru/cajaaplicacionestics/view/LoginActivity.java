@@ -248,7 +248,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         {
             firebaseAuthWithGoogle(result.getSignInAccount()); //si se autentico en google bien autentico con firebase
         }else {
-            Toast.makeText(this, "Error al iniciar sesión", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error al iniciar sesión" , Toast.LENGTH_SHORT).show();
+            Log.e("error", result.getStatus().toString());
         }
     }
 
