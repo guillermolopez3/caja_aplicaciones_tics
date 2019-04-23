@@ -103,8 +103,8 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.MenuHolder>
                 activity.startActivity(i);
                 break;
             case 7:
-               // activity.startActivity(new Intent(activity,QrReadActivity.class));
-                activity.startActivity(new Intent(activity, Prueba.class));
+                activity.startActivity(new Intent(activity,QrReadActivity.class));
+                //activity.startActivity(new Intent(activity, Prueba.class));
                 break;
 
         }

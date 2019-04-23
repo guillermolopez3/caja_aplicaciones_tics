@@ -7,8 +7,8 @@ android {
         applicationId "com.gru.cajaaplicacionestics"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 34
-        versionName "2.2.3"
+        versionCode 36
+        versionName "2.2.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

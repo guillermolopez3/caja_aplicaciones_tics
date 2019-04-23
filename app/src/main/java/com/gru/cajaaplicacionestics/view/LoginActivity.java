@@ -150,7 +150,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
+                //todo verificar si en este metodo se puede hacer que el código sea mas chico
             }
         };
 

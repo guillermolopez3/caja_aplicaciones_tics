@@ -13,7 +13,12 @@ import android.os.Build;
 import android.os.Vibrator;
 import android.renderscript.BaseObj;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.gru.cajaaplicacionestics.R;
@@ -22,6 +27,7 @@ import com.gru.cajaaplicacionestics.view.notificaciones.NotificacionesActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -127,5 +133,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
         //NotificationManager manager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationManagerCompat manager = NotificationManagerCompat.from(this);
         manager.notify((int) notificatioId, notificationBuilder.build());
+    }
+
+    @Override
+    public void onNewToken(String token) {
+        super.onNewToken(token);
+        Log.e("new token", token);
     }
 }

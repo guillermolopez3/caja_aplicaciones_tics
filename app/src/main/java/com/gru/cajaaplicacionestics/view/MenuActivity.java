@@ -1,6 +1,8 @@
 package com.gru.cajaaplicacionestics.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
@@ -23,14 +25,29 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.adapter.AdapterMenu;
+import com.gru.cajaaplicacionestics.auxiliares.Constantes;
 import com.gru.cajaaplicacionestics.model.ModelMenu;
 import com.gru.cajaaplicacionestics.view.notificaciones.NotificacionesActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MenuActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -40,6 +57,8 @@ public class MenuActivity extends AppCompatActivity {
 
     public static int MILISEGUNDOS_ESPERA = 4000;
     private boolean fab_visible=true;
+    private FirebaseAuth firebaseAuth;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +69,8 @@ public class MenuActivity extends AppCompatActivity {
         fab = findViewById(R.id.fab);
 
         llenarArray();
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         AdapterMenu adapterMenu = new AdapterMenu(this,array);
         recyclerView.setAdapter(adapterMenu);
@@ -96,6 +117,8 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(new Intent(MenuActivity.this, NotificacionesActivity.class));
             }
         });
+
+        actualizarToken();
     }
 
     //metodo para convertir los dp a pixel
@@ -165,6 +188,71 @@ public class MenuActivity extends AppCompatActivity {
             fab_visible=true;
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    private void actualizarToken(){
+        try{
+            if(firebaseAuth != null){
+                String token = FirebaseInstanceId.getInstance().getToken();
+                String mail = firebaseAuth.getCurrentUser().getEmail();
+                String uid = firebaseAuth.getCurrentUser().getUid();
+                if(!sharePref())
+                {
+                    Log.e("datos token", token + "-" + mail + "-" + uid);
+                    enviarTokenBD(token, mail, uid);
+                }
+            }
+        }
+        catch (Exception e){}
+    }
+
+    private boolean sharePref(){
+        pref = getSharedPreferences("token",MODE_PRIVATE);
+        return  pref.getBoolean("token",false);
+    }
+
+    private void enviarTokenBD(final String token,final String mail, final String uuid)
+    {
+        String URL= Constantes.URL_BASE + Constantes.URL_UPDATE_TOKEN;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("respuesta",response.toString());
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String cod_rta= jsonObject.getString("estado");
+
+                            if(cod_rta.equals("ok"))
+                            {
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putBoolean("token",true);
+                                editor.commit();
+                            }
+
+                        } catch (JSONException e) {
+                            Log.e("error actualizar usuario", e.toString());
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error actualizar usuario", error.toString());
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+                HashMap<String,String> hashMap = new HashMap<>();
+                hashMap.put("mail",mail);
+                hashMap.put("id_social",uuid);
+                hashMap.put("token",token);
+                return hashMap;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
 }

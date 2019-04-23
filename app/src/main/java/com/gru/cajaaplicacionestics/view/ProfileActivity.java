@@ -142,6 +142,8 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
                 }
             }
         };
+
+
     }
 
     private void logueadoConFace()
@@ -184,6 +186,7 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
             Toast.makeText(this, "Se cerró la sesión", Toast.LENGTH_SHORT).show();
         }
         actualizarSharePreff();
+        eliminarPrefToken();
         irMenuPpal();
     }
 
@@ -202,6 +205,7 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
             }
         });
         actualizarSharePreff();
+        eliminarPrefToken();
     }
 
     private void mostrarDatosFace()
@@ -301,5 +305,14 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    //elimino de las shared pref el valor para decir q el token ya lo tengo
+    private void eliminarPrefToken()
+    {
+        SharedPreferences pref = getSharedPreferences("token",MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean("token",false);
+        editor.commit();
     }
 }

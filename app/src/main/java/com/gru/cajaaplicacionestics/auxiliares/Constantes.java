@@ -26,6 +26,7 @@ public class Constantes
     public static final String URL_PPADE_COHORTE = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/ppade.json";
 
     public static final String URL_INSERTAR_USUARIO = "insertarUsuario";
+    public static final String URL_UPDATE_TOKEN = "updateToken";
 
     //fav
     public static final String URL_INSERTAR_FAV = "insertarFav";
