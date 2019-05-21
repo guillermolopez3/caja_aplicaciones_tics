@@ -63,18 +63,20 @@ public class PpadeNewActivity extends AppCompatActivity implements PaginationErr
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return  abrirFragment("quinta_co","Quinta cohorte");
+                    return  abrirFragment("sexta_co","Sexta cohorte");
                 case 1:
-                    return  abrirFragment("cuarta_co","Cuarta cohorte");
+                    return  abrirFragment("quinta_co","Quinta cohorte");
                 case 2:
-                   return abrirFragment("tercera_co","Tercera cohorte");
+                    return  abrirFragment("cuarta_co","Cuarta cohorte");
                 case 3:
-                    return abrirFragment("segunda_co","Segunda cohorte");
+                   return abrirFragment("tercera_co","Tercera cohorte");
                 case 4:
-                    return abrirFragment("primera_co","Primera cohorte");
+                    return abrirFragment("segunda_co","Segunda cohorte");
                 case 5:
-                    return new FragmentEquipo();
+                    return abrirFragment("primera_co","Primera cohorte");
                 case 6:
+                    return new FragmentEquipo();
+                case 7:
                     return new FragmentPresentacion();
                 default:
                     return null;
@@ -103,18 +105,20 @@ public class PpadeNewActivity extends AppCompatActivity implements PaginationErr
         public CharSequence getPageTitle(int position) {
             switch (position){
                 case 0:
-                    return "5ª Cohorte";
+                    return "6ª Cohorte";
                 case 1:
-                    return "4ª Cohorte";
+                    return "5ª Cohorte";
                 case 2:
-                    return "3ª Cohorte";
+                    return "4ª Cohorte";
                 case 3:
-                    return "2ª Cohorte";
+                    return "3ª Cohorte";
                 case 4:
-                    return "1ª Cohorte";
+                    return "2ª Cohorte";
                 case 5:
-                    return "Equipo y contacto";
+                    return "1ª Cohorte";
                 case 6:
+                    return "Equipo y contacto";
+                case 7:
                     return "Presentación";
             }
             return null;
@@ -122,7 +126,7 @@ public class PpadeNewActivity extends AppCompatActivity implements PaginationErr
 
         @Override
         public int getCount() {
-            return 7;
+            return 8;
         }
 
     }
