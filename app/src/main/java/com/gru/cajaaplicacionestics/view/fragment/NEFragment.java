@@ -52,45 +52,45 @@ public class NEFragment extends Fragment {
     {
         Log.e("seccion en fragment", seccion);
         if(seccion.equals("cronograma")){
-           RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+           RecursosNE.obtenerRecursos("https://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
                     ,getActivity(),"cronograma",adapter);
         }
         else if (seccion.equals("jornada")){
-            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+            RecursosNE.obtenerRecursos("https://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
                     ,getActivity(),"jornadas",adapter);
         }
         else if (seccion.equals("orientacion")){
-           RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+           RecursosNE.obtenerRecursos("https://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
                     ,getActivity(),"orientacion",adapter);
         }
         else if(seccion.equals("recomendaciones"))
         {
-            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+            RecursosNE.obtenerRecursos("https://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
                     ,getActivity(),"recomendaciones",adapter);
         }
         else if(seccion.equals("verEscuchar"))
         {
-            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+            RecursosNE.obtenerRecursos("https://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
                     ,getActivity(),"verEscuchar",adapter);
         }
         else if(seccion.equals("circulo"))
         {
-            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+            RecursosNE.obtenerRecursos("https://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
                     ,getActivity(),"circulo",adapter);
         }
         else if(seccion.equals("ateneo_modelo_aval"))
         {
-            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+            RecursosNE.obtenerRecursos("https://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
                     ,getActivity(),"ateneo_modelo_aval",adapter);
         }
         else if(seccion.equals("ateneo_actividad"))
         {
-            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+            RecursosNE.obtenerRecursos("https://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
                     ,getActivity(),"ateneo_actividad",adapter);
         }
         else if(seccion.equals("ateneo_memo"))
         {
-            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+            RecursosNE.obtenerRecursos("https://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
                     ,getActivity(),"ateneo_memo",adapter);
         }
         /*// links para la semana tic
@@ -105,12 +105,12 @@ public class NEFragment extends Fragment {
                     ,getActivity(),"noticia",adapter);
         }*/
         else if(seccion.equals("formacion")){
-            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+            RecursosNE.obtenerRecursos("https://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
                     ,getActivity(),seccion,adapter);
         }
         // fin semana tic
         else {
-            RecursosNE.obtenerRecursos("http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
+            RecursosNE.obtenerRecursos("https://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json"
                     ,getActivity(),seccion,adapter);
         }
     }

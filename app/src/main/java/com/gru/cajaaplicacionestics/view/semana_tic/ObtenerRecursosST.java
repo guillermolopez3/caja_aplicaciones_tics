@@ -107,7 +107,7 @@ public class ObtenerRecursosST
         StringRequest request;
         VolleySingleton.getInstancia(activity).
                 addToRequestQueue(request=new StringRequest(Request.Method.GET,
-                        "http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/popup.json",
+                        "https://www.igualdadycalidadcba.gov.ar/CajaTIC/js/popup.json",
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {

@@ -161,7 +161,7 @@ public class WebViewActivity extends AppCompatActivity {
 
         if(link.endsWith("pdf"))
         {
-            url = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/pdf_vie?url=" + link;
+            url = "https://www.igualdadycalidadcba.gov.ar/CajaTIC/pdf_vie?url=" + link;
             Log.e("link pdf",url);
         }
         else {

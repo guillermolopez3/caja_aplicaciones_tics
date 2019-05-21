@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class ObtenerRecursosJornadasNE
 {
-    private final String URL = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json";
+    private final String URL = "https://www.igualdadycalidadcba.gov.ar/CajaTIC/js/orientacion.json";
     private IReturnPeticionGet retornoArrayDatos;
 
     public void setRetornoArrayDatos(IReturnPeticionGet retornoArrayDatos) {

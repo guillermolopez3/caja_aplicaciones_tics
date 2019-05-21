@@ -237,7 +237,7 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
 
     private void llenarSpinner() {
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                "http://www.muniap.com/CajaTic/llenarSpinner.php?id=1",
+                "https://www.muniap.com/CajaTic/llenarSpinner.php?id=1",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -298,7 +298,7 @@ public class ServicioTecnicoActivity extends AppCompatActivity implements Adapte
 
     private void insertarCapacitacion() //trae los datos de la BD, los parsea con volley y lo carga a la lista
     {
-        String URL = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/consultas_app/InsertarReclamo.php";
+        String URL = "https://www.igualdadycalidadcba.gov.ar/CajaTIC/consultas_app/InsertarReclamo.php";
 
         final ProgressDialog dialog=new ProgressDialog(this);
         dialog.setMessage("Enviando pedido...");

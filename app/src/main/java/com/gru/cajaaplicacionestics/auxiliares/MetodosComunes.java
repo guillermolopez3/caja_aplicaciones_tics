@@ -145,7 +145,7 @@ public class MetodosComunes
         try{
             if(cadena.startsWith("img") || cadena.startsWith("files"))
             {
-                String x = "http://www.igualdadycalidadcba.gov.ar/CajaTIC/storage/public/" + cadena;
+                String x = "https://www.igualdadycalidadcba.gov.ar/CajaTIC/storage/public/" + cadena;
                 return x;
             }
             else {
@@ -160,7 +160,7 @@ public class MetodosComunes
 
     public static void enviarPostSeleccionado(final String id_post, Activity activity)
     {
-        String URL= "http://www.igualdadycalidadcba.gov.ar/CajaTIC/api/analitycsPost?id=" + id_post;
+        String URL= "https://www.igualdadycalidadcba.gov.ar/CajaTIC/api/analitycsPost?id=" + id_post;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 URL,

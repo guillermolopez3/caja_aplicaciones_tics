@@ -69,7 +69,7 @@ public class EnviarRecursosActivity extends AppCompatActivity {
     private void insertarCapacitacion() //trae los datos de la BD, los parsea con volley y lo carga a la lista
     {
         //String URL = "http://www.muniap.com/CajaTic/InsertarNuevoRecurso.php";
-        String URL= "http://www.igualdadycalidadcba.gov.ar/CajaTIC/consultas_app/InsertarNuevoRecurso.php";
+        String URL= "https://www.igualdadycalidadcba.gov.ar/CajaTIC/consultas_app/InsertarNuevoRecurso.php";
 
         final ProgressDialog dialog=new ProgressDialog(this);
         dialog.setMessage("Enviando pedido...");

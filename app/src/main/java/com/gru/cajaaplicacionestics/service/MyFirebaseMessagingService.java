@@ -104,7 +104,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
             title = titulo;
         }
 
-        String url = "http://www.igualdadycalidadcba.gov.ar/SIPEC-CBA/capacitacion-v2/capacitacion.php?opt=estatal";
+        String url = "https://www.igualdadycalidadcba.gov.ar/SIPEC-CBA/capacitacion-v2/capacitacion.php?opt=estatal";
         Intent intent = new Intent(this, NotificacionesActivity.class);
         Uri uri = Uri.parse(url);
         //Intent intent = new Intent(Intent.ACTION_VIEW,uri);
