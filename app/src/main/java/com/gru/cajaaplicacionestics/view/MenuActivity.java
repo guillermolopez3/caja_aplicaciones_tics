@@ -158,7 +158,7 @@ public class MenuActivity extends AppCompatActivity {
         array.add(new ModelMenu(R.drawable.espacio_didactico));
         array.add(new ModelMenu(R.drawable.aprender_conectados));
         array.add(new ModelMenu(R.drawable.nuestra_escuela));
-        array.add(new ModelMenu(R.drawable.audiovisuales));
+        array.add(new ModelMenu(R.drawable.ic_donde_estudiar));
         array.add(new ModelMenu(R.drawable.programa_docentesyescuela));
         array.add(new ModelMenu(R.drawable.favoritos));
         array.add(new ModelMenu(R.drawable.qrlogo));
