@@ -68,7 +68,7 @@ Es una herramienta colaborativa para toda  la comunidad educativa, en constante 
 
 
     <!-- url de conexion a la bd -->
-    <string name="URL_BASE">http://www.igualdadycalidadcba.gov.ar/CajaTIC/api/</string>
+    <string name="URL_BASE">https://www.igualdadycalidadcba.gov.ar/CajaTIC/api/</string>
 
 
     <string name="URL_BASE1">http://www.muniap.com/api/</string>

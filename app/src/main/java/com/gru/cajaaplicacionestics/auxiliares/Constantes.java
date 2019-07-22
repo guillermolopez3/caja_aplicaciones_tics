@@ -34,4 +34,9 @@ public class Constantes
 
     //notificaciones
     public static final String URL_NOTIFICACIONES = "https://www.igualdadycalidadcba.gov.ar/CajaTIC/js/alertas.json";
+
+    //donde estudiar
+    public static final String URL_BASE_OVO = "https://www.igualdadycalidadcba.gov.ar/OVO/api/";
+    public static final String URL_ALL_CARRERAS = "listCarreras";
+
 }
