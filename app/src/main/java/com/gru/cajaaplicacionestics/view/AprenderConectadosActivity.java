@@ -53,10 +53,14 @@ public class AprenderConectadosActivity extends AppCompatActivity implements Pag
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
+                    Fragment inicial = new FragmentAprenConec();
+                    inicial.setArguments(sendYear(8));
+                    return inicial;
+                case 1:
                     Fragment primaria = new FragmentAprenConec();
                     primaria.setArguments(sendYear(1));
                     return primaria;
-                case 1:
+                case 2:
                     Fragment secundaria = new FragmentAprenConec();
                     secundaria.setArguments(sendYear(2));
                     return secundaria;
@@ -78,8 +82,10 @@ public class AprenderConectadosActivity extends AppCompatActivity implements Pag
         public CharSequence getPageTitle(int position) {
             switch (position){
                 case 0:
-                    return "Primaria";
+                    return "Inicial";
                 case 1:
+                    return "Primaria";
+                case 2:
                     return "Secundaria";
             }
             return null;
@@ -87,7 +93,7 @@ public class AprenderConectadosActivity extends AppCompatActivity implements Pag
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     }
 }
