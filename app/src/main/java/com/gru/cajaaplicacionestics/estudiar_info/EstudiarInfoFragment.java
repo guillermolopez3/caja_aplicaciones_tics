@@ -13,30 +13,36 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.backend.PaginacionNovedades;
 import com.gru.cajaaplicacionestics.estudiar_info.adapter.EstudiarAdapter;
+import com.gru.cajaaplicacionestics.estudiar_info.backend.PaginacionEstudiar;
+import com.gru.cajaaplicacionestics.estudiar_info.backend.PaginacionInstitucion;
 import com.gru.cajaaplicacionestics.estudiar_info.model.CarrerasModel;
+import com.srx.widget.PullToLoadView;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EstudiarInfo extends Fragment {
+public class EstudiarInfoFragment extends Fragment {
 
-    RecyclerView recycler;
-    ProgressBar progressBar;
-    EstudiarAdapter adapter;
+    private String seccion;
 
-    public EstudiarInfo() {
+    public EstudiarInfoFragment() {
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_recycler, container, false);
+        View view = inflater.inflate(R.layout.fragment_novedad,container,false);
 
-        recycler = view.findViewById(R.id.recycler);
+        if(getArguments()!= null)
+        {
+            seccion = getArguments().getString("seccion");
+        }
+        /*recycler = view.findViewById(R.id.recycler);
         progressBar = view.findViewById(R.id.progress);
         progressBar.setVisibility(View.GONE);
 
@@ -44,6 +50,17 @@ public class EstudiarInfo extends Fragment {
         recycler.setHasFixedSize(true);
         adapter = new EstudiarAdapter(getCarreras(),getActivity());
         recycler.setAdapter(adapter);
+
+        return view;*/
+        PullToLoadView pullToLoadView = view.findViewById(R.id.recyclerNovedades);
+        if(seccion.equals("carrera"))
+        {
+            new PaginacionEstudiar(getActivity(),pullToLoadView).iniciarPaginacion();
+        }
+        else if(seccion.equals("institucion"))
+        {
+            new PaginacionInstitucion(getActivity(),pullToLoadView).iniciarPaginacion();
+        }
 
         return view;
     }

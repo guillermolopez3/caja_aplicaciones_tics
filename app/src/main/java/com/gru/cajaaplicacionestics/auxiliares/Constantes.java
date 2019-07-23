@@ -38,5 +38,6 @@ public class Constantes
     //donde estudiar
     public static final String URL_BASE_OVO = "https://www.igualdadycalidadcba.gov.ar/OVO/api/";
     public static final String URL_ALL_CARRERAS = "listCarreras";
+    public static final String URL_ALL_INSTITUCIONES = "listInstituciones";
 
 }

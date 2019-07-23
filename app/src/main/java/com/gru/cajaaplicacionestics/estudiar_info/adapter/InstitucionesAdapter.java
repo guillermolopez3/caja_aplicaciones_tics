@@ -14,37 +14,37 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.gru.cajaaplicacionestics.R;
-import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.estudiar_info.model.CarrerasModel;
+import com.gru.cajaaplicacionestics.estudiar_info.model.InstitucionModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class EstudiarAdapter extends RecyclerView.Adapter<EstudiarAdapter.EstudiarHolder>
+public class InstitucionesAdapter extends RecyclerView.Adapter<InstitucionesAdapter.InstitucionHolder>
 {
-    private ArrayList<CarrerasModel> list;
+    private ArrayList<InstitucionModel> list;
     private Activity activity;
 
-    public EstudiarAdapter(Activity activity, boolean fav) {
+    public InstitucionesAdapter(Activity activity, boolean fav) {
         this.activity = activity;
         list = new ArrayList<>();
     }
 
     @NonNull
     @Override
-    public EstudiarHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public InstitucionesAdapter.InstitucionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(activity).inflate(R.layout.item_estudiar_info,parent,false);
-        return new EstudiarHolder(view);
+        return new InstitucionesAdapter.InstitucionHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EstudiarHolder holder, int position) {
-        CarrerasModel model = list.get(position);
+    public void onBindViewHolder(@NonNull InstitucionesAdapter.InstitucionHolder holder, int position) {
+        InstitucionModel model = list.get(position);
 
         String img = model.getUrl_logo();
 
-        holder.carrera.setText(model.getNombreCarrera());
-        holder.institucion.setText(model.getInstitucion());
+        holder.carrera.setText(model.getNombre());
+        holder.institucion.setVisibility(View.GONE);
         //holder.duracion.setText(model.getDuracion() + " años");
         try{
             if((img!=null) && (!img.equals("")) && (!img.equals("null")))
@@ -63,7 +63,7 @@ public class EstudiarAdapter extends RecyclerView.Adapter<EstudiarAdapter.Estudi
         return list.size();
     }
 
-    public void add(CarrerasModel pos)
+    public void add(InstitucionModel pos)
     {
         list.add(pos);
         notifyDataSetChanged();
@@ -79,11 +79,11 @@ public class EstudiarAdapter extends RecyclerView.Adapter<EstudiarAdapter.Estudi
         return list.size(); //cantidad de items del array
     }
 
-    class EstudiarHolder extends RecyclerView.ViewHolder
+    class InstitucionHolder extends RecyclerView.ViewHolder
     {
         ImageView imagen;
         TextView carrera, institucion, duracion;
-        public EstudiarHolder(@NonNull View itemView)
+        public InstitucionHolder(@NonNull View itemView)
         {
             super(itemView);
             imagen = itemView.findViewById(R.id.imgCarrera);

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.gru.cajaaplicacionestics.R;
+import com.gru.cajaaplicacionestics.estudiar_info.EstudiarActivity;
 import com.gru.cajaaplicacionestics.view.AprenderConectadosActivity;
 import com.gru.cajaaplicacionestics.view.NovedadActivity;
 import com.gru.cajaaplicacionestics.model.ModelMenu;
@@ -86,10 +87,11 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.MenuHolder>
                 activity.startActivity(i);
                 break;
             case 4:
-                i = new Intent(activity,PostActivity.class);
-                i.putExtra("seleccion","canal");
-                i.putExtra("titulo","Audiovisuales");
-                params.putString("nombre_pantalla","Canal");
+                // i = new Intent(activity,PostActivity.class);
+                i = new Intent(activity, EstudiarActivity.class);
+                //i.putExtra("seleccion","canal");
+                //i.putExtra("titulo","Audiovisuales");
+                //params.putString("nombre_pantalla","Canal");
                 activity.startActivity(i);
                 break;
             case 5:

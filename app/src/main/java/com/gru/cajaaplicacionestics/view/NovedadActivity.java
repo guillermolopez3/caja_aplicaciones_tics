@@ -14,7 +14,6 @@ import android.util.Log;
 import com.gru.cajaaplicacionestics.R;
 import com.gru.cajaaplicacionestics.auxiliares.MetodosComunes;
 import com.gru.cajaaplicacionestics.auxiliares.PaginationErrorCallBack;
-import com.gru.cajaaplicacionestics.estudiar_info.EstudiarInfo;
 import com.gru.cajaaplicacionestics.view.fragment.FragmentNovedades;
 
 public class NovedadActivity extends AppCompatActivity implements PaginationErrorCallBack {
@@ -67,7 +66,7 @@ public class NovedadActivity extends AppCompatActivity implements PaginationErro
                     fragment2017 = new FragmentNovedades();
                     fragment2017.setArguments(sendYear("2018"));
                     return fragment2017;
-                    /*Fragment frag = new EstudiarInfo();
+                    /*Fragment frag = new EstudiarInfoFragment();
                     return frag;*/
                 default:
                     return null;
