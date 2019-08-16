@@ -28,6 +28,9 @@ import java.util.ArrayList;
 public class EstudiarInfoFragment extends Fragment {
 
     private String seccion;
+    private String query;
+
+    private PullToLoadView pullToLoadView;
 
     public EstudiarInfoFragment() {
     }
@@ -41,6 +44,7 @@ public class EstudiarInfoFragment extends Fragment {
         if(getArguments()!= null)
         {
             seccion = getArguments().getString("seccion");
+            query   = getArguments().getString("query");
         }
         /*recycler = view.findViewById(R.id.recycler);
         progressBar = view.findViewById(R.id.progress);
@@ -52,18 +56,34 @@ public class EstudiarInfoFragment extends Fragment {
         recycler.setAdapter(adapter);
 
         return view;*/
-        PullToLoadView pullToLoadView = view.findViewById(R.id.recyclerNovedades);
+        pullToLoadView = view.findViewById(R.id.recyclerNovedades);
         if(seccion.equals("carrera"))
         {
             new PaginacionEstudiar(getActivity(),pullToLoadView).iniciarPaginacion();
         }
         else if(seccion.equals("institucion"))
         {
-            new PaginacionInstitucion(getActivity(),pullToLoadView).iniciarPaginacion();
+            if(query.isEmpty()){
+
+                new PaginacionInstitucion(getActivity(),pullToLoadView).iniciarPaginacion();
+            }else {
+                new PaginacionInstitucion(getActivity(),pullToLoadView).iniciarPaginacionSearch(query);
+            }
         }
 
         return view;
     }
+
+
+    public void actualizarFragment(String quer)
+    {
+        String aux = quer.substring(quer.length() -1);
+        if(aux.equals(",")){
+            aux = quer.substring(0,quer.length()-1);
+        }
+        new PaginacionInstitucion(getActivity(),pullToLoadView).iniciarPaginacionSearch(aux);
+    }
+
 
 
     private ArrayList<CarrerasModel> getCarreras()

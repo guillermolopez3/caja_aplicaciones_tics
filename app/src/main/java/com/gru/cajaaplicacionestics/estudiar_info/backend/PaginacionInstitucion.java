@@ -1,6 +1,7 @@
 package com.gru.cajaaplicacionestics.estudiar_info.backend;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -97,14 +98,125 @@ public class PaginacionInstitucion
         pullToLoadView.initLoad();
     }
 
+    public void iniciarPaginacionSearch(final String query)
+    {
+        Log.e("estoy en","paginacion query");
+        pullToLoadView.isLoadMoreEnabled(true);
+
+        URL_BASE    = Constantes.URL_BASE_OVO;
+        URL_GET_ALL = Constantes.URL_ALL_INSTITUCIONES_SEARCH;
+        //this.año=año;
+
+
+        pullToLoadView.setPullCallback(new PullCallback() {
+            @Override
+            public void onLoadMore() {
+                PAGINA_ACTUAL++;
+                cargarInstitucionesSearch(query);
+            }
+
+            //evento ni bien ingresa y cuando haces swipe para arriba
+            @Override
+            public void onRefresh() {
+                Log.e("estoy en","onLoadMore");
+                adapter.clear(); //limpio el adapter
+                hasLoadedAll=false;
+                PAGINA_ACTUAL=1; //reinicio el contador
+                cargarInstitucionesSearch(query);
+
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+
+            @Override
+            public boolean hasLoadedAllItems() {
+                return hasLoadedAll;
+            }
+        });
+        pullToLoadView.initLoad();
+    }
+
 
     public void cargarInstituciones()
     {
         //String URL = FavoritosBackend.getUrlNovedades(PAGINA_ACTUAL,año);
-        String URL = URL_BASE + URL_GET_ALL;
+        String URL = URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL;
+        Log.e("url", URL);
         Request request;
         VolleySingleton.getInstancia(activity).
                 addToRequestQueue(request = new StringRequest(Request.Method.GET,URL,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response); //convierte toda la respuesta en json
+                                    JSONArray array= jsonObject.getJSONArray("data"); //lo que est en corchetes lo convierto en array
+
+                                    for(int i=0; i< array.length();i++)
+                                    {
+                                        JSONObject o = array.getJSONObject(i);
+                                        InstitucionModel post = new InstitucionModel(
+                                                o.getInt("id"),
+                                                o.getString("nombre"),
+                                                o.getString("url_logo")
+                                        );
+                                        /*if(o.has("fav"))
+                                        {
+                                            if(o.getString("fav").equals("null")){
+                                                post.setFav(false);
+                                            }else {
+                                                post.setFav(true);
+                                            }
+
+                                        }*/
+
+                                        adapter.add(post);
+                                    }
+                                    pullToLoadView.setComplete();
+                                    isLoading=false;
+                                } catch (JSONException e) {
+                                    Log.e("error",e.getMessage());
+                                    // manejoError(true);
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("error",error.toString());
+                        FirebaseCrash.report(new Exception("VooleyError " + error.toString() ));
+                        // manejoError(true);
+                    }
+                }));
+        request.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                FirebaseCrash.report(new Exception("Timeout" + URL_BASE + URL_GET_ALL + "?page=" + PAGINA_ACTUAL + "&ano=" + año  ));
+                return 8000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 8000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+    }
+
+    public void cargarInstitucionesSearch(String query)
+    {
+        //String URL = FavoritosBackend.getUrlNovedades(PAGINA_ACTUAL,año);
+        String URL = URL_BASE + URL_GET_ALL + "?localidad="+ query + "&page=" + PAGINA_ACTUAL;
+        Log.e("url", URL);
+        Request request;
+        VolleySingleton.getInstancia(activity).
+                addToRequestQueue(request = new StringRequest(Request.Method.GET, URL,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {

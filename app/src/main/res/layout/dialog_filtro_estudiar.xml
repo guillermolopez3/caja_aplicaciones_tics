@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Aplicar filtro"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:textSize="40sp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:weightSum="10"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <CheckBox
+                    android:id="@+id/cordoba"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Ciudad de Córdoba"/>
+                <CheckBox
+                    android:id="@+id/san_francisco"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="San Francisco"/>
+                <CheckBox
+                    android:id="@+id/dean_funes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Deán Funes y Cruz del Eje"/>
+                <CheckBox
+                    android:id="@+id/capilla"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Capilla del Monte"/>
+                <CheckBox
+                    android:id="@+id/la_falda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="La Falda, Cosquíny Santa María De Punilla"/>
+                <CheckBox
+                    android:id="@+id/carlos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Carlos Paz"/>
+                <CheckBox
+                    android:id="@+id/alta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Alta Gracia"/>
+                <CheckBox
+                    android:id="@+id/jesus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Jesús María"/>
+                <CheckBox
+                    android:id="@+id/oncativo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Oncativo"/>
+                <CheckBox
+                    android:id="@+id/oliva"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Oliva"/>
+                <CheckBox
+                    android:id="@+id/villa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Villa María"/>
+                <CheckBox
+                    android:id="@+id/bell"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Bell Ville"/>
+                <CheckBox
+                    android:id="@+id/leone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Leones"/>
+                <CheckBox
+                    android:id="@+id/rio_t"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Río Tercero"/>
+                <CheckBox
+                    android:id="@+id/rio_c"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Río Cuarto"/>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:weightSum="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/dialogNo"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:background="@color/colorPrimary"
+                android:text="Cancelar"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.5"
+                android:textColor="@android:color/white"/>
+
+            <Button
+                android:id="@+id/dialogSi"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:background="@color/colorPrimary"
+                android:text="Aplicar"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="10dp"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
